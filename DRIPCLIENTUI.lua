@@ -101,7 +101,7 @@ local redzlib = {
 			["shirt"] = "rbxassetid://10734952036",
 			["skull"] = "rbxassetid://10734962068",
 			["user"] = "rbxassetid://10747373176",
-			["wind"] = "rbxassetid://10747382750"
+			["wind"] = "rbxassetid://10747382750",
 		}
 	end)()
 }
