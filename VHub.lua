@@ -7,7 +7,7 @@ local RunService = game:GetService("RunService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local StarterGui = game:GetService("StarterGui")
 
-local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/z/refs/heads/main/PinkyUi.lua"))()
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/z/refs/heads/main/BRUTONHUBUI.txt"))()
 local Window = Lib:MakeWindow({
     Title = "Victory Hub | Brookhaven 🌠 ",
     SubTitle = " by Nort_VT",
