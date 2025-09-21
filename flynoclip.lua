@@ -142,7 +142,7 @@ noclipbtn.Font = "SourceSans"
 noclipbtn.Size = UDim2.new(0, 100, 0, 27)
 noclipbtn.Text = "Noclip OFF"
 noclipbtn.TextColor3 = Color3.fromRGB(202,178,251)
-noclipbtn.TextSize = 35
+noclipbtn.TextSize = 18
 noclipbtn.Position = UDim2.new(0, 90, -1, 27)
 
 local noclip = false
