@@ -10,7 +10,7 @@ local flybtn = Instance.new("TextButton")
 local closebtn = Instance.new("TextButton")
 local mini = Instance.new("TextButton")
 local mini2 = Instance.new("TextButton")
-local noclip = Instance.new("TextButton")
+local noclipbtn = Instance.new("TextButton")
 
 local plr = game.Players.LocalPlayer
 local chr = plr.Character
@@ -135,21 +135,21 @@ mini2.TextSize = 30
 mini2.Position = UDim2.new(0, 44, -1, 54)
 mini2.Visible = false
 
-noclip.Name = "noclip"
-noclip.Parent = main.Frame
-noclip.BackgroundColor3 = Color3.fromRGB(46,49,54)
-noclip.Font = "SourceSans"
-noclip.Size = UDim2.new(0, 100, 0, 27)
-noclip.Text = "Noclip OFF"
-noclip.TextColor3 = Color3.fromRGB(202,178,251)
-noclip.TextSize = 35
-noclip.Position = UDim2.new(0, 90, -1, 27)
+noclipbtn.Name = "noclip"
+noclipbtn.Parent = main.Frame
+noclipbtn.BackgroundColor3 = Color3.fromRGB(46,49,54)
+noclipbtn.Font = "SourceSans"
+noclipbtn.Size = UDim2.new(0, 100, 0, 27)
+noclipbtn.Text = "Noclip OFF"
+noclipbtn.TextColor3 = Color3.fromRGB(202,178,251)
+noclipbtn.TextSize = 35
+noclipbtn.Position = UDim2.new(0, 90, -1, 27)
 
 local noclip = false
 
-local function Noclip()
+local function Noclipf()
 	noclip = not noclip
-	noclip.Text = noclip and "Noclip ON" or "Noclip OFF"
+	noclipbtn.Text = noclip and "Noclip ON" or "Noclip OFF"
 	if noclip then
 		connection = RunService.Stepped:Connect(function()
 			for _, part in pairs(chr:GetDescendants()) do
@@ -168,7 +168,7 @@ local function Noclip()
 	end
 end
 
-noclip.MouseButton1Click:Connect(Noclip)
+noclipbtn.MouseButton1Click:Connect(Noclipf)
 
 speeds = 1
 fly = false
@@ -436,7 +436,7 @@ mini.MouseButton1Click:Connect(function()
     speed.Visible = false
     mine.Visible = false
     mini.Visible = false
-    noclip.Visible = false
+    noclipbtn.Visible = false
     mini2.Visible = true
     main.Frame.BackgroundTransparency = 1
     closebtn.Position =  UDim2.new(0, 0, -1, 54)
@@ -450,7 +450,7 @@ mini2.MouseButton1Click:Connect(function()
     speed.Visible = true
     mine.Visible = true
     mini.Visible = true
-    noclip.Visible = true
+    noclipbtn.Visible = true
     mini2.Visible = false
     main.Frame.BackgroundTransparency = 0 
     closebtn.Position =  UDim2.new(0, 0, -1, 27)
