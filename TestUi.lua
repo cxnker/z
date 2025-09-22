@@ -17,7 +17,7 @@ local redzlib = {
 				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 128, 255))
 			}),
 			["Color Hub 2"] = Color3.fromRGB(0, 0, 0),
-			["Color Stroke"] = Color3.fromRGB(5, 5, 5),
+			["Color Stroke"] = Color3.fromRGB(55, 55, 55),
 			["Color Theme"] = Color3.fromRGB(0, 128, 255),
 			["Color Text"] = Color3.fromRGB(180, 180, 180),
 			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
@@ -594,7 +594,7 @@ function redzlib:MakeWindow(Configs)
 	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
 		Size = UDim2.fromOffset(UISizeX, UISizeY),
 		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
-		BackgroundTransparency = 0.06,
+		BackgroundTransparency = 0.09,
 		Name = "Hub"
 	}), "Main")
 	Make("Gradient", MainFrame, {
@@ -626,7 +626,7 @@ function redzlib:MakeWindow(Configs)
 		TextSize = 12,
 		TextColor3 = Theme["Color Text"],
 		BackgroundTransparency = 1,
-		Font = Enum.Font.GothamMedium,
+		Font = Enum.Font.BuilderSansBold,
 		Name = "Title"
 	}, {
 		InsertTheme(Create("TextLabel", {
