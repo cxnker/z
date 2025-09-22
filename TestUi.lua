@@ -953,7 +953,7 @@ function redzlib:MakeWindow(Configs)
 			Size = UDim2.new(1, TIcon and -25 or -15, 1),
 			Position = UDim2.fromOffset(TIcon and 25 or 15),
 			BackgroundTransparency = 1,
-			Font = Enum.Font.GothamMedium,
+			Font = Enum.Font.BuilderSansBold,
 			Text = TName,
 			TextColor3 = Theme["Color Text"],
 			TextSize = 10,
