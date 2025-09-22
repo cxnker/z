@@ -1,56 +1,45 @@
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
-local StarterGui = game:GetService("StarterGui")
-local LocalPlayer = Players.LocalPlayer
+local lplr = game.Players.LocalPlayer
+local rs = game:GetService("RunService")
+pcall(function() lplr:WaitForChild("PlayerGui"):FindFirstChild("superRing"):Destroy() end)
 
-pcall(function() LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("SuperRing"):Destroy() end)
+local gui = Instance.new("ScreenGui", lplr:WaitForChild("PlayerGui"))
+gui.Name = "superRing"
+gui.ResetOnSpawn = false
 
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "SuperRing"
-ScreenGui.ResetOnSpawn = false
-ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+local main = Instance.new("Frame", gui)
+main.Size = UDim2.new(0, 180, 0, 160)
+main.Position = UDim2.new(0.5, -110, 0.5, -95)
+main.BackgroundColor3 = Color3.fromRGB(47,49,54)
+main.BorderSizePixel = 0
 
-local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 180, 0, 160)
-MainFrame.Position = UDim2.new(0.5, -110, 0.5, -95)
-MainFrame.BackgroundColor3 = Color3.fromRGB(47,49,54)
-MainFrame.BorderSizePixel = 0
-MainFrame.Parent = ScreenGui
+local title = Instance.new("TextLabel", main)
+title.Size = UDim2.new(1, 0, 0, 40)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.Text = "Super Ring Parts"
+title.TextColor3 = Color3.fromRGB(202,178,251)
+title.BackgroundColor3 = Color3.fromRGB(41,43,47)
+title.Font = "SourceSansBold"
+title.TextSize = 18
 
-local UICorner = Instance.new("UICorner")
+local UICorner = Instance.new("UICorner", main)
 UICorner.CornerRadius = UDim.new(0, 20)
-UICorner.Parent = MainFrame
 
-local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(1, 0, 0, 40)
-Title.Position = UDim2.new(0, 0, 0, 0)
-Title.Text = "Super Ring Parts"
-Title.TextColor3 = Color3.fromRGB(202,178,251)
-Title.BackgroundColor3 = Color3.fromRGB(41,43,47)
-Title.Font = Enum.Font.SourceSansBold
-Title.TextSize = 18
-Title.Parent = MainFrame
+local titleCorner = Instance.new("UICorner", title)
+titleCorner.CornerRadius = UDim.new(0, 20)
 
-local TitleCorner = Instance.new("UICorner")
-TitleCorner.CornerRadius = UDim.new(0, 20)
-TitleCorner.Parent = Title
-
-local togglebtn = Instance.new("TextButton")
+local togglebtn = Instance.new("TextButton", main)
 togglebtn.Size = UDim2.new(0.8, 0, 0, 35)
 togglebtn.Position = UDim2.new(0.1, 0, 0.3, 0)
 togglebtn.Text = "Apagado"
 togglebtn.BackgroundColor3 = Color3.fromRGB(32,34,37)
 togglebtn.TextColor3 = Color3.fromRGB(202,178,251)
-togglebtn.Font = Enum.Font.Gotham
+togglebtn.Font = "Gotham"
 togglebtn.TextSize = 14
-togglebtn.Parent = MainFrame
 
-local ToggleCorner = Instance.new("UICorner")
+local ToggleCorner = Instance.new("UICorner", togglebtn)
 ToggleCorner.CornerRadius = UDim.new(0, 10)
-ToggleCorner.Parent = togglebtn
 
-local DecreaseRadius = Instance.new("TextButton")
+local DecreaseRadius = Instance.new("TextButton", main)
 DecreaseRadius.Size = UDim2.new(0.2, 0, 0, 35)
 DecreaseRadius.Position = UDim2.new(0.1, 0, 0.6, 0)
 DecreaseRadius.Text = "<"
@@ -58,13 +47,12 @@ DecreaseRadius.BackgroundColor3 = Color3.fromRGB(32,34,37)
 DecreaseRadius.TextColor3 = Color3.fromRGB(202,178,251)
 DecreaseRadius.Font = Enum.Font.Gotham
 DecreaseRadius.TextSize = 14
-DecreaseRadius.Parent = MainFrame
 
 local DecreaseCorner = Instance.new("UICorner")
 DecreaseCorner.CornerRadius = UDim.new(0, 10)
 DecreaseCorner.Parent = DecreaseRadius
 
-local IncreaseRadius = Instance.new("TextButton")
+local IncreaseRadius = Instance.new("TextButton", main)
 IncreaseRadius.Size = UDim2.new(0.2, 0, 0, 35)
 IncreaseRadius.Position = UDim2.new(0.7, 0, 0.6, 0)
 IncreaseRadius.Text = ">"
@@ -72,13 +60,12 @@ IncreaseRadius.BackgroundColor3 = Color3.fromRGB(32,34,37)
 IncreaseRadius.TextColor3 = Color3.fromRGB(202,178,251)
 IncreaseRadius.Font = Enum.Font.Gotham
 IncreaseRadius.TextSize = 14
-IncreaseRadius.Parent = MainFrame
 
 local IncreaseCorner = Instance.new("UICorner")
 IncreaseCorner.CornerRadius = UDim.new(0, 10)
 IncreaseCorner.Parent = IncreaseRadius
 
-local RadiusDisplay = Instance.new("TextLabel")
+local RadiusDisplay = Instance.new("TextLabel", main)
 RadiusDisplay.Size = UDim2.new(0.4, 0, 0, 35)
 RadiusDisplay.Position = UDim2.new(0.3, 0, 0.6, 0)
 RadiusDisplay.Text = "Alcance: 50"
@@ -86,23 +73,21 @@ RadiusDisplay.BackgroundColor3 = Color3.fromRGB(41,43,47)
 RadiusDisplay.TextColor3 = Color3.fromRGB(202,178,251)
 RadiusDisplay.Font = Enum.Font.Gotham
 RadiusDisplay.TextSize = 14
-RadiusDisplay.Parent = MainFrame
 
 local RadiusCorner = Instance.new("UICorner")
 RadiusCorner.CornerRadius = UDim.new(0, 10)
 RadiusCorner.Parent = RadiusDisplay
 
-local Watermark = Instance.new("TextLabel")
-Watermark.Size = UDim2.new(1, 0, 0, 20)
-Watermark.Position = UDim2.new(0, 0, 1, -20)
-Watermark.Text = "Super Ring GUI - By @Roun95"
-Watermark.TextColor3 = Color3.fromRGB(202,178,251)
-Watermark.BackgroundTransparency = 1
-Watermark.Font = Enum.Font.Gotham
-Watermark.TextSize = 12
-Watermark.Parent = MainFrame
+local info = Instance.new("TextLabel", main)
+info.Size = UDim2.new(1, 0, 0, 20)
+info.Position = UDim2.new(0, 0, 1, -20)
+info.Text = "Super Ring GUI - By @Roun95"
+info.TextColor3 = Color3.fromRGB(202,178,251)
+info.BackgroundTransparency = 1
+info.Font = Enum.Font.Gotham
+info.TextSize = 12
 
-local closebtn = Instance.new("TextButton")
+local closebtn = Instance.new("TextButton", main)
 closebtn.Size = UDim2.new(0, 30, 0, 30)
 closebtn.Position = UDim2.new(1, -175, 0, 5)
 closebtn.Text = "X"
@@ -111,9 +96,8 @@ closebtn.BackgroundColor3 = Color3.fromRGB(32,34,37)
 closebtn.TextColor3 = Color3.fromRGB(170,0,0)
 closebtn.Font = Enum.Font.SourceSansBold
 closebtn.TextSize = 24
-closebtn.Parent = MainFrame
 
-local minimizebtn = Instance.new("TextButton")
+local minimizebtn = Instance.new("TextButton", main)
 minimizebtn.Size = UDim2.new(0, 30, 0, 30)
 minimizebtn.Position = UDim2.new(1, -35, 0, 5)
 minimizebtn.Text = "-"
@@ -121,31 +105,29 @@ minimizebtn.BackgroundColor3 = Color3.fromRGB(32,34,37)
 minimizebtn.TextColor3 = Color3.fromRGB(202,178,251)
 minimizebtn.Font = Enum.Font.SourceSansBold
 minimizebtn.TextSize = 14
-minimizebtn.Parent = MainFrame
 
-local MinimizeCorner = Instance.new("UICorner")
+local MinimizeCorner = Instance.new("UICorner", minimizebtn)
 MinimizeCorner.CornerRadius = UDim.new(0, 15)
-MinimizeCorner.Parent = minimizebtn
 
 local minimized = false
 minimizebtn.MouseButton1Click:Connect(function()
     minimized = not minimized
     if minimized then
-        MainFrame:TweenSize(UDim2.new(0, 180, 0, 40), "Out", "Quad", 0.3, true)
+        main:TweenSize(UDim2.new(0, 180, 0, 40), "Out", "Quad", 0.3, true)
         minimizebtn.Text = "+"
         togglebtn.Visible = false
         DecreaseRadius.Visible = false
         IncreaseRadius.Visible = false
         RadiusDisplay.Visible = false
-        Watermark.Visible = false
+        info.Visible = false
     else
-        MainFrame:TweenSize(UDim2.new(0, 180, 0, 160), "Out", "Quad", 0.3, true)
+        main:TweenSize(UDim2.new(0, 180, 0, 160), "Out", "Quad", 0.3, true)
         minimizebtn.Text = "-"
         togglebtn.Visible = true
         DecreaseRadius.Visible = true
         IncreaseRadius.Visible = true
         RadiusDisplay.Visible = true
-        Watermark.Visible = true
+        info.Visible = true
     end
 end)
 
@@ -156,14 +138,14 @@ local startPos
 
 local function update(input)
     local delta = input.Position - dragStart
-    MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    main.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 end
 
-MainFrame.InputBegan:Connect(function(input)
+main.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         dragStart = input.Position
-        startPos = MainFrame.Position
+        startPos = main.Position
         
         input.Changed:Connect(function()
             if input.UserInputState == Enum.UserInputState.End then
@@ -173,13 +155,13 @@ MainFrame.InputBegan:Connect(function(input)
     end
 end)
 
-MainFrame.InputChanged:Connect(function(input)
+main.InputChanged:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
         dragInput = input
     end
 end)
 
-UserInputService.InputChanged:Connect(function(input)
+game:GetService("UserInputService").InputChanged:Connect(function(input)
     if input == dragInput and dragging then
         update(input)
     end
@@ -198,9 +180,9 @@ if not getgenv().Network then
         end
     end
     local function EnablePartControl()
-        LocalPlayer.ReplicationFocus = workspace
-        RunService.Heartbeat:Connect(function()
-            sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge)
+        lplr.ReplicationFocus = workspace
+        rs.Heartbeat:Connect(function()
+            sethiddenproperty(lplr, "SimulationRadius", math.huge)
             for _, Part in pairs(Network.BaseParts) do
                 if Part:IsDescendantOf(workspace) then
                     Part.Velocity = Network.Velocity
@@ -219,7 +201,7 @@ local ringPartsEnabled = false
 
 local function RetainPart(Part)
     if Part:IsA("BasePart") and not Part.Anchored and Part:IsDescendantOf(workspace) then
-        if Part.Parent == LocalPlayer.Character or Part:IsDescendantOf(LocalPlayer.Character) then
+        if Part.Parent == lplr.Character or Part:IsDescendantOf(lplr.Character) then
             return false
         end
         Part.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0, 0, 0)
@@ -252,10 +234,10 @@ end
 workspace.DescendantAdded:Connect(addPart)
 workspace.DescendantRemoving:Connect(removePart)
 
-RunService.Heartbeat:Connect(function()
+rs.Heartbeat:Connect(function()
     if not ringPartsEnabled then return end
     
-    local humanoidRootPart = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    local humanoidRootPart = lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart")
     if humanoidRootPart then
         local tornadoCenter = humanoidRootPart.Position
         for _, part in pairs(parts) do
@@ -277,7 +259,7 @@ RunService.Heartbeat:Connect(function()
 end)
 
 closebtn.MouseButton1Click:Connect(function()
-    ScreenGui:Destroy()
+    gui:Destroy()
 end)
 
 togglebtn.MouseButton1Click:Connect(function()
