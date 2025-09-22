@@ -372,7 +372,7 @@ end
 
 AddEle("Corner", function(parent, CornerRadius)
 	local New = SetProps(Create("UICorner", parent, {
-		CornerRadius = CornerRadius or UDim.new(0, 15)
+		CornerRadius = CornerRadius or UDim.new(0, 12)
 	}), props)
 	return New
 end)
