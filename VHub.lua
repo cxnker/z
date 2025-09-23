@@ -33,6 +33,9 @@ local Tab11 = Window:MakeTab({"Graphics", "wind"})
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab 1: Info === --
 ----------------------------------------------------------------------------------------------------
+ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayName", "ST4R 🌠")
+ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayBio", "⌠ Welcome ⌡" .. LocalPlayer.DisplayName)
+
 Tab1:AddSection({"》 Victory Hub Version 1.4"})
 Tab1:AddParagraph({"Executor", identifyexecutor()})
 Tab1:AddParagraph({"Credits", "• Nort_VT\n• Developer and designer\n\n• Roun95\n• Contributor and developer"})
