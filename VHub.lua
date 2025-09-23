@@ -7,9 +7,9 @@ local RunService = game:GetService("RunService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local StarterGui = game:GetService("StarterGui")
 
-local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/z/refs/heads/main/TestUi.lua"))()
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/nxvap/VictoryHub/refs/heads/main/VictoryUi.lua"))()
 local Window = Lib:MakeWindow({
-    Title = "Victory Hub | Brookhaven 🌠 ",
+    Title = "Victory Hub | Brookhaven RP 🌠 ",
     SubTitle = " by Nort_VT",
     SaveFolder = "VictoryData"
 })
@@ -705,7 +705,7 @@ end)
     end
 })
 
-Tab2:AddSection({"ESP"})
+Tab2:AddSection({"》 ESP"})
 local billboardGuis = {}
 local connections = {}
 local espEnabled = false
@@ -843,7 +843,7 @@ end)
 ----------------------------------------------------------------------------------------------------
                                 -- === Tab 3: Avatar === --
 ----------------------------------------------------------------------------------------------------
-Tab3:AddSection({"Copy Avatar"})
+Tab3:AddSection({"》 Copy Avatar"})
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 
 local PlayerValue
@@ -998,7 +998,7 @@ Tab3:AddButton({
     end
 })
 
-Tab3:AddSection({"3D Clothes"})
+Tab3:AddSection({"》 3D Clothes"})
 
 Tab3:AddDropdown({
     Name = "Select clothes",
@@ -1032,7 +1032,7 @@ Tab3:AddDropdown({
     end
 })
 
-Tab3:AddSection({"Avatar editor"})
+Tab3:AddSection({"》 Avatar editor"})
 Tab3:AddParagraph({"Adjust the proportions of your avatar for a better result"})
 
 Tab3:AddButton({
@@ -1190,7 +1190,7 @@ Tab3:AddButton({
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab4: RGB === --
 ----------------------------------------------------------------------------------------------------
-Tab4:AddSection({"RGB Player"})
+Tab4:AddSection({"》 RGB Player"})
 local rgbSpeed = 1
 
 Tab4:AddSlider({
@@ -1385,7 +1385,7 @@ Tab7:AddToggle({
 ----------------------------------------------------------------------------------------------------
                                 	-- === Tab8: Troll === --
 ----------------------------------------------------------------------------------------------------
-Tab8:AddSection({"Troll Scripts"})
+Tab8:AddSection({"》 Troll Scripts"})
 
 Tab8:AddButton({
     Name = "Bring parts",
@@ -1697,7 +1697,7 @@ end)
 	end
 })
 
-Tab8:AddSection({"OP Command"})
+Tab8:AddSection({"》 OP Command"})
 
 Tab8:AddButton({
     Name = "Annoy server",
@@ -1773,7 +1773,7 @@ Tab8:AddButton({
 ----------------------------------------------------------------------------------------------------
                                 	-- === Tab9: Teleportes === --
 ----------------------------------------------------------------------------------------------------
-Tab9:AddSection({"Brookhaven Sites"})
+Tab9:AddSection({"》 Brookhaven Sites"})
 
 local sites = {
     {"Hill", CFrame.new(-348.64, 65.94, -458.08)},
@@ -1794,7 +1794,7 @@ end
 ----------------------------------------------------------------------------------------------------
                                 	-- === Tab10: Scripts === --
 ----------------------------------------------------------------------------------------------------
-Tab10:AddSection({"Scripts"})
+Tab10:AddSection({"》 Scripts"})
 
 Tab10:AddButton({
     Name = "Virtual keyboard",
@@ -2376,7 +2376,7 @@ Tab10:AddButton({
 ----------------------------------------------------------------------------------------------------
                                 	-- === Tab11: Graphics === --
 ----------------------------------------------------------------------------------------------------
-Tab11:AddSection({"Optimization"})
+Tab11:AddSection({"》 Optimization"})
 
 Tab11:AddButton({
     Name = "Fps boost",
@@ -2436,7 +2436,7 @@ for i, v in pairs(g:GetDescendants()) do
     end
 	end
 })
-Tab11:AddSection({"Graphics"})
+Tab11:AddSection({"》 Graphics"})
 
 Tab11:AddButton({
     Name = "Shaders",
