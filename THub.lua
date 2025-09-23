@@ -400,7 +400,9 @@ end)
                                 -- === Tab 3: Avatar Editor === --
 ----------------------------------------------------------------------------------------------------
 Tab3:AddSection({"Copiar avatar"})
-local Remotes = ReplicatedStorage:WaitForChild("Remotes")
+local Remotes = ReplicatedStorage.Remotes
+local Wear = Remotes.Wear
+local ChangeCharacterBody = Remotes.ChangeCharacterBody
 
 local PlayerValue
 local Target = nil
@@ -457,28 +459,27 @@ Tab3:AddButton({
 
                 for _, acc in ipairs(LDesc:GetAccessories(true)) do
                     if acc.AssetId and tonumber(acc.AssetId) then
-                        Remotes.Wear:InvokeServer(tonumber(acc.AssetId))
+                        Wear:InvokeServer(tonumber(acc.AssetId))
                         task.wait(0.2)
                     end
                 end
 
                 if tonumber(LDesc.Shirt) then
-                    Remotes.Wear:InvokeServer(tonumber(LDesc.Shirt))
+                    Wear:InvokeServer(tonumber(LDesc.Shirt))
                     task.wait(0.2)
                 end
 
                 if tonumber(LDesc.Pants) then
-                    Remotes.Wear:InvokeServer(tonumber(LDesc.Pants))
+                    Wear:InvokeServer(tonumber(LDesc.Pants))
                     task.wait(0.2)
                 end
 
                 if tonumber(LDesc.Face) then
-                    Remotes.Wear:InvokeServer(tonumber(LDesc.Face))
+                    Wear:InvokeServer(tonumber(LDesc.Face))
                     task.wait(0.2)
                 end
 
                 local PDesc = THumanoid:GetAppliedDescription()
-
                 local argsBody = {
                     [1] = {
                         [1] = PDesc.Torso,
@@ -489,27 +490,27 @@ Tab3:AddButton({
                         [6] = PDesc.Head
                     }
                 }
-                Remotes.ChangeCharacterBody:InvokeServer(unpack(argsBody))
+                ChangeCharacterBody:InvokeServer(unpack(argsBody))
                 task.wait(0.5)
 
                 if tonumber(PDesc.Shirt) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.Shirt))
+                    Wear:InvokeServer(tonumber(PDesc.Shirt))
                     task.wait(0.3)
                 end
 
                 if tonumber(PDesc.Pants) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.Pants))
+                    Wear:InvokeServer(tonumber(PDesc.Pants))
                     task.wait(0.3)
                 end
 
                 if tonumber(PDesc.Face) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.Face))
+                    Wear:InvokeServer(tonumber(PDesc.Face))
                     task.wait(0.3)
                 end
 
                 for _, v in ipairs(PDesc:GetAccessories(true)) do
                     if v.AssetId and tonumber(v.AssetId) then
-                        Remotes.Wear:InvokeServer(tonumber(v.AssetId))
+                        Wear:InvokeServer(tonumber(v.AssetId))
                         task.wait(0.3)
                     end
                 end
@@ -521,28 +522,8 @@ Tab3:AddButton({
                 end
 
                 if tonumber(PDesc.IdleAnimation) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.IdleAnimation))
+                    Wear:InvokeServer(tonumber(PDesc.IdleAnimation))
                     task.wait(0.3)
-                end
-                -- Nombre, Bio y Color
-                local Bag = TPlayer:FindFirstChild("PlayersBag")
-                if Bag then
-                    if Bag:FindFirstChild("RPName") and Bag.RPName.Value ~= "" then
-                        Remotes.RPNameText:FireServer("RolePlayName", Bag.RPName.Value)
-                        task.wait(0.3)
-                    end
-                    if Bag:FindFirstChild("RPBio") and Bag.RPBio.Value ~= "" then
-                        Remotes.RPNameText:FireServer("RolePlayBio", Bag.RPBio.Value)
-                        task.wait(0.3)
-                    end
-                    if Bag:FindFirstChild("RPNameColor") then
-                        Remotes.RPNameColor:FireServer("PickingRPNameColor", Bag.RPNameColor.Value)
-                        task.wait(0.3)
-                    end
-                    if Bag:FindFirstChild("RPBioColor") then
-                        Remotes.RPNameColor:FireServer("PickingRPBioColor", Bag.RPBioColor.Value)
-                        task.wait(0.3)
-                    end
                 end
             end
         end
@@ -563,7 +544,7 @@ for _, btn in ipairs(clothes) do
         btn[1],
         function()
 			local args = {btn[2]}
-            ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(unpack(args))
+            Wear:InvokeServer(unpack(args))
         end
     })
 end
@@ -585,7 +566,7 @@ Tab3:AddButton({
                 15093053680   -- Head
             }
         }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
 
@@ -594,15 +575,15 @@ Tab3:AddButton({
     Callback = function()
         local args = {
             {
-                128776848621889, -- Right Leg
-                81547744637409,  -- Left Leg
-                133466157082146,  -- Right Arm
-                73001997018020,  -- Left Arm
-                129543160215232, -- Torso
-                15093053680   -- Head
+                128776848621889,
+                81547744637409,
+                133466157082146,
+                73001997018020,
+                129543160215232,
+                15093053680
             }
         }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
 
@@ -611,15 +592,15 @@ Tab3:AddButton({
     Callback = function()
         local args = {
             {
-                84418052877367, -- Right Leg
-                124343282827669,  -- Left Leg
-                99519402284266,  -- Right Arm
-                115905570886697,  -- Left Arm
-                92757812011061, -- Torso
-                15093053680   -- Head
+                84418052877367,
+                124343282827669,
+                99519402284266,
+                115905570886697,
+                92757812011061,
+                15093053680
             }
         }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
 
@@ -628,15 +609,15 @@ Tab3:AddButton({
     Callback = function()
         local args = {
             {
-                127241951574732, -- Right Leg
-                118303475394830,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                115745153758680, -- Torso
-                15093053680   -- Head
+                127241951574732,
+                118303475394830,
+                18839824209,
+                18839824132,
+                115745153758680,
+                15093053680
             }
         }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
 
@@ -645,15 +626,15 @@ Tab3:AddButton({
     Callback = function()
         local args = {
             {
-                127241951574732, -- Right Leg
-                118303475394830,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                114206707267907, -- Torso
-                15093053680   -- Head
+                127241951574732,
+                118303475394830,
+                18839824209,
+                18839824132,
+                114206707267907,
+                15093053680
             }
         }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
 
@@ -662,15 +643,15 @@ Tab3:AddButton({
     Callback = function()
         local args = {
             {
-                139607718, -- Right Leg
-                118303475394830,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                114206707267907, -- Torso
-                15093053680   -- Head
+                139607718,
+                118303475394830,
+                18839824209,
+                18839824132,
+                114206707267907,
+                15093053680
             }
         }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
 
@@ -679,15 +660,15 @@ Tab3:AddButton({
     Callback = function()
         local args = {
             {
-                2517207746, -- Right Leg
-                2517204456,  -- Left Leg
-                4416788553,  -- Right Arm
-                4416785861,  -- Left Arm
-                32336059, -- Torso
-                15093053680   -- Head
+                2517207746,
+                2517204456,
+                4416788553,
+                4416785861,
+                32336059,
+                15093053680
             }
         }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
 
@@ -696,15 +677,15 @@ Tab3:AddButton({
     Callback = function()
         local args = {
             {
-                127968751428204, -- Right Leg
-                101521138059051,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                114206707267907, -- Torso
-                14970560459   -- Head
+                127968751428204,
+                101521138059051,
+                18839824209,
+                18839824132,
+                114206707267907,
+                14970560459
             }
         }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
 
@@ -713,11 +694,11 @@ Tab3:AddButton({
     Callback = function()
         local args = {
             {
-                4637265517, -- Torso
-                15093053680   -- Head
+                4637265517,
+                15093053680
             }
         }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
 
@@ -726,11 +707,11 @@ Tab3:AddButton({
     Callback = function()
         local args = {
             {
-                139607718, -- Right Leg
-                15093053680   -- Head
+                139607718,
+                15093053680
             }
         }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
 ----------------------------------------------------------------------------------------------------
@@ -813,7 +794,7 @@ local function getRainbowColor(speedMultiplier)
 end
 
 local function fireServer(eventName, args)
-    local event = ReplicatedStorage:FindFirstChild("RE")
+    local event = ReplicatedStorage.RE
     if event and event:FindFirstChild(eventName) then
         pcall(function()
             event[eventName]:FireServer(unpack(args))
@@ -854,7 +835,7 @@ for _, btn in ipairs(sites) do
     Tab9:AddButton({
         btn[1],
         function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = btn[2]
+            Character.HumanoidRootPart.CFrame = btn[2]
         end
     })
 end
