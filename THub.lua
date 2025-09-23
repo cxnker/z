@@ -3,10 +3,10 @@ local LocalPlayer = Players.LocalPlayer
 local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitForChild("HumanoidRootPart")
 
-local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/z/refs/heads/main/BRUTONHUBUI.txt"))()
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/z/refs/heads/main/TestUi.lua"))()
 local Window = Lib:MakeWindow({
-    Title = "Victory Hub | Brookhaven 🌠 ",
-    SubTitle = " by Nort_VT",
+    Title = "Victory Hub L | Brookhaven RP 🌠 ",
+    SubTitle = " by Roun95",
     SaveFolder = "VictoryData"
 })
 
@@ -26,26 +26,19 @@ local Tab8 = Window:MakeTab({"Troll", "skull"})
 local Tab9 = Window:MakeTab({"Teleportes", "mappin"})
 local Tab10 = Window:MakeTab({"Scripts", "scroll"})
 local Tab11 = Window:MakeTab({"Graphics", "wind"})
-----------------------------------------------------------------------------------------------------
-                                    -- === Tab 1: Credits === --
-----------------------------------------------------------------------------------------------------
+
 Tab1:AddParagraph({"Executor", identifyexecutor()})
 Tab1:AddSection({"Version 1.4"})
-
 Tab1:AddButton({
     Name = "Sigueme en Tiktok (Copiar URL)",
     Callback = function()
     setclipboard("https://www.tiktok.com/@lxvap")
 	end
 })
-----------------------------------------------------------------------------------------------------
-                                    -- === Tab 2: User === --
-----------------------------------------------------------------------------------------------------
-Tab2:AddSection({"Personaje del jugador"})
 
+Tab2:AddSection({"Personaje del jugador"})
 local selectedPlayerName = nil
 local headsitActive = false
-
 local function headsitOnPlayer(targetPlayer)
     if not targetPlayer.Character or not targetPlayer.Character:FindFirstChild("Head") then
         warn("Su personaje no tiene cabeza.")
@@ -63,16 +56,13 @@ local function headsitOnPlayer(targetPlayer)
             v:Destroy()
         end
     end
-
     local weld = Instance.new("WeldConstraint")
     weld.Part0 = localRoot
     weld.Part1 = targetHead
     weld.Parent = localRoot
-
     if Humanoid then
         Humanoid.Sit = true
     end
-
     print("Headsit activado en " .. targetPlayer.Name)
     return true
 end
@@ -103,14 +93,10 @@ local function findPlayerByPartialName(partial)
 end
 
 local function notifyPlayerSelected(player)
-    local thumbType = Enum.ThumbnailType.HeadShot
-    local thumbSize = Enum.ThumbnailSize.Size100x100
-    local content, _ = Players:GetUserThumbnailAsync(player.UserId, thumbType, thumbSize)
-
-    StarterGui:SetCore("SendNotification", {
+	StarterGui:SetCore("SendNotification", {
         Title = "Jugador Seleccionado",
         Text = player.Name .. " fue seleccionado!",
-        Icon = content,
+        Icon = Players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100),
         Duration = 5
     })
 end
@@ -258,9 +244,9 @@ RunService.Stepped:Connect(function()
 	end)
 
 Tab2:AddButton({
-    Name = "Virtual keyboard",
+    Name = "Fly GUI",
     Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/x/refs/heads/main/Scripts/Fly.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/x/refs/heads/main/Scripts/Fly.lua"))()
 	end
 })
 
@@ -331,7 +317,6 @@ local function updateESP(player)
             textLabel.TextSize = 14
             textLabel.Text = player.Name .. " | " .. player.AccountAge .. " dias"
             textLabel.TextColor3 = getESPColor()
-
             billboardGuis[player] = billboard
         end
     end
@@ -396,13 +381,9 @@ Toggle1:Callback(function(value)
         billboardGuis = {}
     end
 end)
-----------------------------------------------------------------------------------------------------
-                                -- === Tab 3: Avatar Editor === --
-----------------------------------------------------------------------------------------------------
+
 Tab3:AddSection({"Copiar avatar"})
-local Remotes = ReplicatedStorage.Remotes
-local Wear = Remotes.Wear
-local ChangeCharacterBody = Remotes.ChangeCharacterBody
+local Remotes, Wear, ChangeCharacterBody = ReplicatedStorage.Remotes, Remotes.Wear, Remotes.ChangeCharacterBody
 
 local PlayerValue
 local Target = nil
@@ -452,42 +433,36 @@ Tab3:AddButton({
         if TPlayer and TPlayer.Character then
             local LHumanoid = LChar and LChar:FindFirstChildOfClass("Humanoid")
             local THumanoid = TPlayer.Character:FindFirstChildOfClass("Humanoid")
-
             if LHumanoid and THumanoid then
 
                 local LDesc = LHumanoid:GetAppliedDescription()
-
                 for _, acc in ipairs(LDesc:GetAccessories(true)) do
                     if acc.AssetId and tonumber(acc.AssetId) then
                         Wear:InvokeServer(tonumber(acc.AssetId))
                         task.wait(0.2)
                     end
                 end
-
                 if tonumber(LDesc.Shirt) then
                     Wear:InvokeServer(tonumber(LDesc.Shirt))
                     task.wait(0.2)
                 end
-
                 if tonumber(LDesc.Pants) then
                     Wear:InvokeServer(tonumber(LDesc.Pants))
                     task.wait(0.2)
                 end
-
                 if tonumber(LDesc.Face) then
                     Wear:InvokeServer(tonumber(LDesc.Face))
                     task.wait(0.2)
                 end
-
                 local PDesc = THumanoid:GetAppliedDescription()
                 local argsBody = {
-                    [1] = {
-                        [1] = PDesc.Torso,
-                        [2] = PDesc.RightArm,
-                        [3] = PDesc.LeftArm,
-                        [4] = PDesc.RightLeg,
-                        [5] = PDesc.LeftLeg,
-                        [6] = PDesc.Head
+                    {
+                        PDesc.Torso,
+                        PDesc.RightArm,
+                        PDesc.LeftArm,
+                        PDesc.RightLeg,
+                        PDesc.LeftLeg,
+                        PDesc.Head
                     }
                 }
                 ChangeCharacterBody:InvokeServer(unpack(argsBody))
@@ -497,17 +472,14 @@ Tab3:AddButton({
                     Wear:InvokeServer(tonumber(PDesc.Shirt))
                     task.wait(0.3)
                 end
-
                 if tonumber(PDesc.Pants) then
                     Wear:InvokeServer(tonumber(PDesc.Pants))
                     task.wait(0.3)
                 end
-
                 if tonumber(PDesc.Face) then
                     Wear:InvokeServer(tonumber(PDesc.Face))
                     task.wait(0.3)
                 end
-
                 for _, v in ipairs(PDesc:GetAccessories(true)) do
                     if v.AssetId and tonumber(v.AssetId) then
                         Wear:InvokeServer(tonumber(v.AssetId))
@@ -520,7 +492,6 @@ Tab3:AddButton({
                     Remotes.ChangeBodyColor:FireServer(tostring(SkinColor.HeadColor))
                     task.wait(0.3)
                 end
-
                 if tonumber(PDesc.IdleAnimation) then
                     Wear:InvokeServer(tonumber(PDesc.IdleAnimation))
                     task.wait(0.3)
@@ -548,9 +519,7 @@ for _, btn in ipairs(clothes) do
         end
     })
 end
-
 Tab3:AddSection({"Editor de avatar (Tu avatar se reiniciara)"})
-
 Tab3:AddParagraph({"Ajusta las proporciones de tu avatar para un mejor resultado"})
 
 Tab3:AddButton({
@@ -714,9 +683,7 @@ Tab3:AddButton({
         ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
-----------------------------------------------------------------------------------------------------
-                                    -- === Tab4: House === --
-----------------------------------------------------------------------------------------------------
+
 Tab4:AddButton({
     Name = "Desbanear de todas las casas",
     Callback = function()
@@ -771,9 +738,7 @@ Tab4:AddButton({
         end
     end
 })
-----------------------------------------------------------------------------------------------------
-                                    -- === Tab5: RGB === --
-----------------------------------------------------------------------------------------------------
+
 Tab5:AddSection({"Velocidad RGB"})
 local rgbSpeed = 1
 
@@ -803,7 +768,6 @@ local function fireServer(eventName, args)
 end
 
 Tab5:AddSection({"Jugador RGB"})
-
 local nameBioRGBActive = false
 Tab5:AddToggle({
     Name = "Nombre + Bio RGB",
