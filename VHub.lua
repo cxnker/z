@@ -64,7 +64,7 @@ end
 })
 
 Tab1:AddSection({"》 Information"})
-Tab1:AddParagraph({"News", "• Added new style in the interface\n• Added new functions\n• Bugs fixed\n• Optimization and improvements"})
+Tab1:AddParagraph({"News", "• New improved interface\n• New Spawm premium cars\n• Upcoming improvements coming soon"})
 ----------------------------------------------------------------------------------------------------
                                 -- === Tab 2: Player === --
 ----------------------------------------------------------------------------------------------------
@@ -1191,13 +1191,6 @@ Tab3:AddButton({
         ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
     end
 })
-
-Tab3:AddButton({
-    Name = "TestHummer Car",
-    Callback = function()
-        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="Hummer"}))
-    end
-})
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab4: RGB === --
 ----------------------------------------------------------------------------------------------------
@@ -1304,8 +1297,60 @@ Tab5:AddButton({
         end
     end
 })
+----------------------------------------------------------------------------------------------------
+                                	-- === Tab8: Cars === --
+----------------------------------------------------------------------------------------------------
+Tab6:AddSection({"》 Spawm Premium Cars"})
 
-Tab6:AddParagraph({"Coming soon", "Thanks for waiting:)"})
+Tab6:AddButton({
+    Name = "Hummer",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="Hummer"}))
+    end
+})
+Tab6:AddButton({
+    Name = "RollsSUV",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="RollsSUV"}))
+    end
+})
+Tab6:AddButton({
+    Name = "NascarPremium",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="NascarPremium"}))
+    end
+})
+Tab6:AddButton({
+    Name = "RaptorMonster",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="RaptorMonster"}))
+    end
+})
+Tab6:AddButton({
+    Name = "Roadster",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="Roadster"}))
+    end
+})
+Tab6:AddButton({
+    Name = "SuperCar",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="SuperCar"}))
+    end
+})
+Tab6:AddButton({
+    Name = "SWAT",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="SWAT"}))
+    end
+})
+Tab6:AddButton({
+    Name = "TankPremium",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="TankPremium"}))
+    end
+})
+Tab6:AddParagraph({"More Cars", "Coming soon more cars"})
 ----------------------------------------------------------------------------------------------------
                                 	-- === Tab7: Music === --
 ----------------------------------------------------------------------------------------------------
