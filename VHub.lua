@@ -33,7 +33,7 @@ local Tab11 = Window:MakeTab({"Graphics", "wind"})
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab 1: Info === --
 ----------------------------------------------------------------------------------------------------
-Tab1:AddSection({"Victory Hub Version 1.4"})
+Tab1:AddSection({"❯ Victory Hub Version 1.4"})
 Tab1:AddParagraph({"Executor", identifyexecutor()})
 Tab1:AddParagraph({"Credits", "• Nort_VT\n• Developer and designer\n\n• Roun95\n• Contributor and developer"})
 
@@ -59,7 +59,7 @@ end
     end
 })
 
-Tab1:AddSection({"Information"})
+Tab1:AddSection({"❯ Information"})
 Tab1:AddParagraph({"News", "• Added new style in the interface\n• Added new functions\n• Bugs fixed\n• Optimization and improvements"})
 ----------------------------------------------------------------------------------------------------
                                 -- === Tab 2: Player === --
