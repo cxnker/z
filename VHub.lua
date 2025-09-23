@@ -1305,61 +1305,55 @@ Tab6:AddSection({"》 Spawm Premium Cars"})
 Tab6:AddButton({
     Name = "Hummer",
     Callback = function()
-        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="Hummer"}))
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(unpack({"PickingCar", "Hummer"}))
     end
 })
 Tab6:AddButton({
     Name = "RollsSUV",
     Callback = function()
-        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="RollsSUV"}))
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(unpack({"PickingCar", "RollsSUV"}))
     end
 })
 Tab6:AddButton({
-    Name = "NascarPremium Test",
+    Name = "NascarPremium",
     Callback = function()
         ReplicatedStorage.RE["1Ca1r"]:FireServer(unpack({"PickingCar", "NascarPremium"}))
     end
 })
 Tab6:AddButton({
-    Name = "NascarPremium Testt",
-    Callback = function()
-        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({"PickingCar", "NascarPremium"}))
-    end
-})
-Tab6:AddButton({
     Name = "RaptorMonster",
     Callback = function()
-        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="RaptorMonster"}))
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(unpack({"PickingCar", "RaptorMonster"}))
     end
 })
 Tab6:AddButton({
     Name = "Roadster",
     Callback = function()
-        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="Roadster"}))
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(unpack({"PickingCar", "Roadster"}))
     end
 })
 Tab6:AddButton({
     Name = "SuperCar",
     Callback = function()
-        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="SuperCar"}))
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(unpack({"PickingCar", "SuperCar"}))
     end
 })
 Tab6:AddButton({
     Name = "SWAT",
     Callback = function()
-        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="SWAT"}))
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(unpack({"PickingCar", "SWAT"}))
     end
 })
 Tab6:AddButton({
     Name = "TankPremium",
     Callback = function()
-        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="TankPremium"}))
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(unpack({"PickingCar", "TankPremium"}))
     end
 })
 Tab6:AddButton({
     Name = "BatMobile",
     Callback = function()
-        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="BatMobile"}))
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(unpack({"PickingCar", "BatMobile"}))
     end
 })
 Tab6:AddParagraph({"More Cars", "Coming soon more cars"})
