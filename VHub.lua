@@ -33,8 +33,10 @@ local Tab11 = Window:MakeTab({"Graphics", "wind"})
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab 1: Info === --
 ----------------------------------------------------------------------------------------------------
-ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayName", "ST4R 🌠")
-ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayBio", "⌠ Welcome ⌡" .. LocalPlayer.DisplayName)
+ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayName", "Victory User 🌠")
+ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayBio", "Welcome, " .. LocalPlayer.DisplayName)
+ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", Color3.fromRGB(0, 170, 255))
+ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPBioColor", Color3.fromRGB(0, 0, 0))
 
 Tab1:AddSection({"》 Victory Hub Version 1.4"})
 Tab1:AddParagraph({"Executor", identifyexecutor()})
