@@ -4,13 +4,17 @@ local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local Humanoid = Character:WaitForChild("Humanoid")
 local RootPart = Character:WaitForChild("HumanoidRootPart")
 local RunService = game:GetService("RunService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local StarterGui = game:GetService("StarterGui")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayName", "Victory User 🌠")
+ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayBio", "Welcome, " .. LocalPlayer.DisplayName)
+ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", Color3.fromRGB(0, 128, 255))
+ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPBioColor", Color3.fromRGB(0, 0, 0))
 
 local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/nxvap/VictoryHub/refs/heads/main/VictoryUi.lua"))()
 local Window = Lib:MakeWindow({
     Title = "Victory Hub | Brookhaven RP 🌠 ",
-    SubTitle = " by Nort_VT",
+    SubTitle = " By Roun95",
     SaveFolder = "VictoryData"
 })
 
@@ -33,14 +37,9 @@ local Tab11 = Window:MakeTab({"Graphics", "wind"})
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab 1: Info === --
 ----------------------------------------------------------------------------------------------------
-ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayName", "Victory User 🌠")
-ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayBio", "Welcome, " .. LocalPlayer.DisplayName)
-ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", Color3.fromRGB(0, 170, 255))
-ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPBioColor", Color3.fromRGB(0, 0, 0))
-
-Tab1:AddSection({"》 Victory Hub Version 1.4"})
+Tab1:AddSection({"》 Victory Hub Version 1.5"})
 Tab1:AddParagraph({"Executor", identifyexecutor()})
-Tab1:AddParagraph({"Credits", "• Nort_VT\n• Developer and designer\n\n• Roun95\n• Contributor and developer"})
+Tab1:AddParagraph({"Credits", "• Nort_VT\n• Developer and designer\n\n• Roun95\n• Contributor and developer\n\n♡ Created with love for you:) <3"})
 
 Tab1:AddButton({
     Name = "Rejoin server",
@@ -69,108 +68,6 @@ Tab1:AddParagraph({"News", "• Added new style in the interface\n• Added new 
 ----------------------------------------------------------------------------------------------------
                                 -- === Tab 2: Player === --
 ----------------------------------------------------------------------------------------------------
-Tab2:AddSection({"》 Player Character"})
-
-local selectedPlayerName = nil
-local headsitActive = false
-
-local function headsitOnPlayer(targetPlayer)
-    if not targetPlayer.Character or not targetPlayer.Character:FindFirstChild("Head") then
-        warn("Character has no Head")
-        return false
-    end
-    local targetHead = targetPlayer.Character.Head
-    local localRoot = Character:FindFirstChild("HumanoidRootPart")
-    if not localRoot then
-        warn("Character has no HumanoidRootPart")
-        return false
-    end
-    localRoot.CFrame = targetHead.CFrame * CFrame.new(0, 2.2, 0)
-    for _, v in pairs(localRoot:GetChildren()) do
-        if v:IsA("WeldConstraint") then
-            v:Destroy()
-        end
-    end
-
-    local weld = Instance.new("WeldConstraint")
-    weld.Part0 = localRoot
-    weld.Part1 = targetHead
-    weld.Parent = localRoot
-    if Humanoid then
-        Humanoid.Sit = true
-    end
-    print("Headsit activated on " .. targetPlayer.Name)
-    return true
-end
-
-local function removeHeadsit()
-    local localRoot = Character:FindFirstChild("HumanoidRootPart")
-    if localRoot then
-        for _, v in pairs(localRoot:GetChildren()) do
-            if v:IsA("WeldConstraint") then
-                v:Destroy()
-            end
-        end
-    end
-    if Humanoid then
-        Humanoid.Sit = false
-    end
-    print("Headsit disabled")
-end
-
-local function findPlayerByPartialName(partial)
-    partial = partial:lower()
-    for _, player in pairs(Players:GetPlayers()) do
-        if player ~= localPlayer and player.Name:lower():sub(1, #partial) == partial then
-            return player
-        end
-    end
-    return nil
-end
-
-local function notifyPlayerSelected(player)
-    local thumbType = Enum.ThumbnailType.HeadShot
-    local thumbSize = Enum.ThumbnailSize.Size100x100
-    local content, _ = Players:GetUserThumbnailAsync(player.UserId, thumbType, thumbSize)
-    StarterGui:SetCore("SendNotification", {
-        Title = "Player selected",
-        Text = player.Name .. " selected!",
-        Icon = content,
-        Duration = 5
-    })
-end
-
-Tab2:AddTextBox({
-    Name = "Headsit Player",
-    Description = "Enter part of the player name",
-    PlaceholderText = "Nor → Nort_VT",
-    Callback = function(Value)
-    local foundPlayer = findPlayerByPartialName(Value)
-        if foundPlayer then
-            selectedPlayerName = foundPlayer.Name
-            notifyPlayerSelected(foundPlayer)
-        else
-            warn("No player found with that name")
-        end
-    end
-})
-
-Tab2:AddButton({"Enable Headsit", function()
-    if not selectedPlayerName then
-        return
-    end
-    if not headsitActive then
-        local target = Players:FindFirstChild(selectedPlayerName)
-        if target and headsitOnPlayer(target) then
-			headsitActive = true
-        end
-    else
-        removeHeadsit()
-		headsitActive = false
-    end
-end
-})
-
 Tab2:AddSlider({
     Name = "Speed",
     Min = 1,
@@ -1390,6 +1287,108 @@ Tab7:AddToggle({
 ----------------------------------------------------------------------------------------------------
                                 	-- === Tab8: Troll === --
 ----------------------------------------------------------------------------------------------------
+Tab8:AddSection({"》 Player Character"})
+
+local selectedPlayerName = nil
+local headsitActive = false
+
+local function headsitOnPlayer(targetPlayer)
+    if not targetPlayer.Character or not targetPlayer.Character:FindFirstChild("Head") then
+        warn("Character has no Head")
+        return false
+    end
+    local targetHead = targetPlayer.Character.Head
+    local localRoot = Character:FindFirstChild("HumanoidRootPart")
+    if not localRoot then
+        warn("Character has no HumanoidRootPart")
+        return false
+    end
+    localRoot.CFrame = targetHead.CFrame * CFrame.new(0, 2.2, 0)
+    for _, v in pairs(localRoot:GetChildren()) do
+        if v:IsA("WeldConstraint") then
+            v:Destroy()
+        end
+    end
+
+    local weld = Instance.new("WeldConstraint")
+    weld.Part0 = localRoot
+    weld.Part1 = targetHead
+    weld.Parent = localRoot
+    if Humanoid then
+        Humanoid.Sit = true
+    end
+    print("Headsit activated on " .. targetPlayer.Name)
+    return true
+end
+
+local function removeHeadsit()
+    local localRoot = Character:FindFirstChild("HumanoidRootPart")
+    if localRoot then
+        for _, v in pairs(localRoot:GetChildren()) do
+            if v:IsA("WeldConstraint") then
+                v:Destroy()
+            end
+        end
+    end
+    if Humanoid then
+        Humanoid.Sit = false
+    end
+    print("Headsit disabled")
+end
+
+local function findPlayerByPartialName(partial)
+    partial = partial:lower()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= localPlayer and player.Name:lower():sub(1, #partial) == partial then
+            return player
+        end
+    end
+    return nil
+end
+
+local function notifyPlayerSelected(player)
+    local thumbType = Enum.ThumbnailType.HeadShot
+    local thumbSize = Enum.ThumbnailSize.Size100x100
+    local content, _ = Players:GetUserThumbnailAsync(player.UserId, thumbType, thumbSize)
+    StarterGui:SetCore("SendNotification", {
+        Title = "Player selected",
+        Text = player.Name .. " selected!",
+        Icon = content,
+        Duration = 5
+    })
+end
+
+Tab8:AddTextBox({
+    Name = "Headsit Player",
+    Description = "Enter part of the player name",
+    PlaceholderText = "Nor → Nort_VT",
+    Callback = function(Value)
+    local foundPlayer = findPlayerByPartialName(Value)
+        if foundPlayer then
+            selectedPlayerName = foundPlayer.Name
+            notifyPlayerSelected(foundPlayer)
+        else
+            warn("No player found with that name")
+        end
+    end
+})
+
+Tab8:AddButton({"Enable Headsit", function()
+    if not selectedPlayerName then
+        return
+    end
+    if not headsitActive then
+        local target = Players:FindFirstChild(selectedPlayerName)
+        if target and headsitOnPlayer(target) then
+			headsitActive = true
+        end
+    else
+        removeHeadsit()
+		headsitActive = false
+    end
+end
+})
+
 Tab8:AddSection({"》 Troll Scripts"})
 
 Tab8:AddButton({
