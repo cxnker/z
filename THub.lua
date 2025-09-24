@@ -452,12 +452,14 @@ Tab3:AddButton({
                 end
                 local PDesc = THumanoid:GetAppliedDescription()
                 local argsBody = {
-                        PDesc.Torso,
-                        PDesc.RightArm,
-                        PDesc.LeftArm,
-                        PDesc.RightLeg,
-                        PDesc.LeftLeg,
-                        PDesc.Head
+                    [1] = {
+                        [1] = PDesc.Torso,
+                        [2] = PDesc.RightArm,
+                        [3] = PDesc.LeftArm,
+                        [4] = PDesc.RightLeg,
+                        [5] = PDesc.LeftLeg,
+                        [6] = PDesc.Head
+                    }
                 }
                 ChangeCharacterBody:InvokeServer(unpack(argsBody))
                 task.wait(0.5)
@@ -480,7 +482,6 @@ Tab3:AddButton({
                         task.wait(0.3)
                     end
                 end
-
                 local SkinColor = TPlayer.Character:FindFirstChild("Body Colors")
                 if SkinColor then
                     Remotes.ChangeBodyColor:FireServer(tostring(SkinColor.HeadColor))
@@ -496,7 +497,6 @@ Tab3:AddButton({
 })
 
 Tab3:AddSection({"Ropa 3D"})
-
 local clothes = {
     {"Black-Arm-Bandages-1-0", 11458078735},
     {"Black-Oversized-Warmers", 10789914680},
