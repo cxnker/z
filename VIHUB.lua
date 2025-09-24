@@ -1735,6 +1735,71 @@ Tab6:AddButton({
 ----------------------------------------------------------------------------------------------------
                                 	-- === Tab7: Music === --
 ----------------------------------------------------------------------------------------------------
+local loopAtivo = false
+local InputID = ""
+
+Tab7:AddTextBox({
+    Name = "Reproductor de musica",
+    Description = "Pon el ID del sonido para reproducir",
+    Default = "",
+    PlaceholderText = "ej: 6832470734",
+    ClearTextOnFocus = true,
+    Callback = function(text)
+        InputID = tonumber(text)
+    end
+})
+
+local function fireServer(eventName, args)
+    local event = ReplicatedStorage:FindFirstChild("RE") and ReplicatedStorage.RE:FindFirstChild(eventName)
+    if event then
+        pcall(function()
+            event:FireServer(unpack(args))
+        end)
+    end
+end
+
+Tab7:AddButton({
+    Name = "Reproducir musica",
+    Callback = function()
+        if InputID then
+            fireServer("1Gu1nSound1s", {Workspace, InputID, 1})
+            local globalSound = Instance.new("Sound", Workspace)
+            globalSound.SoundId = "rbxassetid://" .. InputID
+            globalSound.Looped = false
+            globalSound:Play()
+            task.wait(3)
+            globalSound:Destroy()
+        end
+    end
+})
+
+Tab7:AddToggle({
+    Name = "Repetir",
+    Description = "Repetir sonido en bucle",
+    Default = false,
+    Callback = function(state)
+        loopAtivo = state
+        if loopAtivo then
+            spawn(function()
+                while loopAtivo do
+                    if InputID then
+                        fireServer("1Gu1nSound1s", {Workspace, InputID, 1})
+                        local globalSound = Instance.new("Sound", Workspace)
+                        globalSound.SoundId = "rbxassetid://" .. InputID
+                        globalSound.Looped = false
+                        globalSound:Play()
+                        task.spawn(function()
+                            task.wait(3)
+                            globalSound:Destroy()
+                        end)
+                    end
+                    task.wait(1)
+                end
+            end)
+        end
+    end
+})
+
 local audios = {
     {Name = "SUS", ID = 6701126635},
     {Name = "Sus", ID = 7153419575},
