@@ -15,7 +15,7 @@ Window:AddMinimizeButton({
     Corner = {CornerRadius = UDim.new(1,1)},
 })
 
-local Tab1 = Window:MakeTab({"Credits", "info"})
+local Tab1 = Window:MakeTab({"Info", "info"})
 local Tab2 = Window:MakeTab({"Player", "user"})
 local Tab3 = Window:MakeTab({"Avatar", "shirt"})
 local Tab4 = Window:MakeTab({"House", "home"})
