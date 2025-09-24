@@ -34,7 +34,11 @@ bgCorner.CornerRadius = UDim.new(0.02,0)
 bgCorner.Parent = Background
 
 local bgGradient = Instance.new("UIGradient")
-bgGradient.Color = Color3.fromRGB(0 0 0 0 0 0.5 0 0 0 1 0 0.5 1 0)
+bgGradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 0)),
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 0)),
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 128, 255))
+	})
 bgGradient.Parent = Background
 
 -- Top Text
@@ -43,7 +47,7 @@ Title.Size = UDim2.new(0, 300, 0, 50)
 Title.Position = UDim2.new(0.5, -150, 0.2, 0)
 Title.BackgroundTransparency = 1
 Title.Text = "Victory Hub 🌠 "
-Title.TextColor3 = Color3.fromRGB(0,128,255) -- Color
+Title.TextColor3 = Color3.fromRGB(180,180,180) -- Color
 Title.Font = Enum.Font.GothamBold
 Title.TextScaled = true
 Title.Parent = ScreenGui
@@ -79,7 +83,7 @@ local PercentText = Instance.new("TextLabel")
 PercentText.Size = UDim2.new(1,0,1,0)
 PercentText.Position = UDim2.new(0,0,0,0)
 PercentText.BackgroundTransparency = 1
-PercentText.TextColor3 = Color3.fromRGB(20,20,20)
+PercentText.TextColor3 = Color3.fromRGB(180,180,180)
 PercentText.Font = Enum.Font.GothamBold
 PercentText.TextScaled = true
 PercentText.Text = "0%"
