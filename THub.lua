@@ -220,7 +220,7 @@ Tab2:AddToggle({
 
 Tab2:AddToggle({
     Name = "Noclip",
-    Default = false,
+    Default = true,
     Callback = function(v)
         noclipEnabled = v
     end
@@ -335,12 +335,10 @@ local Toggle1 = Tab2:AddToggle({
 
 Toggle1:Callback(function(value)
     espEnabled = value
-
     if espEnabled then
         for _, player in pairs(Players:GetPlayers()) do
             updateESP(player)
         end
-
         local updateConnection = RunService.Heartbeat:Connect(function()
             for _, player in pairs(Players:GetPlayers()) do
                 updateESP(player)
@@ -355,7 +353,6 @@ Toggle1:Callback(function(value)
             end
         end)
         table.insert(connections, updateConnection)
-
         local playerAdded = Players.PlayerAdded:Connect(function(player)
             updateESP(player)
             local charConn = player.CharacterAdded:Connect(function()
@@ -364,12 +361,10 @@ Toggle1:Callback(function(value)
             table.insert(connections, charConn)
         end)
         table.insert(connections, playerAdded)
-
         local playerRemoving = Players.PlayerRemoving:Connect(function(player)
             removeESP(player)
         end)
         table.insert(connections, playerRemoving)
-
     else
         for _, player in pairs(Players:GetPlayers()) do
             removeESP(player)
@@ -456,13 +451,13 @@ Tab3:AddButton({
                 end
                 local PDesc = THumanoid:GetAppliedDescription()
                 local argsBody = {
-                    {
-                        PDesc.Torso,
-                        PDesc.RightArm,
-                        PDesc.LeftArm,
-                        PDesc.RightLeg,
-                        PDesc.LeftLeg,
-                        PDesc.Head
+                    [1] = {
+                        [1] = PDesc.Torso,
+                        [2] = PDesc.RightArm,
+                        [3] = PDesc.LeftArm,
+                        [4] = PDesc.RightLeg,
+                        [5] = PDesc.LeftLeg,
+                        [6] = PDesc.Head
                     }
                 }
                 ChangeCharacterBody:InvokeServer(unpack(argsBody))
