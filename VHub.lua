@@ -25,6 +25,7 @@ Background.Position = UDim2.new(0,0,0,0)
 Background.Image = "rbxassetid://"
 Background.ScaleType = Enum.ScaleType.Crop
 Background.BackgroundTransparency = 0
+Background.BackgroundColor3 = Color3.fromRGB(0,0,0)
 Background.Parent = ScreenGui
 
 -- Rounded Borders
@@ -37,7 +38,7 @@ local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(0, 300, 0, 50)
 Title.Position = UDim2.new(0.5, -150, 0.2, 0)
 Title.BackgroundTransparency = 1
-Title.Text = "Nova Hub"
+Title.Text = "Victory Hub"
 Title.TextColor3 = Color3.fromRGB(30, 60, 120) -- Color
 Title.Font = Enum.Font.GothamBold
 Title.TextScaled = true
@@ -47,7 +48,7 @@ Title.Parent = ScreenGui
 local BarBackground = Instance.new("Frame")
 BarBackground.Size = UDim2.new(0, 400, 0, 30)
 BarBackground.Position = UDim2.new(0.5, -200, 0.5, 0)
-BarBackground.BackgroundColor3 = Color3.fromRGB(200,200,200)
+BarBackground.BackgroundColor3 = Color3.fromRGB(20,20,20)
 BarBackground.BorderSizePixel = 0
 BarBackground.Parent = ScreenGui
 BarBackground.ClipsDescendants = true
@@ -81,7 +82,7 @@ PercentText.Text = "0%"
 PercentText.Parent = BarBackground
 
 -- Loading Animation
-local totalTime = 4 -- Seconds
+local totalTime = 6 -- Seconds
 local steps = 100
 local delayPerStep = totalTime / steps
 
@@ -90,7 +91,6 @@ for i = 1, steps do
     PercentText.Text = i .. "%"
     wait(delayPerStep)
 end
-
 -- Delete GUI in the end
 ScreenGui:Destroy()
 
