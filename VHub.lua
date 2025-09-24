@@ -11,13 +11,11 @@ ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayBio", "Welcome, " .. L
 ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", Color3.fromRGB(0, 128, 255))
 ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPBioColor", Color3.fromRGB(0, 0, 0))
 
-local lp = Players.LocalPlayer
-
 -- Create GUI
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "Loading"
 ScreenGui.ResetOnSpawn = false
-ScreenGui.Parent = lp:WaitForChild("PlayerGui")
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.IgnoreGuiInset = true -- Ignore others gui
 
 -- Background
@@ -62,7 +60,7 @@ barBgCorner.Parent = BarBackground
 -- Progress Bar
 local ProgressBar = Instance.new("Frame")
 ProgressBar.Size = UDim2.new(0,0,1,0)
-ProgressBar.BackgroundColor3 = Color3.fromRGB(255,0,0)
+ProgressBar.BackgroundColor3 = Color3.fromRGB(0,128,255)
 ProgressBar.BorderSizePixel = 0
 ProgressBar.Parent = BarBackground
 
