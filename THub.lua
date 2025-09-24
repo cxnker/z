@@ -452,14 +452,12 @@ Tab3:AddButton({
                 end
                 local PDesc = THumanoid:GetAppliedDescription()
                 local argsBody = {
-                    [1] = {
-                        [1] = PDesc.Torso,
-                        [2] = PDesc.RightArm,
-                        [3] = PDesc.LeftArm,
-                        [4] = PDesc.RightLeg,
-                        [5] = PDesc.LeftLeg,
-                        [6] = PDesc.Head
-                    }
+                        PDesc.Torso,
+                        PDesc.RightArm,
+                        PDesc.LeftArm,
+                        PDesc.RightLeg,
+                        PDesc.LeftLeg,
+                        PDesc.Head
                 }
                 ChangeCharacterBody:InvokeServer(unpack(argsBody))
                 task.wait(0.5)
