@@ -33,6 +33,10 @@ local bgCorner = Instance.new("UICorner")
 bgCorner.CornerRadius = UDim.new(0.02,0)
 bgCorner.Parent = Background
 
+local bgGradient = Instance.new("UIGradient")
+bgGradient.Color = Color3.fromRGB(0 0 0 0 0 0.5 0 0 0 1 0 0.5 1 0)
+bgGradient.Parent = Background
+
 -- Top Text
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(0, 300, 0, 50)
