@@ -38,8 +38,8 @@ local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(0, 300, 0, 50)
 Title.Position = UDim2.new(0.5, -150, 0.2, 0)
 Title.BackgroundTransparency = 1
-Title.Text = "Victory Hub"
-Title.TextColor3 = Color3.fromRGB(30, 60, 120) -- Color
+Title.Text = "Victory Hub 🌠 "
+Title.TextColor3 = Color3.fromRGB(0,128,255) -- Color
 Title.Font = Enum.Font.GothamBold
 Title.TextScaled = true
 Title.Parent = ScreenGui
@@ -75,14 +75,14 @@ local PercentText = Instance.new("TextLabel")
 PercentText.Size = UDim2.new(1,0,1,0)
 PercentText.Position = UDim2.new(0,0,0,0)
 PercentText.BackgroundTransparency = 1
-PercentText.TextColor3 = Color3.fromRGB(0,0,0)
+PercentText.TextColor3 = Color3.fromRGB(20,20,20)
 PercentText.Font = Enum.Font.GothamBold
 PercentText.TextScaled = true
 PercentText.Text = "0%"
 PercentText.Parent = BarBackground
 
 -- Loading Animation
-local totalTime = 6 -- Seconds
+local totalTime = 8 -- Seconds
 local steps = 100
 local delayPerStep = totalTime / steps
 
