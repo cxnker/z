@@ -378,7 +378,8 @@ Toggle1:Callback(function(value)
 end)
 
 Tab3:AddSection({"Copiar avatar"})
-local Remotes, Wear, ChangeCharacterBody = ReplicatedStorage.Remotes, Remotes.Wear, Remotes.ChangeCharacterBody
+local Remotes = ReplicatedStorage.Remotes
+local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
 
 local PlayerValue
 local Target = nil
