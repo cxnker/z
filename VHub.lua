@@ -90,7 +90,7 @@ PercentText.Text = "0%"
 PercentText.Parent = BarBackground
 
 -- Loading Animation
-local totalTime = 8 -- Seconds
+local totalTime = 6 -- Seconds
 local steps = 100
 local delayPerStep = totalTime / steps
 
@@ -104,8 +104,8 @@ ScreenGui:Destroy()
 
 local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/z/refs/heads/main/TestUi.lua"))()
 local Window = Lib:MakeWindow({
-    Title = "Victory Hub | Brookhaven RP 🌠 ",
-    SubTitle = " By Nort_VT",
+    Title = "Victory Hub | Brookhaven RP 🌠		",
+    SubTitle = "by Roun95",
     SaveFolder = "VictoryData"
 })
 
@@ -128,7 +128,7 @@ local Tab11 = Window:MakeTab({"Graphics", "wind"})
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab 1: Info === --
 ----------------------------------------------------------------------------------------------------
-Tab1:AddSection({"》 DEVELOPER VERSION"})
+Tab1:AddSection({"》 DEVELOPER VERSION rev-5"})
 Tab1:AddParagraph({"Executor", identifyexecutor()})
 Tab1:AddParagraph({"Credits", "• Nort_VT\n• Developer and designer\n\n• Roun95\n• Contributor and developer"})
 
@@ -1896,38 +1896,22 @@ end)
 ----------------------------------------------------------------------------------------------------
                                 	-- === Tab7: Music === --
 ----------------------------------------------------------------------------------------------------
-local audios = {
-    {Name = "SUS", ID = 6701126635},
-    {Name = "Sus", ID = 7153419575},
-    {Name = "Amongus", ID = 6651571134},
-    {Name = "Sonic.exe", ID = 2496367477},
-    {Name = "Mandrake Detected", ID = 9068077052},
-    {Name = "Super fast groan", ID = 128863565301778},
-    {Name = "dodichan onnn", ID = 134640594695384},
-    {Name = "Oh my god", ID = 73349649774476},
-    {Name = "China boy", ID = 84403553163931}
-}
+local loopAtivo = false
+local InputID = ""
 
-local audioNames = {}
-for _, audio in ipairs(audios) do
-    table.insert(audioNames, audio.Name)
-end
-
-Tab7:AddDropdown({
-    Name = "Select audio",
-    Options = audioNames,
-    Default = audioNames[1],
-    Callback = function(value)
-        for _, audio in ipairs(audios) do
-            if audio.Name == value then
-                audioID = audio.ID
-                break
-            end
-        end
+Tab7:AddTextBox({
+    Name = "Music Player",
+    Description = "Enter the music ID",
+    Default = "",
+    PlaceholderText = "ej: 6832470734",
+    ClearTextOnFocus = true,
+    Callback = function(text)
+        InputID = tonumber(text)
     end
 })
 
 local function fireServer(eventName, args)
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
     local event = ReplicatedStorage:FindFirstChild("RE") and ReplicatedStorage.RE:FindFirstChild(eventName)
     if event then
         pcall(function()
@@ -1936,50 +1920,138 @@ local function fireServer(eventName, args)
     end
 end
 
-local audioLoop = false
-
-local function loopAudio()
-    while audioLoop do
-        if audioID then
-			local args = { Workspace, audioID, 1 }
-            ReplicatedStorage.RE:FindFirstChild("1Gu1nSound1s"):FireServer(unpack(args))
-            local sound = Instance.new("Sound", Workspace)
-            sound.SoundId = "rbxassetid://" .. audioID
-            sound:Play()
-        end
-        task.wait(1)
-    end
-end
-
-local function playAudio()
-    local args = { Workspace, audioID, 1 }
-		ReplicatedStorage.RE:FindFirstChild("1Gu1nSound1s"):FireServer(unpack(args))
-        local sound = Instance.new("Sound", Workspace)
-        sound.SoundId = "rbxassetid://" .. audioID
-        sound:Play()
-        task.wait(3)
-        sound:Destroy()
-end
-
 Tab7:AddButton({
-    Name = "Play audio",
+    Name = "Reproducir musica",
     Callback = function()
-	    if audioID then
-    	    playAudio(audioID)
-    	end
+        if InputID then
+            fireServer("1Gu1nSound1s", {Workspace, InputID, 1})
+            local globalSound = Instance.new("Sound", Workspace)
+            globalSound.SoundId = "rbxassetid://" .. InputID
+            globalSound.Looped = false
+            globalSound:Play()
+            task.wait(3)
+            globalSound:Destroy()
+        end
     end
 })
 
 Tab7:AddToggle({
-    Name = "Loop audio",
+    Name = "Repetir",
+    Description = "Repetir sonido en bucle",
     Default = false,
-    Callback = function(value)
-        audioLoop = value
-        if audioLoop then
-            task.spawn(loopAudio)
+    Callback = function(state)
+        loopAtivo = state
+        if loopAtivo then
+            spawn(function()
+                while loopAtivo do
+                    if InputID then
+                        fireServer("1Gu1nSound1s", {Workspace, InputID, 1})
+                        local globalSound = Instance.new("Sound", Workspace)
+                        globalSound.SoundId = "rbxassetid://" .. InputID
+                        globalSound.Looped = false
+                        globalSound:Play()
+                        task.spawn(function()
+                            task.wait(3)
+                            globalSound:Destroy()
+                        end)
+                    end
+                    task.wait(1)
+                end
+            end)
         end
     end
 })
+
+local function createSoundDropdown(title, musicOptions, defaultOption)
+	local musicNames = {}
+    local categoryMap = {}
+    for category, sounds in pairs(musicOptions) do
+        for _, music in ipairs(sounds) do
+            if music.name ~= "" and music.id ~= "4354908569" then
+                table.insert(musicNames, music.name)
+                categoryMap[music.name] = {id = music.id, category = category}
+            end
+        end
+    end
+
+	local selectedSoundID = nil
+    local currentVolume = 1
+    local currentPitch = 1
+
+    local function playSound(soundId, volume, pitch)
+        fireServer("1Gu1nSound1s", {Workspace, soundId, volume})
+        local globalSound = Instance.new("Sound")
+        globalSound.Parent = Workspace
+        globalSound.SoundId = "rbxassetid://" .. soundId
+        globalSound.Volume = volume
+        globalSound.Pitch = pitch
+        globalSound.Looped = false
+        globalSound:Play()
+        task.spawn(function()
+            task.wait(3)
+            globalSound:Destroy()
+        end)
+    end
+
+	Tab7:AddDropdown({
+    	Name = title,
+    	Description = "Elige un sonido para reproducir en el servidor",
+    	Default = defaultOption,
+    	Multi = false,
+    	Options = musicNames,
+    	Callback = function(selectedSound)
+        	if selectedSound and categoryMap[selectedSound] then
+            	selectedSoundID = categoryMap[selectedSound].id
+        	else
+            	selectedSoundID = nil
+        	end
+    	end
+	})
+
+	Tab7:AddButton({
+    	Name = "Reproducir sonido",
+    	Description = "Reproducir sonido seleccionado del menu",
+    	Callback = function()
+    	    if selectedSoundID then
+    	        playSound(selectedSoundID, currentVolume, currentPitch)
+    	    end
+    	end
+	})
+
+	local dropdownLoopActive = false
+	Tab7:AddToggle({
+    	Name = "Repetir",
+    	Description = "Repetir sonido en bucle",
+    	Default = false,
+    	Callback = function(state)
+    	dropdownLoopActive = state
+        	if state then
+            	task.spawn(function()
+                	while dropdownLoopActive do
+                    	if selectedSoundID then
+                    		playSound(selectedSoundID, currentVolume, currentPitch)
+                    	end
+                    	task.wait(1)
+                	end
+            	end)
+        	end
+    	end
+	})
+end
+
+createSoundDropdown("Selecione um meme", {
+	["Sounds"] = {
+		{name = "SUS", id = "6701126635"},
+    	{name = "Sus", id = "7153419575"},
+    	{name = "Amongus", id = "6651571134"},
+    	{name = "Sonic.exe", id = "2496367477"},
+    	{name = "Mandrake Detected", id = "9068077052"},
+    	{name = "Super fast groan", id = "128863565301778"},
+    	{name = "dodichan onnn", id = "134640594695384"},
+    	{name = "Oh my god", id = "73349649774476"},
+    	{name = "China boy", id = "84403553163931"}
+    }
+}, "SUS")
 -----------------------------------------------------------------------------
 local selectedPlayer = nil
 local isFollowingKill = false
@@ -2195,7 +2267,7 @@ end)
 
 local player_name_value
 
-local DropdownPlayerTab2 = Tab9:AddDropdown({
+local DropdownPlayerTab2 = Tab8:AddDropdown({
     Name = "Seleccionar Jugador",
     Description = "Elige un jugador para matar, atraer, ver o lanzar",
     Default = "",
@@ -2235,13 +2307,13 @@ function UptadePlayers()
     DropdownPlayerTab2:Set(playerNames)
 end
 
-Tab9:AddButton({"Actualizar lista", function()
+Tab8:AddButton({"Actualizar lista", function()
     UptadePlayers()
 end})
 
 UptadePlayers()
 
-Tab9:AddButton({
+Tab8:AddButton({
     Title = "Teletransportarse al jugador",
     Desc = "Teletransportarse a la posicion del jugador seleccionado",
     Callback = function()
@@ -2257,7 +2329,7 @@ Tab9:AddButton({
     end
 })
 
-local SpectateToggleTab10 = Tab9:AddToggle({
+local SpectateToggleTab10 = Tab8:AddToggle({
     Name = "Visualizar jugador",
     Description = "Activar/desactivar la visualizacion del jugador seleccionado",
     Default = false,
@@ -2302,7 +2374,7 @@ updateDropdown(DropdownPlayerTab2, SpectateToggleTab10)
 ----------------------------------------------------------------------------------------------------
 Tab8:AddSection({"Matar o Atraer jugador"})
 
-local DropdownKillPullMethod = Tab9:AddDropdown({
+local DropdownKillPullMethod = Tab8:AddDropdown({
     Name = "Selecciona una opcion",
     Description = "Elige una opcion para matar o atraer a un jugador",
     Options = {"Sofa", "Autobus"},
@@ -2609,7 +2681,7 @@ Tab8:AddButton({
 ----------------------------------------------------------------------------------------------------
 Tab8:AddSection({"Lanzar Jugador"})
 
-local DropdownFlingMethod = Tab9:AddDropdown({
+local DropdownFlingMethod = Tab8:AddDropdown({
     Name = "Selecciona una opcion",
     Description = "Elige una opcion para lanzar a un jugador",
     Options = {"Sofa", "Autobus", "Balon", "Balon V2", "Barco", "Camion"},
@@ -3453,7 +3525,7 @@ local function stopFling()
     end
 end
 
-flingToggle = Tab9:AddToggle({
+flingToggle = Tab8:AddToggle({
     Name = "Lanzar jugador",
     Description = "Activa o desactiva el lanzamiento con el método seleccionado",
     Default = false,
@@ -3572,7 +3644,7 @@ Tab8:AddTextBox({
     end
 })
 
-Tab9:AddButton({"Verificar lista blanca", function()
+Tab8:AddButton({"Verificar lista blanca", function()
     if #excludedPlayers == 0 then
         showNotification("Aviso", "Ningun jugador fue removido.", nil)
         return
