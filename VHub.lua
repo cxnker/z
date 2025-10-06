@@ -2712,18 +2712,17 @@ Tab8:AddButton({
         end)
     end
 })
-----------------------------------------------------------------------------------------------------
+
 Tab8:AddSection({"Throw player"})
 
 local DropdownFlingMethod = Tab8:AddDropdown({
-    Name = "Select optionnnn",
-    Description = "Elige una opcion para lanzar a un jugador",
+    Name = "Select an option",
     Options = {"Sofa", "Autobus", "Balon", "Balon V2", "Barco", "Camion"},
     Callback = function(value)
         selectedFlingMethod = value
     end
 })
-----------------------------------------------------------------------------------------------------
+
 -- Lanzar con Sofa --
 local function flingWithSofa(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then
@@ -2864,7 +2863,7 @@ local function flingWithSofa(targetPlayer)
         end
     end)
 end
-----------------------------------------------------------------------------------------------------
+
 -- Lanzar con Autobus --
 local function flingWithBus(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
@@ -2995,7 +2994,7 @@ local function flingWithBus(targetPlayer)
         end
     end)
 end
-----------------------------------------------------------------------------------------------------
+
 -- Lanzar con Balon --
 local function equipBall()
     local backpack = LocalPlayer:WaitForChild("Backpack")
@@ -3105,7 +3104,7 @@ local function flingWithBall(targetPlayer)
         end
     end)
 end
-----------------------------------------------------------------------------------------------------
+
 -- Lanzar con Balon V2 --
 local function flingWithBallV2(targetPlayer)
     if not targetPlayer or not targetPlayer.Character then return end
@@ -3181,7 +3180,7 @@ local function flingWithBallV2(targetPlayer)
         end
     end)
 end
-----------------------------------------------------------------------------------------------------
+
 -- Lanzar con Barco --
 local function flingWithBoat(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
@@ -3322,7 +3321,7 @@ local function flingWithBoat(targetPlayer)
         end
     end)
 end
-----------------------------------------------------------------------------------------------------
+
 -- Lanzar con Camion --
 local function flingWithTruck(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
@@ -3495,7 +3494,7 @@ local function flingWithTruck(targetPlayer)
         end
     end)
 end
-----------------------------------------------------------------------------------------------------
+
 -- Stop All --
 local function stopFling()
     running = false
@@ -3560,7 +3559,7 @@ local function stopFling()
 end
 
 flingToggle = Tab8:AddToggle({
-    Name = "Lanzar jugador",
+    Name = "Fling player",
     Default = false,
     Callback = function(state)
         if state then
@@ -3620,7 +3619,7 @@ local function getPlayerThumbnail(userId)
     if success then
         return result
     else
-        warn("Error al obtener la miniatura: " .. tostring(result))
+        warn("Error getting image: " .. tostring(result))
         return nil
     end
 end
@@ -3650,12 +3649,11 @@ end
 
 -- Cuadro de texto para eliminar un jugador
 Tab8:AddTextBox({
-    Name = "Añadir jugador a la lista blanca",
-    Description = "Ingrese parte del nombre del jugador",
-    PlaceholderText = "ej: Rou → Roun95",
+    Name = "Add player to whitelist",
+    PlaceholderText = "Player name",
     Callback = function(Value)
         if Value == "" then
-            showNotification("Ninguna accion", "Introduzca un nombre para agregar un jugador.", nil)
+            showNotification("Warn", "Enter the player name", nil)
             return
         end
 
@@ -3664,38 +3662,38 @@ Tab8:AddTextBox({
             -- Comprueba si el jugador ya esta excluido
             for _, excluded in ipairs(excludedPlayers) do
                 if excluded == player then
-                    showNotification("El jugador ya está en la lista de espera", "Jugador " .. player.Name .. " ya se ha añadido.", getPlayerThumbnail(player.UserId))
+                    showNotification("The player is already on the list", "Player " .. player.Name .. " has already been added.", getPlayerThumbnail(player.UserId))
                     return
                 end
             end
             table.insert(excludedPlayers, player)
             local thumbnail = getPlayerThumbnail(player.UserId)
-            showNotification("Jugador añadido", "Jugador " .. player.Name .. " fue removido.", thumbnail)
+            showNotification("Player added", "Player " .. player.Name .. " was added.", thumbnail)
         else
-            showNotification("Jugador no encontrado", "No se encontraron jugadores con '" .. Value .. "'.", nil)
+            showNotification("Player not found", "No se encontraron jugadores con '" .. Value .. "'.", nil)
         end
     end
 })
 
-Tab8:AddButton({"Verificar lista blanca", function()
+Tab8:AddButton({"Verify whitelist", function()
     if #excludedPlayers == 0 then
-        showNotification("Aviso", "Ningun jugador fue removido.", nil)
+        showNotification("Warn", "No player was removed.", nil)
         return
     end
     for i, player in ipairs(excludedPlayers) do
         local thumbnail = getPlayerThumbnail(player.UserId)
-        showNotification("Jugador añadido " .. i, "Jugador " .. player.Name .. " fue removido.", thumbnail)
-        task.wait(0.5) -- Breve retraso entre notificaciones para evitar superposiciones
+        showNotification("Player added " .. i, "Player " .. player.Name .. " was added.", thumbnail)
+        task.wait(0.5)
     end
 end})
 
-Tab8:AddButton({"Remover lista blanca", function()
+Tab8:AddButton({"Remove whitelist", function()
     if #excludedPlayers == 0 then
-        showNotification("Aviso", "Ningun jugador de la lista blanca fue removido.", nil)
+        showNotification("Warn", "No player was removed.", nil)
         return
     end
     excludedPlayers = {}
-    showNotification("Aviso", "Todos los jugadores de la lista blanca fueron removidos.", nil)
+    showNotification("Warn", "All players were removed.", nil)
 end})
 
 Tab8:AddButton({"Orbiting Fling Ball", function()
@@ -3956,7 +3954,7 @@ Tab8:AddButton({"Fling All V2", function()
     end)
 end})
 -- Parar todo
-Tab8:AddButton({"Parar todo", function()
+Tab8:AddButton({"Stop all", function()
     -- Parar Orbitando
     orbitando = false
     if orbitConn then
