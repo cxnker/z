@@ -2192,7 +2192,7 @@ local function updateDropdown(dropdown, spectateToggle)
                 if flingToggle then pcall(function() flingToggle:Set(false) end) end
             end
         elseif currentValue and table.find(playerNames, currentValue) then
-            dropdown:Set(currentValue) -- Mantiene la seleccion si el jugador todavia esta en el juego
+            dropdown:Set(currentValue)
         end
     end)
 end
@@ -2277,7 +2277,7 @@ local function teleportToPlayer(playerName)
             myHRP.CFrame = CFrame.new(targetPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 2, 0))
         end)
         if not success then
-            warn("Teleport failed: " .. tostring(errorMessage))
+            warn("Teleportation failed: " .. tostring(errorMessage))
             return
         end
 
@@ -2294,9 +2294,9 @@ local function teleportToPlayer(playerName)
             end
         end
 
-        print("Teletransportado al jugador: " .. playerName .. " con anclaje seguro.")
+        print("Teleported to the player: " .. playerName .. " .")
     else
-        print("Jugador o personaje no encontrado para teletransportarse.")
+        print("Player not found to teleport")
     end
 end
 
@@ -2310,8 +2310,8 @@ end)
 local player_name_value
 
 local DropdownPlayerTab2 = Tab8:AddDropdown({
-    Name = "Seleccionar Jugador",
-    Description = "Elige un jugador para matar, atraer, ver o lanzar",
+    Name = "Select player",
+    Description = "Choose a player to kill, lure, see, or throw",
     Default = "",
     Multi = false,
     Options = getPlayerNames(),
@@ -2349,31 +2349,29 @@ function UptadePlayers()
     DropdownPlayerTab2:Set(playerNames)
 end
 
-Tab8:AddButton({"Actualizar lista", function()
+Tab8:AddButton({"Update list", function()
     UptadePlayers()
 end})
 
 UptadePlayers()
 
 Tab8:AddButton({
-    Title = "Teletransportarse al jugador",
-    Desc = "Teletransportarse a la posicion del jugador seleccionado",
+    Title = "Teleport to the player",
     Callback = function()
         local selectedPlayerName = player_name_value
         if selectedPlayerName and selectedPlayerName ~= "" then
             local success, errorMessage = pcall(teleportToPlayer, selectedPlayerName)
             if not success then
-                warn("Error al teletransportarse: " .. tostring(errorMessage))
+                warn("Teleportation failed: " .. tostring(errorMessage))
             end
         else
-            print("Seleccione un jugador antes de teletransportarse.")
+            print("Select a player first")
         end
     end
 })
 
 local SpectateToggleTab10 = Tab8:AddToggle({
-    Name = "Visualizar jugador",
-    Description = "Activar/desactivar la visualizacion del jugador seleccionado",
+    Name = "View player",
     Default = false,
     Callback = function(state)
         if state then
@@ -2388,7 +2386,6 @@ local SpectateToggleTab10 = Tab8:AddToggle({
     end
 })
 
--- Remueve automaticamente los jugadores que salen
 Players.PlayerRemoving:Connect(function(player)
     updateDropdown(DropdownPlayerTab2, SpectateToggleTab10)
     if selectedPlayer == player then
@@ -2405,26 +2402,22 @@ Players.PlayerRemoving:Connect(function(player)
     end
 end)
 
--- Actualizacion automatica de un nuevo jugador ingresado
 Players.PlayerAdded:Connect(function()
-    task.wait(1) -- Pequeño retraso para garantizar que el reproductor este listo
+    task.wait(1)
     updateDropdown(DropdownPlayerTab2, SpectateToggleTab10)
 end)
 
--- Inicia el menu desplegable
 updateDropdown(DropdownPlayerTab2, SpectateToggleTab10)
-----------------------------------------------------------------------------------------------------
-Tab8:AddSection({"Matar o Atraer jugador"})
+
+Tab8:AddSection({"Kill or lure player"})
 
 local DropdownKillPullMethod = Tab8:AddDropdown({
-    Name = "Selecciona una opcion",
-    Description = "Elige una opcion para matar o atraer a un jugador",
+    Name = "Select an option",
     Options = {"Sofa", "Autobus"},
     Callback = function(value)
         selectedKillPullMethod = value
     end
 })
-----------------------------------------------------------------------------------------------------
 -- Lanzar con Sofa --
 local function equipSofa()
     local backpack = LocalPlayer:WaitForChild("Backpack")
@@ -2460,7 +2453,6 @@ local function pullWithSofa(targetPlayer)
     isFollowingPull = true
     originalPosition = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position
 end
-----------------------------------------------------------------------------------------------------
 -- Lanzar con Autobus --
 local function killWithBus(targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not LocalPlayer.Character then return end
@@ -2658,8 +2650,8 @@ sitCheckConnection = RunService.Heartbeat:Connect(function()
 end)
 
 Tab8:AddButton({
-    Name = "Matar",
-    Description = "Teletransporta el jugador seleccionado al vacio",
+    Name = "Kill",
+	Description = "Throws the player into the void",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod then return end
@@ -2672,8 +2664,8 @@ Tab8:AddButton({
 })
 
 Tab8:AddButton({
-    Name = "Atraer",
-    Description = "Teletransporta el jugador seleccionado a tu posicion",
+    Name = "Lure",
+    Description = "Teleport the player to your position",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod or selectedKillPullMethod ~= "Sofa" then return end
@@ -2682,7 +2674,7 @@ Tab8:AddButton({
 })
 
 Tab8:AddButton({
-    Name = "Parar todo (Matar o Atraer)",
+    Name = "Stop all (Kill/Lure)",
     Callback = function()
         isFollowingKill = false
         isFollowingPull = false
@@ -2721,10 +2713,10 @@ Tab8:AddButton({
     end
 })
 ----------------------------------------------------------------------------------------------------
-Tab8:AddSection({"Lanzar Jugador"})
+Tab8:AddSection({"Throw player"})
 
 local DropdownFlingMethod = Tab8:AddDropdown({
-    Name = "Selecciona una opcion",
+    Name = "Select optionnnn",
     Description = "Elige una opcion para lanzar a un jugador",
     Options = {"Sofa", "Autobus", "Balon", "Balon V2", "Barco", "Camion"},
     Callback = function(value)
