@@ -1773,7 +1773,7 @@ end)
 vehicleTeleport.Workspace:WaitForChild("Vehicles").ChildRemoved:Connect(function()
     Dropdown:Set(vehicleTeleport:UpdateVehicleList())
 end)
-----------------------------------------------------------------------------------------------------
+
 Tab6:AddSection({"》 Other functions"})
 
 Tab6:AddButton({
@@ -3670,14 +3670,14 @@ Tab8:AddTextBox({
             local thumbnail = getPlayerThumbnail(player.UserId)
             showNotification("Player added", "Player " .. player.Name .. " was added.", thumbnail)
         else
-            showNotification("Player not found", "No se encontraron jugadores con '" .. Value .. "'.", nil)
+            showNotification("Player not found", "No players were found with '" .. Value .. "'.", nil)
         end
     end
 })
 
 Tab8:AddButton({"Verify whitelist", function()
     if #excludedPlayers == 0 then
-        showNotification("Warn", "No player was removed.", nil)
+        showNotification("Warn", "No players found.", nil)
         return
     end
     for i, player in ipairs(excludedPlayers) do
@@ -3689,7 +3689,7 @@ end})
 
 Tab8:AddButton({"Remove whitelist", function()
     if #excludedPlayers == 0 then
-        showNotification("Warn", "No player was removed.", nil)
+        showNotification("Warn", "No players found.", nil)
         return
     end
     excludedPlayers = {}
@@ -3741,7 +3741,7 @@ Tab8:AddButton({"Orbiting Fling Ball", function()
     end)
 end})
 
-Tab8:AddButton({"Fling All V1", function()
+Tab8:AddButton({"Fling All V1 (Patched)", function()
     if allFling then return end
     if not equipBall() then return end
     task.wait(0.5)
@@ -3862,7 +3862,7 @@ Tab8:AddButton({"Fling All V1", function()
     end)
 end})
 
-Tab8:AddButton({"Fling All V2", function()
+Tab8:AddButton({"Fling All V2 (Patched)", function()
     if allFling2 then return end
     if not equipBall() then return end
     task.wait(0.5)
