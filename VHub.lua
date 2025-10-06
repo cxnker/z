@@ -1526,7 +1526,7 @@ Tab6:AddButton({
     end
 })
 ----------------------------------------------------------------------------------------------
-Tab6:AddSection({"All vehicle functions"})
+Tab6:AddSection({"》 All vehicle functions"})
 
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
@@ -1653,7 +1653,7 @@ function vehicleTeleport:UpdateVehicleList()
 end
 
 Tab6:AddToggle({
-    Name = "Remove all vehicles",
+    Name = "Remove all vehicles (Patched)",
     Default = false,
     Callback = function(state)
         local originalPosition
@@ -1710,7 +1710,7 @@ Tab6:AddToggle({
     end
 })
 ----------------------------------------------------------------------------------------------------
-Tab6:AddSection({"Vehicle features"})
+Tab6:AddSection({"》 Vehicle features"})
 
 Tab6:AddDropdown({
     Name = "Select vehicle",
@@ -1774,7 +1774,7 @@ vehicleTeleport.Workspace:WaitForChild("Vehicles").ChildRemoved:Connect(function
     Dropdown:Set(vehicleTeleport:UpdateVehicleList())
 end)
 ----------------------------------------------------------------------------------------------------
-Tab6:AddSection({"Other functions"})
+Tab6:AddSection({"》 Other functions"})
 
 Tab6:AddButton({
     Name = "Delete selected vehicle",
@@ -1953,8 +1953,8 @@ local loopAtivo = false
 local InputID = ""
 
 Tab7:AddTextBox({
-    Name = "Music Player",
-    Description = "Enter the music ID",
+    Name = "Sound Player",
+    Description = "Enter the sound ID",
     Default = "",
     PlaceholderText = "ej: 6832470734",
     ClearTextOnFocus = true,
@@ -1989,7 +1989,7 @@ Tab7:AddButton({
 })
 
 Tab7:AddToggle({
-    Name = "Loop",
+    Name = "Loop sound",
     Default = false,
     Callback = function(state)
         loopAtivo = state
@@ -2069,7 +2069,7 @@ local function createSoundDropdown(title, musicOptions, defaultOption)
 
 	local dropdownLoopActive = false
 	Tab7:AddToggle({
-    	Name = "Loop",
+    	Name = "Loop sound",
     	Default = false,
     	Callback = function(state)
     	dropdownLoopActive = state
@@ -2261,36 +2261,31 @@ local function teleportToPlayer(playerName)
         local myHRP = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
         local myHumanoid = LocalPlayer.Character:FindFirstChild("Humanoid")
         if not myHRP or not myHumanoid then
-            print("Su personaje no ha cargado por completo para teletransportarse.")
+            print("Your character has not fully loaded to teleport")
             return
         end
 
-        -- Restablecer la fisica del personaje antes de la teletransportacion
         for _, part in ipairs(LocalPlayer.Character:GetDescendants()) do
             if part:IsA("BasePart") then
                 part.Velocity = Vector3.zero
                 part.RotVelocity = Vector3.zero
-                part.Anchored = true -- Anclar temporalmente para evitar el movimiento
+                part.Anchored = true
             end
         end
 
-        -- Teletransportarse a la posicion del jugador objetivo
         local success, errorMessage = pcall(function()
-            myHRP.CFrame = CFrame.new(targetPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 2, 0)) -- Ligera elevacion para evitar colision con el suelo.
+            myHRP.CFrame = CFrame.new(targetPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 2, 0))
         end)
         if not success then
-            warn("Error al transportar: " .. tostring(errorMessage))
+            warn("Teleport failed: " .. tostring(errorMessage))
             return
         end
 
-        -- Asegurese de que el Humanoid salga del estado sentado o de vuelo.
         myHumanoid.Sit = false
         myHumanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
 
-        -- Espere 0,5 segundos con el personaje anclado
         task.wait(0.5)
 
-        -- Desacoplar todas las partes del personaje y restaurar la fisica.
         for _, part in ipairs(LocalPlayer.Character:GetDescendants()) do
             if part:IsA("BasePart") then
                 part.Anchored = false
@@ -3574,7 +3569,6 @@ end
 
 flingToggle = Tab8:AddToggle({
     Name = "Lanzar jugador",
-    Description = "Activa o desactiva el lanzamiento con el método seleccionado",
     Default = false,
     Callback = function(state)
         if state then
@@ -3601,7 +3595,7 @@ flingToggle = Tab8:AddToggle({
     end
 })
 ----------------------------------------------------------------------------------------------------
-Tab8:AddSection({"Quite TODO y el RGB antes de usar"})
+Tab8:AddSection({"Turn off everything before use"})
 
 -- Variables globales al inicio de Tab2
 local Players = game:GetService("Players")
