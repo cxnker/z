@@ -90,7 +90,7 @@ PercentText.Text = "0%"
 PercentText.Parent = BarBackground
 
 -- Loading Animation
-local totalTime = 5 -- Seconds
+local totalTime = 6 -- Seconds
 local steps = 100
 local delayPerStep = totalTime / steps
 
@@ -101,6 +101,13 @@ for i = 1, steps do
 end
 -- Delete GUI in the end
 ScreenGui:Destroy()
+
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "Notify",
+    Text = "Follow me for more scripts: @Roun95",
+    Icon = game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("Roun95"), Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420),
+    Duration = 10
+})
 
 local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/nxvap/VictoryHub/refs/heads/main/VictoryUi.lua"))()
 local Window = Lib:MakeWindow({
@@ -233,7 +240,7 @@ end
 Tab2:AddTextBox({
     Name = "Headsit Player",
     Description = "Enter part of the player name",
-    PlaceholderText = "Nor → Nort_VT",
+    PlaceholderText = "Rou → Roun95",
     Callback = function(Value)
     local foundPlayer = findPlayerByPartialName(Value)
         if foundPlayer then
