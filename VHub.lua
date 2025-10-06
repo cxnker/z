@@ -128,7 +128,7 @@ local Tab11 = Window:MakeTab({"Graphics", "wind"})
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab 1: Info === --
 ----------------------------------------------------------------------------------------------------
-Tab1:AddSection({"》 Version 2.0 (70% translation)"})
+Tab1:AddSection({"》 Version 2.0"})
 Tab1:AddParagraph({"Executor", identifyexecutor()})
 Tab1:AddParagraph({"Credits", "• Roun95\n• Developer and designer\n\n• Contribution\n• Deluxe_Studios (Nova Hub)"})
 
@@ -1291,7 +1291,7 @@ local rgbSpeed = 1
 Tab4:AddSlider({
     Name = "Adjust RGB Speed",
     Min = 1,
-    Max = 5,
+    Max = 8,
     Increase = 1,
     Default = 2,
     Callback = function(Value)
@@ -2409,7 +2409,7 @@ end)
 
 updateDropdown(DropdownPlayerTab2, SpectateToggleTab10)
 
-Tab8:AddSection({"Kill or lure player"})
+Tab8:AddSection({"》 Kill or Pull player"})
 
 local DropdownKillPullMethod = Tab8:AddDropdown({
     Name = "Select an option",
@@ -2664,8 +2664,8 @@ Tab8:AddButton({
 })
 
 Tab8:AddButton({
-    Name = "Lure",
-    Description = "Teleport the player to your position",
+    Name = "Pull",
+    Description = "Pull the player to your position",
     Callback = function()
         if isFollowingKill or isFollowingPull or running then return end
         if not selectedPlayer or not selectedKillPullMethod or selectedKillPullMethod ~= "Sofa" then return end
@@ -2674,7 +2674,7 @@ Tab8:AddButton({
 })
 
 Tab8:AddButton({
-    Name = "Stop all (Kill/Lure)",
+    Name = "Stop all (Kill/Pull)",
     Callback = function()
         isFollowingKill = false
         isFollowingPull = false
@@ -2713,7 +2713,7 @@ Tab8:AddButton({
     end
 })
 
-Tab8:AddSection({"Throw player"})
+Tab8:AddSection({"》 Throw player"})
 
 local DropdownFlingMethod = Tab8:AddDropdown({
     Name = "Select an option",
@@ -3585,8 +3585,8 @@ flingToggle = Tab8:AddToggle({
         end
     end
 })
-----------------------------------------------------------------------------------------------------
-Tab8:AddSection({"Turn off everything before use"})
+
+Tab8:AddSection({"》 Troll functions"})
 
 -- Variables globales al inicio de Tab2
 local Players = game:GetService("Players")
@@ -3696,7 +3696,7 @@ Tab8:AddButton({"Remove whitelist", function()
     showNotification("Warn", "All players were removed.", nil)
 end})
 
-Tab8:AddButton({"Orbiting Fling Ball", function()
+Tab8:AddButton({"Orbiting Fling Ball (Patched)", function()
     if orbitando then return end
     if not equipBall() then return end
     task.wait(0.5)
@@ -3984,7 +3984,7 @@ Tab8:AddButton({"Stop all", function()
     end
     soccerBall = nil
     originalProperties = nil
-    showNotification("Aviso", "Se han desactivado todas las funciones.", nil)
+    showNotification("Warn", "All options were disabled.", nil)
 end})
 ----------------------------------------------------------------------------------------------------
                                 	-- === Tab8: Troll === --
