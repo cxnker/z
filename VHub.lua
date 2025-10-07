@@ -6800,7 +6800,8 @@ bl.Size = 2
 })
 
 Tab12:AddSection({"》 Protection"})
-Tab10:AddToggle({
+
+Tab12:AddToggle({
     Name = "Anti-Dump (All tools)",
     Default = false,
     Callback = function(state)
@@ -6913,7 +6914,7 @@ Tab10:AddToggle({
 })
 
 
-Tab10:AddToggle({
+Tab12:AddToggle({
     Name = "Anti-Bring Parts (All doors)",
     Default = false,
     Callback = function(state)
