@@ -383,120 +383,111 @@ Tab2:AddButton({
     Name = "Fly GUI Universal",
     Callback = function()
 local main = Instance.new("ScreenGui")
-local frame = Instance.new("Frame")
-local name = Instance.new("TextLabel")
+local Frame = Instance.new("Frame")
 local up = Instance.new("TextButton")
 local down = Instance.new("TextButton")
+local onof = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
 local plus = Instance.new("TextButton")
-local mine = Instance.new("TextButton")
 local speed = Instance.new("TextLabel")
-local flybtn = Instance.new("TextButton")
-local closebtn = Instance.new("TextButton")
+local mine = Instance.new("TextButton")
+local closebutton = Instance.new("TextButton")
 local mini = Instance.new("TextButton")
 local mini2 = Instance.new("TextButton")
 
-local plr = game.Players.LocalPlayer
-local chr = plr.Character
-local hmn = chr.Humanoid
-local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-local RunService = game:GetService("RunService")
-
-pcall(function() plr:WaitForChild("PlayerGui"):FindFirstChild("flygui"):Destroy() end)
-
-main.Name = "flygui"
-main.Parent = plr:WaitForChild("PlayerGui")
+main.Name = "main"
+main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 main.ResetOnSpawn = false
 
-frame.Parent = main
-frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-frame.BorderColor3 = Color3.fromRGB(30, 30, 30)
-frame.Position = UDim2.new(0.1, 0, 0.1, 0)
-frame.Size = UDim2.new(0, 189, 0, 54)
-
-name.Name = "name"
-name.Parent = frame
-name.BackgroundColor3 = Color3.fromRGB(46,49,54)
-name.Position = UDim2.new(0.475, 0, 0, 0)
-name.Size = UDim2.new(0, 100, 0, 27)
-name.Font = "SourceSans"
-name.Text = "FLY GUI"
-name.TextColor3 = Color3.fromRGB(202,178,251)
-name.TextSize = 25
-name.TextWrapped = true
+Frame.Parent = main
+Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Frame.BorderColor3 = Color3.fromRGB(30, 30, 30)
+Frame.Position = UDim2.new(0.1, 0, 0.1, 0)
+Frame.Size = UDim2.new(0, 189, 0, 54)
 
 up.Name = "up"
-up.Parent = frame
+up.Parent = Frame
 up.BackgroundColor3 = Color3.fromRGB(74,76,81)
 up.Size = UDim2.new(0, 44, 0, 27)
-up.Font = "SourceSans"
-up.Text = "UP"
+up.Font = Enum.Font.SourceSans
+up.Text = "↑"
 up.TextColor3 = Color3.fromRGB(202,178,251)
 up.TextSize = 14
 
 down.Name = "down"
-down.Parent = frame
+down.Parent = Frame
 down.BackgroundColor3 = Color3.fromRGB(74,76,81)
 down.Position = UDim2.new(0, 0, 0.52, 0)
 down.Size = UDim2.new(0, 44, 0, 27)
-down.Font = "SourceSans"
-down.Text = "DOWN"
+down.Font = Enum.Font.SourceSans
+down.Text = "↓"
 down.TextColor3 = Color3.fromRGB(202,178,251)
 down.TextSize = 14
 
+onof.Name = "onof"
+onof.Parent = Frame
+onof.BackgroundColor3 = Color3.fromRGB(74,76,81)
+onof.Position = UDim2.new(0.72, 0, 0.52, 0)
+onof.Size = UDim2.new(0, 54, 0, 27)
+onof.Font = Enum.Font.SourceSans
+onof.Text = "FLY"
+onof.TextColor3 = Color3.fromRGB(202,178,251)
+onof.TextSize = 14
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(46,49,54)
+TextLabel.Position = UDim2.new(0.475, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 100, 0, 27)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "FLY GUI"
+TextLabel.TextColor3 = Color3.fromRGB(202,178,251)
+TextLabel.TextSize = 25
+TextLabel.TextWrapped = true
+
 plus.Name = "plus"
-plus.Parent = frame
+plus.Parent = Frame
 plus.BackgroundColor3 = Color3.fromRGB(54,57,62)
 plus.Position = UDim2.new(0.236, 0, 0, 0)
 plus.Size = UDim2.new(0, 44, 0, 27)
-plus.Font = "SourceSans"
+plus.Font = Enum.Font.SourceSans
 plus.Text = "+"
 plus.TextColor3 = Color3.fromRGB(202,178,251)
 plus.TextSize = 25
 plus.TextWrapped = true
 
-mine.Name = "mine"
-mine.Parent = frame
-mine.BackgroundColor3 = Color3.fromRGB(54,57,62)
-mine.Position = UDim2.new(0.24, 0, 0.516, 0)
-mine.Size = UDim2.new(0, 44, 0, 27)
-mine.Font = "SourceSans"
-mine.Text = "-"
-mine.TextColor3 = Color3.fromRGB(202,178,251)
-mine.TextSize = 25
-mine.TextWrapped = true
-
 speed.Name = "speed"
-speed.Parent = frame
+speed.Parent = Frame
 speed.BackgroundColor3 = Color3.fromRGB(74,76,81)
 speed.Position = UDim2.new(0.48, 0, 0.52, 0)
 speed.Size = UDim2.new(0, 44, 0, 27)
-speed.Font = "SourceSans"
+speed.Font = Enum.Font.SourceSans
 speed.Text = "1"
 speed.TextColor3 = Color3.fromRGB(202,178,251)
 speed.TextScaled = true
 speed.TextSize = 14
 speed.TextWrapped = true
 
-flybtn.Name = "fly"
-flybtn.Parent = frame
-flybtn.BackgroundColor3 = Color3.fromRGB(74,76,81)
-flybtn.Position = UDim2.new(0.72, 0, 0.52, 0)
-flybtn.Size = UDim2.new(0, 54, 0, 27)
-flybtn.Font = "SourceSans"
-flybtn.Text = "FLY"
-flybtn.TextColor3 = Color3.fromRGB(202,178,251)
-flybtn.TextSize = 14
+mine.Name = "mine"
+mine.Parent = Frame
+mine.BackgroundColor3 = Color3.fromRGB(54,57,62)
+mine.Position = UDim2.new(0.24, 0, 0.516, 0)
+mine.Size = UDim2.new(0, 44, 0, 27)
+mine.Font = Enum.Font.SourceSans
+mine.Text = "-"
+mine.TextColor3 = Color3.fromRGB(202,178,251)
+mine.TextSize = 25
+mine.TextWrapped = true
 
-closebtn.Name = "close"
-closebtn.Parent = main.Frame
-closebtn.BackgroundColor3 = Color3.fromRGB(54,57,62)
-closebtn.Font = "SourceSans"
-closebtn.Size = UDim2.new(0, 44, 0, 27)
-closebtn.Text = "x"
-closebtn.TextColor3 = Color3.fromRGB(202,178,251)
-closebtn.TextSize = 25
-closebtn.Position =  UDim2.new(0, 0, -1, 27)
+closebutton.Name = "Close"
+closebutton.Parent = main.Frame
+closebutton.BackgroundColor3 = Color3.fromRGB(54,57,62)
+closebutton.Font = "SourceSans"
+closebutton.Size = UDim2.new(0, 44, 0, 27)
+closebutton.Text = "x"
+closebutton.TextColor3 = Color3.fromRGB(202,178,251)
+closebutton.TextSize = 25
+closebutton.Position =  UDim2.new(0, 0, -1, 27)
 
 mini.Name = "minimize"
 mini.Parent = main.Frame
@@ -521,288 +512,325 @@ mini2.Visible = false
 
 speeds = 1
 
-fly = false
-frame.Active = true
-frame.Draggable = true
-flybtn.MouseButton1Down:connect(function()
-    if fly == true then
-        fly = false
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Running,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
-        hmn:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
-    else 
-        fly = true
-        for i = 1, speeds do
-            spawn(function()
-                local rs = RunService.Heartbeat
-                tpwalking = true
-                while tpwalking and rs:Wait() and chr and hum and hum.Parent do
-                    if hum.MoveDirection.Magnitude > 0 then
-                        chr:TranslateBy(hum.MoveDirection)
-                    end
-                end
-            end)
-        end
-        chr.Animate.Disabled = true
-        local Hum = chr:FindFirstChildOfClass("Humanoid") or chr:FindFirstChildOfClass("AnimationController")
-        for i,v in next, Hum:GetPlayingAnimationTracks() do
-            v:AdjustSpeed(0)
-        end
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Running,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
-        hmn:ChangeState(Enum.HumanoidStateType.Swimming)
-    end
+local speaker = game:GetService("Players").LocalPlayer
 
-    if chr:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
-        local torso = chr.Torso
-        local flying = true
-        local deb = true
-        local ctrl = {f = 0, b = 0, l = 0, r = 0}
-        local lastctrl = {f = 0, b = 0, l = 0, r = 0}
-        local maxspeed = 50
-        local speed = 0
-        local bg = Instance.new("BodyGyro", torso)
-        bg.P = 9e4
-        bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
-        bg.cframe = torso.CFrame
-        local bv = Instance.new("BodyVelocity", torso)
-        bv.velocity = Vector3.new(0,0.1,0)
-        bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
-        if fly == true then
-            hmn.PlatformStand = true
-        end
+local chr = game.Players.LocalPlayer.Character
+local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
 
-        while fly == true or hmn.Health == 0 do
-            RunService.RenderStepped:Wait()
-            if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
-                speed = speed+.5+(speed/maxspeed)
-                if speed > maxspeed then
-                    speed = maxspeed
-                end
-            elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
-                speed = speed-1
-                if speed < 0 then
-                    speed = 0
-                end
-            end
+nowe = false
 
-            if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
-                bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-                lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
-            elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
-                bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-            else
-                bv.velocity = Vector3.new(0,0,0)
-            end
-            --    game.Players.LocalPlayer.Character.Animate.Disabled = true
-            bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
-        end
-        ctrl = {f = 0, b = 0, l = 0, r = 0}
-        lastctrl = {f = 0, b = 0, l = 0, r = 0}
-        speed = 0
-        bg:Destroy()
-        bv:Destroy()
-        hmn.PlatformStand = false
-        chr.Animate.Disabled = false
-        tpwalking = false
-    else
-        local UpperTorso = chr.UpperTorso
-        local flying = true
-        local deb = true
-        local ctrl = {f = 0, b = 0, l = 0, r = 0}
-        local lastctrl = {f = 0, b = 0, l = 0, r = 0}
-        local maxspeed = 50
-        local speed = 0
-        local bg = Instance.new("BodyGyro", UpperTorso)
-        bg.P = 9e4
-        bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
-        bg.cframe = UpperTorso.CFrame
-        local bv = Instance.new("BodyVelocity", UpperTorso)
-        bv.velocity = Vector3.new(0,0.1,0)
-        bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
-        if fly == true then
-            hmn.PlatformStand = true
-        end
-        while fly == true or hmn.Health == 0 do
-            wait()
-            if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
-                speed = speed+.5+(speed/maxspeed)
-                if speed > maxspeed then
-                    speed = maxspeed
-                end
-            elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
-                speed = speed-1
-                if speed < 0 then
-                    speed = 0
-                end
-            end
-            if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
-                bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-                lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
-            elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
-                bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-            else
-                bv.velocity = Vector3.new(0,0,0)
-            end
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "Notify";
+    Text = "Follow me for more scripts: @Roun95";
+    Icon = game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("Roun95"), Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)})
+    Duration = 10;
 
-            bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
-        end
-        ctrl = {f = 0, b = 0, l = 0, r = 0}
-        lastctrl = {f = 0, b = 0, l = 0, r = 0}
-        speed = 0
-        bg:Destroy()
-        bv:Destroy()
-        hmn.PlatformStand = false
-        chr.Animate.Disabled = false
-        tpwalking = false
-    end
+Frame.Active = true -- main = gui
+Frame.Draggable = true
+
+onof.MouseButton1Down:connect(function()
+
+	if nowe == true then
+		nowe = false
+
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
+		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
+	else 
+		nowe = true
+
+		for i = 1, speeds do
+			spawn(function()
+
+				local hb = game:GetService("RunService").Heartbeat	
+
+				tpwalking = true
+				local chr = game.Players.LocalPlayer.Character
+				local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+				while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+					if hum.MoveDirection.Magnitude > 0 then
+						chr:TranslateBy(hum.MoveDirection)
+					end
+				end
+
+			end)
+		end
+		game.Players.LocalPlayer.Character.Animate.Disabled = true
+		local Char = game.Players.LocalPlayer.Character
+		local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+		for i,v in next, Hum:GetPlayingAnimationTracks() do
+			v:AdjustSpeed(0)
+		end
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
+		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+	end
+
+	if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
+
+		local plr = game.Players.LocalPlayer
+		local torso = plr.Character.Torso
+		local flying = true
+		local deb = true
+		local ctrl = {f = 0, b = 0, l = 0, r = 0}
+		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		local maxspeed = 50
+		local speed = 0
+
+
+		local bg = Instance.new("BodyGyro", torso)
+		bg.P = 9e4
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		bg.cframe = torso.CFrame
+		local bv = Instance.new("BodyVelocity", torso)
+		bv.velocity = Vector3.new(0,0.1,0)
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		if nowe == true then
+			plr.Character.Humanoid.PlatformStand = true
+		end
+		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
+			game:GetService("RunService").RenderStepped:Wait()
+
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed+.5+(speed/maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed-1
+				if speed < 0 then
+					speed = 0
+				end
+			end
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+			else
+				bv.velocity = Vector3.new(0,0,0)
+			end
+			--	game.Players.LocalPlayer.Character.Animate.Disabled = true
+			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+		end
+		ctrl = {f = 0, b = 0, l = 0, r = 0}
+		lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		speed = 0
+		bg:Destroy()
+		bv:Destroy()
+		plr.Character.Humanoid.PlatformStand = false
+		game.Players.LocalPlayer.Character.Animate.Disabled = false
+		tpwalking = false
+
+	else
+		local plr = game.Players.LocalPlayer
+		local UpperTorso = plr.Character.UpperTorso
+		local flying = true
+		local deb = true
+		local ctrl = {f = 0, b = 0, l = 0, r = 0}
+		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		local maxspeed = 50
+		local speed = 0
+
+
+		local bg = Instance.new("BodyGyro", UpperTorso)
+		bg.P = 9e4
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		bg.cframe = UpperTorso.CFrame
+		local bv = Instance.new("BodyVelocity", UpperTorso)
+		bv.velocity = Vector3.new(0,0.1,0)
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		if nowe == true then
+			plr.Character.Humanoid.PlatformStand = true
+		end
+		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
+			wait()
+
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed+.5+(speed/maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed-1
+				if speed < 0 then
+					speed = 0
+				end
+			end
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+			else
+				bv.velocity = Vector3.new(0,0,0)
+			end
+
+			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+		end
+		ctrl = {f = 0, b = 0, l = 0, r = 0}
+		lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		speed = 0
+		bg:Destroy()
+		bv:Destroy()
+		plr.Character.Humanoid.PlatformStand = false
+		game.Players.LocalPlayer.Character.Animate.Disabled = false
+		tpwalking = false
+	end
 end)
 
 local tis
 
 up.MouseButton1Down:connect(function()
-    tis = up.MouseEnter:connect(function()
-        while tis do
-            wait()
-            chr.HumanoidRootPart.CFrame = chr.HumanoidRootPart.CFrame * CFrame.new(0,1,0)
-        end
-    end)
+	tis = up.MouseEnter:connect(function()
+		while tis do
+			wait()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,1,0)
+		end
+	end)
 end)
 
 up.MouseLeave:connect(function()
-    if tis then
-        tis:Disconnect()
-        tis = nil
-    end
+	if tis then
+		tis:Disconnect()
+		tis = nil
+	end
 end)
 
 local dis
 
 down.MouseButton1Down:connect(function()
-    dis = down.MouseEnter:connect(function()
-        while dis do
-            wait()
-            chr.HumanoidRootPart.CFrame = chr.HumanoidRootPart.CFrame * CFrame.new(0,-1,0)
-        end
-    end)
+	dis = down.MouseEnter:connect(function()
+		while dis do
+			wait()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-1,0)
+		end
+	end)
 end)
 
 down.MouseLeave:connect(function()
-    if dis then
-        dis:Disconnect()
-        dis = nil
-    end
+	if dis then
+		dis:Disconnect()
+		dis = nil
+	end
 end)
 
-plr.CharacterAdded:Connect(function(char)
-    wait(0.7)
-    hmn.PlatformStand = false
-    chr.Animate.Disabled = false
- 
+game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
+	wait(0.7)
+	game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+	game.Players.LocalPlayer.Character.Animate.Disabled = false
+
 end)
 
 plus.MouseButton1Down:connect(function()
-    speeds = speeds + 1
-    speed.Text = speeds
-    if fly == true then
+	speeds = speeds + 1
+	speed.Text = speeds
+	if nowe == true then
 
-        tpwalking = false
-        for i = 1, speeds do
-            spawn(function()
-                local rs = RunService.Heartbeat
-                tpwalking = true
-                local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-                while tpwalking and rs:Wait() and chr and hum and hum.Parent do
-                    if hum.MoveDirection.Magnitude > 0 then
-                        chr:TranslateBy(hum.MoveDirection)
-                    end
-                end
-            end)
-        end
-    end
+		tpwalking = false
+		for i = 1, speeds do
+			spawn(function()
+
+				local hb = game:GetService("RunService").Heartbeat	
+
+				tpwalking = true
+				local chr = game.Players.LocalPlayer.Character
+				local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+				while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+					if hum.MoveDirection.Magnitude > 0 then
+						chr:TranslateBy(hum.MoveDirection)
+					end
+				end
+
+			end)
+		end
+	end
 end)
-
 mine.MouseButton1Down:connect(function()
-    if speeds == 1 then
-        speed.Text = 'cannot be less than 1'
-        wait(1)
-        speed.Text = speeds
-    else
-        speeds = speeds - 1
-        speed.Text = speeds
-        if fly == true then
-            tpwalking = false
-            for i = 1, speeds do
-                spawn(function()
-                    local rs = RunService.Heartbeat    
+	if speeds == 1 then
+		speed.Text = 'cannot be less than 1'
+		wait(1)
+		speed.Text = speeds
+	else
+		speeds = speeds - 1
+		speed.Text = speeds
+		if nowe == true then
+			tpwalking = false
+			for i = 1, speeds do
+				spawn(function()
 
-                    tpwalking = true
-                    local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-                    while tpwalking and rs:Wait() and chr and hum and hum.Parent do
-                        if hum.MoveDirection.Magnitude > 0 then
-                            chr:TranslateBy(hum.MoveDirection)
-                        end
-                    end
-                end)
-            end
-        end
-    end
+					local hb = game:GetService("RunService").Heartbeat	
+
+					tpwalking = true
+					local chr = game.Players.LocalPlayer.Character
+					local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+					while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+						if hum.MoveDirection.Magnitude > 0 then
+							chr:TranslateBy(hum.MoveDirection)
+						end
+					end
+
+				end)
+			end
+		end
+	end
 end)
 
-closebtn.MouseButton1Click:Connect(function()
-    main:Destroy()
+closebutton.MouseButton1Click:Connect(function()
+	main:Destroy()
 end)
 
 mini.MouseButton1Click:Connect(function()
-    up.Visible = false
-    down.Visible = false
-    flybtn.Visible = false
-    plus.Visible = false
-    speed.Visible = false
-    mine.Visible = false
-    mini.Visible = false
-    mini2.Visible = true
-    main.Frame.BackgroundTransparency = 1
-    closebtn.Position =  UDim2.new(0, 0, -1, 54)
+	up.Visible = false
+	down.Visible = false
+	onof.Visible = false
+	plus.Visible = false
+	speed.Visible = false
+	mine.Visible = false
+	mini.Visible = false
+	mini2.Visible = true
+	main.Frame.BackgroundTransparency = 1
+	closebutton.Position =  UDim2.new(0, 0, -1, 54)
 end)
 
 mini2.MouseButton1Click:Connect(function()
-    up.Visible = true
-    down.Visible = true
-    flybtn.Visible = true
-    plus.Visible = true
-    speed.Visible = true
-    mine.Visible = true
-    mini.Visible = true
-    mini2.Visible = false
-    main.Frame.BackgroundTransparency = 0 
-    closebtn.Position =  UDim2.new(0, 0, -1, 27)
+	up.Visible = true
+	down.Visible = true
+	onof.Visible = true
+	plus.Visible = true
+	speed.Visible = true
+	mine.Visible = true
+	mini.Visible = true
+	mini2.Visible = false
+	main.Frame.BackgroundTransparency = 0 
+	closebutton.Position =  UDim2.new(0, 0, -1, 27)
 end)
     end
 })
@@ -4974,6 +5002,503 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		humanoid.RootPart.CFrame = CFrame.new(humanoid.RootPart.Position, humanoid.RootPart.Position + flatLook)
 	end
 
+end)
+	end
+})
+
+Tab10:AddButton({
+    Name = "Telekinesis Tool",
+    Callback = function()
+pcall(function() game.CoreGui:FindFirstChild("FlashGUI"):Destroy() end)
+
+local Players = game:GetService("Players")
+local Debris = game:GetService("Debris")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+local cam = workspace.CurrentCamera
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Configurações
+local speedMultiplier = 34
+local isFlash = false
+local effectsEnabled = true
+local speedActive = false
+
+-- Sistema de Cores TOTALMENTE CORRIGIDO
+local colorSchemes = {
+    vermelho = {
+        primary = Color3.fromRGB(255, 0, 0),
+        secondary = Color3.fromRGB(255, 100, 100),
+        border = Color3.fromRGB(255, 0, 0),
+        name = "Vermelho"
+    },
+    azul = {
+        primary = Color3.fromRGB(0, 100, 255),
+        secondary = Color3.fromRGB(100, 150, 255),
+        border = Color3.fromRGB(0, 100, 255),
+        name = "Azul"
+    },
+    preto = {
+        primary = Color3.fromRGB(0, 0, 0), -- REALMENTE PRETO AGORA
+        secondary = Color3.fromRGB(25, 25, 25), -- CINZA MUITO ESCURO
+        border = Color3.fromRGB(0, 0, 0),
+        name = "Preto"
+    },
+    branco = {
+        primary = Color3.fromRGB(255, 255, 255),
+        secondary = Color3.fromRGB(200, 200, 255),
+        border = Color3.fromRGB(255, 255, 255),
+        name = "Branco"
+    },
+    roxo = {
+        primary = Color3.fromRGB(75, 0, 130), -- ROXO ESCURO REAL (INDIGO)
+        secondary = Color3.fromRGB(138, 43, 226), -- ROXO VIOLETA
+        border = Color3.fromRGB(75, 0, 130),
+        name = "Roxo"
+    },
+    verde = {
+        primary = Color3.fromRGB(0, 255, 0),
+        secondary = Color3.fromRGB(100, 255, 100),
+        border = Color3.fromRGB(0, 255, 0),
+        name = "Verde"
+    },
+    dourado = {
+        primary = Color3.fromRGB(255, 215, 0),
+        secondary = Color3.fromRGB(255, 235, 100),
+        border = Color3.fromRGB(255, 215, 0),
+        name = "Dourado"
+    },
+    rosa = {
+        primary = Color3.fromRGB(255, 20, 147), -- ROSA PINK REAL
+        secondary = Color3.fromRGB(255, 105, 180), -- ROSA QUENTE
+        border = Color3.fromRGB(255, 20, 147),
+        name = "Rosa"
+    }
+}
+
+local currentColorScheme = "vermelho"
+
+-- Função para obter cores atuais
+local function getCurrentColors()
+    return colorSchemes[currentColorScheme]
+end
+
+-- Sons
+local rumble = Instance.new("Sound", humanoidRootPart)
+rumble.SoundId = "rbxassetid://1837635124"
+rumble.Looped = true
+rumble.Volume = 0.8
+
+local zap = Instance.new("Sound", humanoidRootPart)
+zap.SoundId = "rbxassetid://138218317"
+zap.Volume = 0.6
+
+local electricTrails = {}
+
+-- Partículas elétricas
+local function createLightningEffect()
+    local effect = Instance.new("ParticleEmitter")
+    effect.Texture = "rbxassetid://255449862"
+    effect.Lifetime = NumberRange.new(0.2, 0.5)
+    effect.Rate = 19
+    effect.Speed = NumberRange.new(10, 20)
+    effect.Parent = humanoidRootPart
+    effect.Enabled = false
+    return effect
+end
+
+local lightningParticles = createLightningEffect()
+
+-- Função para criar rastro de velocidade
+local function lightningTrail()
+    if not effectsEnabled or not speedActive then return end
+    
+    local colors = getCurrentColors()
+    
+    local a0 = Instance.new("Attachment", humanoidRootPart)
+    local a1 = Instance.new("Attachment", humanoidRootPart)
+    a0.Position = Vector3.new(0, 2, 0)
+    a1.Position = Vector3.new(0, -2, 0)
+
+    local trail = Instance.new("Trail", humanoidRootPart)  
+    trail.Attachment0 = a0  
+    trail.Attachment1 = a1  
+    trail.Color = ColorSequence.new(colors.primary)
+    trail.Lifetime = 0.4  
+    trail.WidthScale = NumberSequence.new({  
+        NumberSequenceKeypoint.new(0, 1.5),   
+        NumberSequenceKeypoint.new(1, 0)  
+    })  
+    trail.Transparency = NumberSequence.new(0.1)  
+    trail.LightEmission = 1  
+
+    Debris:AddItem(trail, 1.2)  
+    Debris:AddItem(a0, 1.2)  
+    Debris:AddItem(a1, 1.2)
+end
+
+-- Função para criar rastros elétricos no corpo
+local function createElectricTrails()
+    if not effectsEnabled then return end
+    
+    local colors = getCurrentColors()
+    
+    local parts = {
+        {part = character:FindFirstChild("Head"), offset = Vector3.new(0, 0.4, 0)},
+        {part = character:FindFirstChild("Left Arm") or character:FindFirstChild("LeftUpperArm"), offset = Vector3.new(0, -0.5, 0)},
+        {part = character:FindFirstChild("Right Arm") or character:FindFirstChild("RightUpperArm"), offset = Vector3.new(0, -0.5, 0)},
+        {part = character:FindFirstChild("Left Leg") or character:FindFirstChild("LeftUpperLeg"), offset = Vector3.new(0, -0.5, 0)},
+        {part = character:FindFirstChild("Right Leg") or character:FindFirstChild("RightUpperLeg"), offset = Vector3.new(0, -0.5, 0)},
+        {part = humanoidRootPart, offset = Vector3.new(0.5, 1, 0)}
+    }
+    
+    for _, info in ipairs(parts) do  
+        if info.part then  
+            local att0 = Instance.new("Attachment", info.part)  
+            local att1 = Instance.new("Attachment", info.part)  
+            att0.Position = info.offset  
+            att1.Position = info.offset + Vector3.new(0, -0.3, 0)  
+            
+            local trail = Instance.new("Trail", info.part)  
+            trail.Attachment0 = att0  
+            trail.Attachment1 = att1  
+            trail.Color = ColorSequence.new(colors.secondary)
+            trail.Lifetime = 0.3  
+            trail.Transparency = NumberSequence.new(0.2)  
+            trail.WidthScale = NumberSequence.new(0.4)  
+            trail.LightEmission = 1  
+            
+            table.insert(electricTrails, trail)  
+            table.insert(electricTrails, att0)  
+            table.insert(electricTrails, att1)  
+        end  
+    end
+end
+
+-- Função para destruir rastros elétricos
+local function destroyElectricTrails()
+    for _, obj in pairs(electricTrails) do
+        if obj and obj.Parent then 
+            obj:Destroy() 
+        end
+    end
+    electricTrails = {}
+end
+
+-- Função para atualizar cor da GUI
+local function updateGUIColors()
+    local colors = getCurrentColors()
+    if titleLabel then
+        titleLabel.BackgroundColor3 = colors.primary
+    end
+    if mainFrame then
+        mainFrame.BorderColor3 = colors.border
+    end
+end
+
+-- Sistema de movimento rápido
+local function startSpeedSystem()
+    RunService.RenderStepped:Connect(function()
+        if speedActive and isFlash then
+            local moveDirection = humanoid.MoveDirection
+            if moveDirection.Magnitude > 0 then
+                humanoidRootPart.CFrame = humanoidRootPart.CFrame + (moveDirection * speedMultiplier)
+                
+                -- Criar rastros quando se movendo
+                if effectsEnabled and math.random() < 0.3 then
+                    lightningTrail()
+                end
+                
+                -- Som ocasional
+                if zap and not zap.IsPlaying and math.random() < 0.1 then
+                    zap:Play()
+                end
+            end
+        end
+    end)
+end
+
+-- Função principal do Flash
+local function toggleFlash()
+    isFlash = not isFlash
+    
+    if isFlash then
+        -- Efeitos sonoros
+        if rumble then rumble:Play() end
+        
+        -- Efeito de câmera
+        TweenService:Create(cam, TweenInfo.new(0.3), {FieldOfView = 90}):Play()
+        
+        -- Criar rastros elétricos
+        if effectsEnabled then
+            createElectricTrails()
+        end
+        
+        -- Ativar partículas se velocidade estiver ativa
+        if speedActive then
+            lightningParticles.Enabled = true
+        end
+        
+    else
+        -- Desativar Flash
+        if rumble then rumble:Stop() end
+        
+        -- Restaurar câmera
+        TweenService:Create(cam, TweenInfo.new(0.3), {FieldOfView = 70}):Play()
+        
+        -- Remover efeitos
+        destroyElectricTrails()
+        lightningParticles.Enabled = false
+    end
+end
+
+-- Função para ativar/desativar velocidade
+local function toggleSpeed()
+    speedActive = not speedActive
+    
+    if speedActive and isFlash then
+        lightningParticles.Enabled = true
+    else
+        lightningParticles.Enabled = false
+    end
+end
+
+-- Função para trocar cor
+local function changeColorScheme(newScheme)
+    if colorSchemes[newScheme] then
+        currentColorScheme = newScheme
+        updateGUIColors()
+        
+        -- Se o Flash estiver ativo, recriar os efeitos com a nova cor
+        if isFlash then
+            destroyElectricTrails()
+            if effectsEnabled then
+                createElectricTrails()
+            end
+        end
+    end
+end
+
+-- Criar GUI - AUMENTADA
+local gui = Instance.new("ScreenGui", game.CoreGui)
+gui.Name = "FlashGUI"
+gui.ResetOnSpawn = false
+
+-- Frame principal - TAMANHO DIMINUÍDO
+local mainFrame = Instance.new("Frame", gui)
+mainFrame.Size = UDim2.new(0, 300, 0, 220) -- DIMINUÍDO de 380x280 para 300x220
+mainFrame.Position = UDim2.new(0, 20, 1, -240) -- AJUSTADO posição
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.BorderSizePixel = 2 -- DIMINUÍDO
+mainFrame.BorderColor3 = Color3.fromRGB(255, 0, 0)
+mainFrame.Active = true
+mainFrame.Draggable = true
+
+-- Título - DIMINUÍDO
+local titleLabel = Instance.new("TextLabel", mainFrame)
+titleLabel.Size = UDim2.new(1, 0, 0, 28) -- DIMINUÍDO de 35 para 28
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+titleLabel.Text = "⚡ FLASH POWERS ⚡"
+titleLabel.TextColor3 = Color3.new(1, 1, 1)
+titleLabel.TextScaled = true
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.BorderSizePixel = 0
+
+-- Botão Flash Principal - DIMINUÍDO
+local flashBtn = Instance.new("TextButton", mainFrame)
+flashBtn.Size = UDim2.new(0.95, 0, 0, 32) -- DIMINUÍDO de 40 para 32
+flashBtn.Position = UDim2.new(0.025, 0, 0, 32) -- AJUSTADO posição
+flashBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+flashBtn.Text = "⚡ FLASH: OFF"
+flashBtn.TextSize = 14 -- DIMINUÍDO de 16 para 14
+flashBtn.Font = Enum.Font.SourceSansBold
+flashBtn.TextColor3 = Color3.new(1, 1, 1)
+flashBtn.BorderSizePixel = 1 -- DIMINUÍDO
+
+-- Botão Velocidade - DIMINUÍDO
+local speedBtn = Instance.new("TextButton", mainFrame)
+speedBtn.Size = UDim2.new(0.6, 0, 0, 28) -- DIMINUÍDO de 35 para 28
+speedBtn.Position = UDim2.new(0.025, 0, 0, 70) -- AJUSTADO posição
+speedBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+speedBtn.Text = "Velocidade: OFF"
+speedBtn.TextSize = 12 -- DIMINUÍDO de 14 para 12
+speedBtn.Font = Enum.Font.SourceSans
+speedBtn.TextColor3 = Color3.new(1, 1, 1)
+speedBtn.BorderSizePixel = 1 -- DIMINUÍDO
+
+-- TextBox para velocidade - DIMINUÍDO
+local speedInput = Instance.new("TextBox", mainFrame)
+speedInput.Size = UDim2.new(0.35, 0, 0, 28) -- DIMINUÍDO de 35 para 28
+speedInput.Position = UDim2.new(0.63, 0, 0, 70) -- AJUSTADO posição
+speedInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+speedInput.Text = tostring(speedMultiplier)
+speedInput.PlaceholderText = "Velocidade"
+speedInput.TextSize = 12 -- DIMINUÍDO de 14 para 12
+speedInput.Font = Enum.Font.SourceSans
+speedInput.TextColor3 = Color3.new(0, 0, 0)
+speedInput.BorderSizePixel = 1 -- DIMINUÍDO
+
+-- Botão Efeitos - DIMINUÍDO
+local effectBtn = Instance.new("TextButton", mainFrame)
+effectBtn.Size = UDim2.new(0.95, 0, 0, 28) -- DIMINUÍDO de 35 para 28
+effectBtn.Position = UDim2.new(0.025, 0, 0, 105) -- AJUSTADO posição
+effectBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+effectBtn.Text = "Efeitos: ON"
+effectBtn.TextSize = 12 -- DIMINUÍDO de 14 para 12
+effectBtn.Font = Enum.Font.SourceSans
+effectBtn.TextColor3 = Color3.new(1, 1, 1)
+effectBtn.BorderSizePixel = 1 -- DIMINUÍDO
+
+-- Label para cores - DIMINUÍDO
+local colorLabel = Instance.new("TextLabel", mainFrame)
+colorLabel.Size = UDim2.new(1, 0, 0, 22) -- DIMINUÍDO de 25 para 22
+colorLabel.Position = UDim2.new(0, 0, 0, 140) -- AJUSTADO posição
+colorLabel.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+colorLabel.Text = "🎨 Cores dos Efeitos:"
+colorLabel.TextColor3 = Color3.new(1, 1, 1)
+colorLabel.TextSize = 11 -- DIMINUÍDO de 13 para 11
+colorLabel.Font = Enum.Font.SourceSansBold
+colorLabel.BorderSizePixel = 0
+
+-- Frame para botões de cor - DIMINUÍDO
+local colorFrame = Instance.new("Frame", mainFrame)
+colorFrame.Size = UDim2.new(0.95, 0, 0, 55) -- DIMINUÍDO de 70 para 55
+colorFrame.Position = UDim2.new(0.025, 0, 0, 165) -- AJUSTADO posição
+colorFrame.BackgroundTransparency = 1
+
+-- Criar botões de cor em grade 4x2 - AUMENTADOS
+local colorButtons = {}
+local colorKeys = {"vermelho", "azul", "preto", "branco", "roxo", "verde", "dourado", "rosa"}
+
+for i, colorKey in ipairs(colorKeys) do
+    local row = math.floor((i-1) / 4)
+    local col = (i-1) % 4
+    
+    local colorBtn = Instance.new("TextButton", colorFrame)
+    colorBtn.Size = UDim2.new(0.23, 0, 0.38, 0) -- DIMINUÍDO altura
+    colorBtn.Position = UDim2.new(col * 0.25 + 0.01, 0, row * 0.5 + 0.06, 0)
+    colorBtn.BackgroundColor3 = colorSchemes[colorKey].primary
+    colorBtn.Text = ""
+    colorBtn.BorderSizePixel = 2 -- DIMINUÍDO
+    colorBtn.BorderColor3 = Color3.new(1, 1, 1)
+    
+    -- Texto com nome da cor - DIMINUÍDO
+    local colorText = Instance.new("TextLabel", colorBtn)
+    colorText.Size = UDim2.new(1, 0, 1, 0)
+    colorText.Position = UDim2.new(0, 0, 0, 0)
+    colorText.BackgroundTransparency = 1
+    colorText.Text = colorSchemes[colorKey].name
+    colorText.TextColor3 = Color3.new(1, 1, 1)
+    colorText.TextSize = 9 -- DIMINUÍDO de 10 para 9
+    colorText.Font = Enum.Font.SourceSansBold
+    colorText.TextStrokeTransparency = 0.5
+    colorText.TextStrokeColor3 = Color3.new(0, 0, 0)
+    
+    colorBtn.MouseButton1Click:Connect(function()
+        changeColorScheme(colorKey)
+        
+        -- Atualizar visual dos botões (destacar selecionado)
+        for _, btn in pairs(colorButtons) do
+            btn.BorderColor3 = Color3.new(1, 1, 1)
+            btn.BorderSizePixel = 2 -- DIMINUÍDO
+        end
+        
+        colorBtn.BorderColor3 = Color3.new(0, 1, 0)
+        colorBtn.BorderSizePixel = 3 -- DIMINUÍDO para destacar menos
+    end)
+    
+    table.insert(colorButtons, colorBtn)
+end
+
+-- Destacar cor inicial
+if colorButtons[1] then
+    colorButtons[1].BorderColor3 = Color3.new(0, 1, 0)
+    colorButtons[1].BorderSizePixel = 3
+end
+
+-- Eventos dos botões principais
+flashBtn.MouseButton1Click:Connect(function()
+    toggleFlash()
+    if isFlash then
+        flashBtn.Text = "⚡ FLASH: ON"
+        flashBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+    else
+        flashBtn.Text = "⚡ FLASH: OFF"
+        flashBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    end
+end)
+
+speedBtn.MouseButton1Click:Connect(function()
+    toggleSpeed()
+    if speedActive then
+        speedBtn.Text = "Velocidade: ON"
+        speedBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+    else
+        speedBtn.Text = "Velocidade: OFF"
+        speedBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    end
+end)
+
+effectBtn.MouseButton1Click:Connect(function()
+    effectsEnabled = not effectsEnabled
+    if effectsEnabled then
+        effectBtn.Text = "Efeitos: ON"
+        effectBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+        if isFlash then createElectricTrails() end
+    else
+        effectBtn.Text = "Efeitos: OFF"
+        effectBtn.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+        destroyElectricTrails()
+    end
+end)
+
+-- Atualizar velocidade via TextBox
+speedInput.FocusLost:Connect(function(enterPressed)
+    local newSpeed = tonumber(speedInput.Text)
+    if newSpeed then
+        speedMultiplier = newSpeed
+        speedInput.Text = tostring(newSpeed)
+    else
+        speedInput.Text = tostring(speedMultiplier)
+    end
+end)
+
+-- Inicializar cores da GUI
+updateGUIColors()
+
+-- Iniciar sistema de velocidade
+startSpeedSystem()
+
+-- Limpeza ao trocar de personagem
+player.CharacterRemoving:Connect(function()
+    isFlash = false
+    speedActive = false
+    destroyElectricTrails()
+    if rumble then rumble:Stop() end
+end)
+
+player.CharacterAdded:Connect(function(newChar)
+    character = newChar
+    humanoid = newChar:WaitForChild("Humanoid")
+    humanoidRootPart = newChar:WaitForChild("HumanoidRootPart")
+    
+    -- Recriar sons
+    rumble = Instance.new("Sound", humanoidRootPart)
+    rumble.SoundId = "rbxassetid://1837635124"
+    rumble.Looped = true
+    rumble.Volume = 0.8
+    
+    zap = Instance.new("Sound", humanoidRootPart)
+    zap.SoundId = "rbxassetid://138218317"
+    zap.Volume = 0.6
+    
+    -- Recriar partículas
+    lightningParticles = createLightningEffect()
 end)
 	end
 })
