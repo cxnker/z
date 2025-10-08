@@ -6,6 +6,7 @@ local RootPart = Character:WaitForChild("HumanoidRootPart")
 local RunService = game:GetService("RunService")
 local StarterGui = game:GetService("StarterGui")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayName", "Victory User 🌠")
 ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayBio", "Welcome, " .. LocalPlayer.DisplayName)
 ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", Color3.fromRGB(0, 128, 255))
@@ -1636,7 +1637,6 @@ Tab1:AddToggle({
 
 ----------------------------------------------------------------------------------------------------
 Tab3:AddSection({"》 Copy Avatar"})
-local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 
 local PlayerValue
 local Target = nil
@@ -1813,7 +1813,7 @@ Tab3:AddDropdown({
         if clothes[selected] then
             pcall(function()
                 local args = {clothes[selected]}
-                ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(unpack(args))
+                Remotes:WaitForChild("Wear"):InvokeServer(unpack(args))
                 StarterGui:SetCore("SendNotification", {
                     Title = "Avatar",
                     Text = "Avatar " .. selected .. " equiped!",
@@ -2762,6 +2762,44 @@ vehicleTeleport.LocalPlayer.CharacterAdded:Connect(function(character)
         humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, true)
     end
 end)
+
+local WheelLoop = false
+
+Tab6:AddToggle({
+    Name = "Auto Wheel Decal",
+    Default = false,
+    Callback = function(Value)
+        WheelLoop = Value
+        if WheelLoop then
+            spawn(function()
+                while WheelLoop do
+                    pcall(function()
+                        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("SetWheelDecal"):InvokeServer()
+                    end)
+                    wait(0.5)
+                end
+            end)
+        end
+    end
+})
+
+local SuspensionLoop = false
+
+Tab6:AddToggle({
+    Name = "Suspension Loop",
+    Default = false,
+    Callback = function(v)
+        SuspensionLoop = v
+        if SuspensionLoop then
+            spawn(function()
+                while SuspensionLoop do
+                    ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("SetNextSuspensionHeight"):InvokeServer()
+                    wait(0.2)
+                end
+            end)
+        end
+    end
+})
 ----------------------------------------------------------------------------------------------------
                                 	-- === Tab7: Music === --
 ----------------------------------------------------------------------------------------------------
