@@ -102,14 +102,6 @@ end
 -- Delete GUI in the end
 ScreenGui:Destroy()
 
-local function startSound()
-    local sound = Instance.new("Sound")
-    sound.SoundId = "rbxassetid://125090389445721"
-    sound.Parent = game.Workspace
-    sound:Play()
-end
-startSound()
-
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "Notify",
     Text = "Follow me for more scripts: @Roun95",
@@ -936,26 +928,6 @@ local function updateESP(player)
             textLabel.Text = player.Name .. " | " .. player.AccountAge .. " dias"
             textLabel.TextColor3 = getESPColor()
 
-            -- Distância em studs (Vermelho)
-            local DistanceLabel = Instance.new("TextLabel")
-            DistanceLabel.Name = "DistanceLabel"
-            DistanceLabel.TextColor3 = Color3.new(1, 0, 0) -- Vermelho
-            DistanceLabel.BackgroundTransparency = 1
-            DistanceLabel.Size = UDim2.new(1, 0, 0, 20)
-            DistanceLabel.Position = UDim2.new(0, 0, 0, 40)
-            DistanceLabel.Parent = billboard
-			
-			local HRP = Character.HumanoidRootPart
-			
-            game:GetService("RunService").Heartbeat:Connect(function()
-                if not HRP or not billboard.Parent then return end
-                local LocalPlayer = game:GetService("Players").LocalPlayer
-                if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                    local Distance = (HRP.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-                    DistanceLabel.Text = string.format("%.1f studs", Distance)
-                end
-            end)
-			
             billboardGuis[player] = billboard
         end
     end
@@ -1201,7 +1173,7 @@ Tab3:AddDropdown({
         if clothes[selected] then
             pcall(function()
                 local args = {clothes[selected]}
-                Remotes:WaitForChild("Wear"):InvokeServer(unpack(args))
+                ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(unpack(args))
                 StarterGui:SetCore("SendNotification", {
                     Title = "Avatar",
                     Text = "Avatar " .. selected .. " equiped!",
@@ -1610,8 +1582,8 @@ Tab6:AddButton({
         ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="TankPremium"}))
     end
 })
-----------------------------------------------------------------------------------------------
-Tab6:AddSection({"》 All vehicle functions"})
+
+Tab6:AddSection({"》 Other functions"})
 
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
@@ -1913,72 +1885,6 @@ wait(0.2)
 ofnawufn = false
     end
 })
-----------------------------------------------------------------------------------------------------
-Tab6:AddSection({"》 Vehicle features"})
-
-Tab6:AddDropdown({
-    Name = "Select vehicle",
-    Default = nil,
-    Options = vehicleTeleport:UpdateVehicleList(),
-    Callback = function(selectedCar)
-        _G.SelectedVehicle = selectedCar
-    end
-})
-
-Tab6:AddToggle({
-    Name = "View vehicle camera",
-    Default = false,
-    Callback = function(state)
-        if state then
-            if not _G.SelectedVehicle or _G.SelectedVehicle == "" then
-                vehicleTeleport:showNotify("No vehicle selected")
-                return
-            end
-
-            local vehiclesFolder = vehicleTeleport.Workspace:FindFirstChild("Vehicles")
-            if not vehiclesFolder then
-                vehicleTeleport:showNotify("No vehicles found in folder")
-                return
-            end
-
-            local vehicle = vehiclesFolder:FindFirstChild(_G.SelectedVehicle)
-            if not vehicle then
-                vehicleTeleport:showNotify("Vehicle not found")
-                return
-            end
-
-            local vehicleSeat = vehicle:FindFirstChildWhichIsA("VehicleSeat", true)
-            if not vehicleSeat then
-                vehicleTeleport:showNotify("Vehicle seat no found")
-                return
-            end
-
-            vehicleTeleport.OriginalCameraSubject = vehicleTeleport.Camera.CameraSubject
-            vehicleTeleport.OriginalCameraType = vehicleTeleport.Camera.CameraType
-
-            vehicleTeleport.Camera.CameraSubject = vehicleSeat
-            vehicleTeleport.Camera.CameraType = Enum.CameraType.Follow
-            vehicleTeleport:showNotify("Camera adjusted for the vehicle " .. _G.SelectedVehicle .. "!")
-        else
-            if vehicleTeleport.OriginalCameraSubject then
-                vehicleTeleport.Camera.CameraSubject = vehicleTeleport.OriginalCameraSubject
-                vehicleTeleport.Camera.CameraType = vehicleTeleport.OriginalCameraType or Enum.CameraType.Custom
-                vehicleTeleport:showNotify("Restored camera")
-                vehicleTeleport.OriginalCameraSubject = nil
-                vehicleTeleport.OriginalCameraType = nil
-            end
-        end
-    end
-})
-
-vehicleTeleport.Workspace:WaitForChild("Vehicles").ChildAdded:Connect(function()
-    Dropdown:Set(vehicleTeleport:UpdateVehicleList())
-end)
-vehicleTeleport.Workspace:WaitForChild("Vehicles").ChildRemoved:Connect(function()
-    Dropdown:Set(vehicleTeleport:UpdateVehicleList())
-end)
-
-Tab6:AddSection({"》 Other functions"})
 
 Tab6:AddButton({
     Name = "Delete selected vehicle",
@@ -2149,6 +2055,70 @@ vehicleTeleport.LocalPlayer.CharacterAdded:Connect(function(character)
         humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, true)
         humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, true)
     end
+end)
+
+Tab6:AddSection({"》 Vehicle features"})
+
+Tab6:AddDropdown({
+    Name = "Select vehicle",
+    Default = nil,
+    Options = vehicleTeleport:UpdateVehicleList(),
+    Callback = function(selectedCar)
+        _G.SelectedVehicle = selectedCar
+    end
+})
+
+Tab6:AddToggle({
+    Name = "View vehicle camera",
+    Default = false,
+    Callback = function(state)
+        if state then
+            if not _G.SelectedVehicle or _G.SelectedVehicle == "" then
+                vehicleTeleport:showNotify("No vehicle selected")
+                return
+            end
+
+            local vehiclesFolder = vehicleTeleport.Workspace:FindFirstChild("Vehicles")
+            if not vehiclesFolder then
+                vehicleTeleport:showNotify("No vehicles found in folder")
+                return
+            end
+
+            local vehicle = vehiclesFolder:FindFirstChild(_G.SelectedVehicle)
+            if not vehicle then
+                vehicleTeleport:showNotify("Vehicle not found")
+                return
+            end
+
+            local vehicleSeat = vehicle:FindFirstChildWhichIsA("VehicleSeat", true)
+            if not vehicleSeat then
+                vehicleTeleport:showNotify("Vehicle seat no found")
+                return
+            end
+
+            vehicleTeleport.OriginalCameraSubject = vehicleTeleport.Camera.CameraSubject
+            vehicleTeleport.OriginalCameraType = vehicleTeleport.Camera.CameraType
+
+            vehicleTeleport.Camera.CameraSubject = vehicleSeat
+            vehicleTeleport.Camera.CameraType = Enum.CameraType.Follow
+            vehicleTeleport:showNotify("Camera adjusted for the vehicle " .. _G.SelectedVehicle .. "!")
+        else
+            if vehicleTeleport.OriginalCameraSubject then
+                vehicleTeleport.Camera.CameraSubject = vehicleTeleport.OriginalCameraSubject
+                vehicleTeleport.Camera.CameraType = vehicleTeleport.OriginalCameraType or Enum.CameraType.Custom
+                vehicleTeleport:showNotify("Restored camera")
+                vehicleTeleport.OriginalCameraSubject = nil
+                vehicleTeleport.OriginalCameraType = nil
+            end
+        end
+    end
+})
+
+vehicleTeleport.Workspace:WaitForChild("Vehicles").ChildAdded:Connect(function()
+    Dropdown:Set(vehicleTeleport:UpdateVehicleList())
+end)
+vehicleTeleport.Workspace:WaitForChild("Vehicles").ChildRemoved:Connect(function()
+    Dropdown:Set(vehicleTeleport:UpdateVehicleList())
 end)
 
 local WheelLoop = false
@@ -6027,6 +5997,7 @@ player.CharacterAdded:Connect(function(newChar)
 end)
 	end
 })
+
 
 Tab10:AddButton({
     Name = "Telekinesis Tool",
