@@ -243,62 +243,6 @@ RunService.Stepped:Connect(function()
 		end
 	end)
 
------------------------------------------------------------------------------------
-
-local function setTransparency(character, transparency)
-    for _, part in pairs(character:GetDescendants()) do
-        if part:IsA("BasePart") or part:IsA("Decal") then
-            part.Transparency = transparency
-        end
-    end
-end
-
-local function toggleInvisibility()
-    invis_on = not invis_on
-    if invis_on then
-        local savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-        wait()
-        game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-25.95, 84, 3537.55))
-        wait(.15)
-        local Seat = Instance.new('Seat', game.Workspace)
-        Seat.Anchored = false
-        Seat.CanCollide = false
-        Seat.Name = 'invischair'
-        Seat.Transparency = 1
-        Seat.Position = Vector3.new(-25.95, 84, 3537.55) -- Fixed typo in position
-        local Weld = Instance.new("Weld", Seat)
-        Weld.Part0 = Seat
-        Weld.Part1 = game.Players.LocalPlayer.Character:FindFirstChild("Torso") or game.Players.LocalPlayer.Character.UpperTorso
-        wait()
-        Seat.CFrame = savedpos
-        setTransparency(game.Players.LocalPlayer.Character, 0.5)
-        game.StarterGui:SetCore("SendNotification", {
-            Title = "Invis (on)",
-            Duration = 3,
-            Text = "STATUS:"
-        })
-    else
-        local invisChair = workspace:FindFirstChild('invischair')
-        if invisChair then
-            invisChair:Destroy()
-        end
-        setTransparency(game.Players.LocalPlayer.Character, 0)
-        game.StarterGui:SetCore("SendNotification", {
-            Title = "Invis (off)",
-            Duration = 3,
-            Text = "STATUS:"
-        })
-    end
-end
-
-Tab2:AddToggle({
-    Name = "Invisible FE",
-    Default = true,
-    Callback = function(v)
-        invis_on = v
-    end
-})
-
 Tab2:AddButton({
     Name = "Fly GUI",
     Callback = function()
