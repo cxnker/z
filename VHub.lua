@@ -6,7 +6,6 @@ local RootPart = Character:WaitForChild("HumanoidRootPart")
 local RunService = game:GetService("RunService")
 local StarterGui = game:GetService("StarterGui")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayName", "Victory User 🌠")
 ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayBio", "Welcome, " .. LocalPlayer.DisplayName)
 ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", Color3.fromRGB(0, 128, 255))
@@ -1025,6 +1024,7 @@ end)
                                 -- === Tab 3: Avatar === --
 ----------------------------------------------------------------------------------------------------
 Tab3:AddSection({"》 Copy Avatar"})
+local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 
 local PlayerValue
 local Target = nil
