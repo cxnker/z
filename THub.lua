@@ -243,13 +243,7 @@ RunService.Stepped:Connect(function()
 		end
 	end)
 
-Tab2:AddToggle({
-    Name = "Invisible FE",
-    Default = true,
-    Callback = function(v)
-        invis_on = v
-    end
-})
+-----------------------------------------------------------------------------------
 
 local function setTransparency(character, transparency)
     for _, part in pairs(character:GetDescendants()) do
@@ -296,7 +290,14 @@ local function toggleInvisibility()
         })
     end
 end
-	end)
+
+Tab2:AddToggle({
+    Name = "Invisible FE",
+    Default = true,
+    Callback = function(v)
+        invis_on = v
+    end
+})
 
 Tab2:AddButton({
     Name = "Fly GUI",
