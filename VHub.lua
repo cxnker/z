@@ -109,7 +109,7 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Duration = 10
 })
 
-local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/z/refs/heads/main/TestUi.lua"))()
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/nxvap/VictoryHub/refs/heads/main/VictoryUi.lua"))()
 local Window = Lib:MakeWindow({
     Title = "Victory Hub | Brookhaven RP 🌠 ",
     SubTitle = " by Roun95",
@@ -321,6 +321,27 @@ Tab2:AddButton({
     end
 })
 
+local fovValue = 70
+
+Tab2:AddTextBox({
+  Name = "Fov player",
+  Description = "", 
+  PlaceholderText = "70",
+  Callback = function(Value)
+    fovValue = tonumber(Value) or 70
+  end
+})
+
+Tab2:AddButton({
+  Name = "Adjust fov",
+  Callback = function()
+    local camera = workspace.CurrentCamera
+    if camera and typeof(fovValue) == "number" then
+      camera.FieldOfView = fovValue
+    end
+  end
+})
+
 Tab2:AddToggle({
 	Name = "Infinite Jump",
     Default = false,
@@ -379,27 +400,6 @@ RunService.Stepped:Connect(function()
 			end
 		end
 	end)
-
-local fovValue = 70
-
-Tab2:AddTextBox({
-  Name = "Fov player",
-  Description = "", 
-  PlaceholderText = "70",
-  Callback = function(Value)
-    fovValue = tonumber(Value) or 70
-  end
-})
-
-Tab2:AddButton({
-  Name = "Fov",
-  Callback = function()
-    local camera = workspace.CurrentCamera
-    if camera and typeof(fovValue) == "number" then
-      camera.FieldOfView = fovValue
-    end
-  end
-})
 
 Tab2:AddButton({
     Name = "Fly GUI Universal",
@@ -6678,9 +6678,23 @@ end)
 })
 
 Tab10:AddButton({
+    Name = "Invisible FE",
+    Callback = function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/3Rnd9rHf"))()
+	end
+})
+
+Tab10:AddButton({
     Name = "Silly Emotes",
     Callback = function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/Gazer-Ha/Gaze-stuff/refs/heads/main/Silly%20emote"))()
+	end
+})
+
+Tab10:AddButton({
+    Name = "AFEM Emotes/Animations",
+    Callback = function()
+	loadstring(game:HttpGet("https://yarhm.mhi.im/scr?channel=afemmax"))()
 	end
 })
 ----------------------------------------------------------------------------------------------------
