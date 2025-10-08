@@ -380,6 +380,27 @@ RunService.Stepped:Connect(function()
 		end
 	end)
 
+local fovValue = 70
+
+Tab2:AddTextBox({
+  Name = "Fov player",
+  Description = "", 
+  PlaceholderText = "70",
+  Callback = function(Value)
+    fovValue = tonumber(Value) or 70
+  end
+})
+
+Tab2:AddButton({
+  Name = "Fov",
+  Callback = function()
+    local camera = workspace.CurrentCamera
+    if camera and typeof(fovValue) == "number" then
+      camera.FieldOfView = fovValue
+    end
+  end
+})
+
 Tab2:AddButton({
     Name = "Fly GUI Universal",
     Callback = function()
