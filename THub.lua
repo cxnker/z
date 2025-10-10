@@ -675,7 +675,7 @@ Tab3:AddButton({
     end
 })
 
-Tab4:AddSection({"Velocidad RGB"})
+Tab4:AddSection({"Nombre + Bio RGB"})
 local rgbSpeed = 1
 
 Tab4:AddSlider({
@@ -703,10 +703,9 @@ local function fireServer(eventName, args)
     end
 end
 
-Tab4:AddSection({"Jugador RGB"})
 local nameBioRGBActive = false
 Tab4:AddToggle({
-    Name = "Nombre + Bio RGB",
+    Name = "Enable RGB",
     Default = false,
     Callback = function(state)
         nameBioRGBActive = state
