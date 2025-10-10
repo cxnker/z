@@ -29,12 +29,6 @@ local Tab11 = Window:MakeTab({"Graphics", "wind"})
 
 Tab1:AddParagraph({"Executor", identifyexecutor()})
 Tab1:AddSection({"Version 1.4"})
-Tab1:AddButton({
-    Name = "Sigueme en Tiktok (Copiar URL)",
-    Callback = function()
-    setclipboard("https://www.tiktok.com/@lxvap")
-	end
-})
 
 Tab2:AddSection({"Personaje del jugador"})
 local selectedPlayerName = nil
@@ -739,7 +733,7 @@ local rgbSpeed = 1
 Tab5:AddSlider({
     Name = "Ajusta la velocidad del RGB",
     Min = 1,
-    Max = 5,
+    Max = 9,
     Increase = 1,
     Default = 2,
     Callback = function(Value)
