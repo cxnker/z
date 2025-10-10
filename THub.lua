@@ -18,8 +18,8 @@ Window:AddMinimizeButton({
 local Tab1 = Window:MakeTab({"Info", "info"})
 local Tab2 = Window:MakeTab({"Player", "user"})
 local Tab3 = Window:MakeTab({"Avatar", "shirt"})
-local Tab4 = Window:MakeTab({"House", "home"})
-local Tab5 = Window:MakeTab({"RGB", "brush"})
+local Tab4 = Window:MakeTab({"RGB", "brush"})
+local Tab5 = Window:MakeTab({"House", "home"})
 local Tab6 = Window:MakeTab({"Car", "car"})
 local Tab7 = Window:MakeTab({"Music", "music"})
 local Tab8 = Window:MakeTab({"Troll", "skull"})
@@ -315,19 +315,21 @@ local function updateESP(player)
         end
     end
 end
+
 local function removeESP(player)
     if billboardGuis[player] then
         billboardGuis[player]:Destroy()
         billboardGuis[player] = nil
     end
 end
-local Toggle1 = Tab2:AddToggle({
+
+local espToggle = Tab2:AddToggle({
     Name = "Espiar jugadores",
     Description = "Muestra la entidad de los jugadores.",
     Default = false
 })
 
-Toggle1:Callback(function(value)
+espToggle:Callback(function(value)
     espEnabled = value
     if espEnabled then
         for _, player in pairs(Players:GetPlayers()) do
@@ -388,28 +390,27 @@ local function GetPlayerNames()
     return playerNames
 end
 
-local Dropdown = Tab3:AddDropdown({
+local updateList = Tab3:AddDropdown({
     Name = "Seleccionar jugador",
     Options = GetPlayerNames(),
     Default = "",
-    Flag = "player list",
     Callback = function(playername)
         PlayerValue = playername
         Target = playername
     end
 })
 
-local function UpdatePlayers()
-    Dropdown:Set(GetPlayerNames())
+local function updatePlayers()
+    updateList:Set(GetPlayerNames())
 end
-UpdatePlayers()
+updatePlayers()
 
 Tab3:AddButton({"Actualizar lista", function()
-    UpdatePlayers()
+    updatePlayers()
 end})
 
-Players.PlayerAdded:Connect(UpdatePlayers)
-Players.PlayerRemoving:Connect(UpdatePlayers)
+Players.PlayerAdded:Connect(updatePlayers)
+Players.PlayerRemoving:Connect(updatePlayers)
 
 Tab3:AddButton({
     Name = "Copiar avatar",
@@ -491,6 +492,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddSection({"Ropa 3D"})
+
 local clothes = {
     {"Black-Arm-Bandages-1-0", 11458078735},
     {"Black-Oversized-Warmers", 10789914680},
@@ -498,6 +500,7 @@ local clothes = {
     {"White-Oversized-Off-Shoulder-Hoodie", 18396754379},
     {"Left-Leg-Spikes", 10814325667}
 }
+
 for _, btn in ipairs(clothes) do
     Tab3:AddButton({
         btn[1],
@@ -507,6 +510,7 @@ for _, btn in ipairs(clothes) do
         end
     })
 end
+
 Tab3:AddSection({"Editor de avatar (Tu avatar se reiniciara)"})
 Tab3:AddParagraph({"Ajusta las proporciones de tu avatar para un mejor resultado"})
 
@@ -672,7 +676,55 @@ Tab3:AddButton({
     end
 })
 
-Tab4:AddButton({
+Tab4:AddSection({"Velocidad RGB"})
+local rgbSpeed = 1
+
+Tab4:AddSlider({
+    Name = "Ajusta la velocidad del RGB",
+    Min = 1,
+    Max = 9,
+    Increase = 1,
+    Default = 2,
+    Callback = function(Value)
+        rgbSpeed = Value
+    end
+})
+
+local function getRainbowColor(speedMultiplier)
+    local h = (tick() * speedMultiplier % 5) / 5
+    return Color3.fromHSV(h, 1, 1)
+end
+
+local function fireServer(eventName, args)
+    local event = ReplicatedStorage.RE
+    if event and event:FindFirstChild(eventName) then
+        pcall(function()
+            event[eventName]:FireServer(unpack(args))
+        end)
+    end
+end
+
+Tab4:AddSection({"Jugador RGB"})
+local nameBioRGBActive = false
+Tab4:AddToggle({
+    Name = "Nombre + Bio RGB",
+    Default = false,
+    Callback = function(state)
+        nameBioRGBActive = state
+        if state then
+            task.spawn(function()
+                while nameBioRGBActive and LocalPlayer.Character do
+                    local color = getRainbowColor(rgbSpeed)
+                    fireServer("1RPNam1eColo1r", {"PickingRPNameColor", color})
+                    fireServer("1RPNam1eColo1r", {"PickingRPBioColor", color})
+                    task.wait(0.03)
+                end
+            end)
+        end
+    end
+})
+
+Tab5:AddButton({
     Name = "Desbanear de todas las casas",
     Callback = function()
         local successCount = 0
@@ -706,7 +758,7 @@ Tab4:AddButton({
         if successCount > 0 then
             StarterGui:SetCore("SendNotification", {
                 Title = "Exito",
-                Text = "Desbaneado de " .. successCount .. " casas!",
+                Text = "Desbaneado de " .. successCount .. " casas.",
                 Duration = 5
             })
         end
@@ -727,54 +779,6 @@ Tab4:AddButton({
     end
 })
 
-Tab5:AddSection({"Velocidad RGB"})
-local rgbSpeed = 1
-
-Tab5:AddSlider({
-    Name = "Ajusta la velocidad del RGB",
-    Min = 1,
-    Max = 9,
-    Increase = 1,
-    Default = 2,
-    Callback = function(Value)
-        rgbSpeed = Value
-    end
-})
-
-local function getRainbowColor(speedMultiplier)
-    local h = (tick() * speedMultiplier % 5) / 5
-    return Color3.fromHSV(h, 1, 1)
-end
-
-local function fireServer(eventName, args)
-    local event = ReplicatedStorage.RE
-    if event and event:FindFirstChild(eventName) then
-        pcall(function()
-            event[eventName]:FireServer(unpack(args))
-        end)
-    end
-end
-
-Tab5:AddSection({"Jugador RGB"})
-local nameBioRGBActive = false
-Tab5:AddToggle({
-    Name = "Nombre + Bio RGB",
-    Default = false,
-    Callback = function(state)
-        nameBioRGBActive = state
-        if state then
-            task.spawn(function()
-                while nameBioRGBActive and LocalPlayer.Character do
-                    local color = getRainbowColor(rgbSpeed)
-                    fireServer("1RPNam1eColo1r", {"PickingRPNameColor", color})
-                    fireServer("1RPNam1eColo1r", {"PickingRPBioColor", color})
-                    task.wait(0.03)
-                end
-            end)
-        end
-    end
-})
-
 local sites = {
     {"Colina", CFrame.new(-348.64, 65.94, -458.08)},
     {"Inicio", CFrame.new(-26.17, 3.48, -0.93)},
@@ -783,11 +787,11 @@ local sites = {
     {"Playa2", CFrame.new(42.39, 2.94, 1336.14)},
     {"Granja", CFrame.new(-766.41, 2.92, -61.10)}
 }
-for _, btn in ipairs(sites) do
+for _, tp in ipairs(sites) do
     Tab9:AddButton({
-        btn[1],
+        tp[1],
         function()
-            Character.HumanoidRootPart.CFrame = btn[2]
+            RootPart.CFrame = tp[2]
         end
     })
 end
