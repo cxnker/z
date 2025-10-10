@@ -5,7 +5,7 @@ local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitFor
 
 local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/z/refs/heads/main/TestUi.lua"))()
 local Window = Lib:MakeWindow({
-    Title = "Victory Hub L | Brookhaven RP 🌠 ",
+    Title = "Victory Hub Source | Brookhaven RP 🌠 ",
     SubTitle = " by Roun95",
     SaveFolder = "VictoryData"
 })
@@ -28,7 +28,7 @@ local Tab10 = Window:MakeTab({"Scripts", "scroll"})
 local Tab11 = Window:MakeTab({"Graphics", "wind"})
 
 Tab1:AddParagraph({"Executor", identifyexecutor()})
-Tab1:AddSection({"Version 1.4"})
+Tab1:AddSection({"Based in v1.4"})
 
 Tab2:AddSection({"Personaje del jugador"})
 local selectedPlayerName = nil
