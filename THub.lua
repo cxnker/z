@@ -23,8 +23,8 @@ local Tab5 = Window:MakeTab({"House", "home"})
 local Tab6 = Window:MakeTab({"Car", "car"})
 local Tab7 = Window:MakeTab({"Music", "music"})
 local Tab8 = Window:MakeTab({"Troll", "skull"})
-local Tab9 = Window:MakeTab({"Teleportes", "mappin"})
-local Tab10 = Window:MakeTab({"Scripts", "scroll"})
+local Tab9 = Window:MakeTab({"Scripts", "scroll"})
+local Tab10 = Window:MakeTab({"Teleportes", "mappin"})
 local Tab11 = Window:MakeTab({"Graphics", "wind"})
 --------------------------------------------------
 			-- === Tab 1: Info === --
@@ -728,7 +728,9 @@ Tab4:AddToggle({
         end
     end
 })
-
+--------------------------------------------------
+			-- === Tab 5: House === --
+--------------------------------------------------
 Tab5:AddButton({
     Name = "Unbanned from all houses",
     Callback = function()
@@ -783,7 +785,9 @@ Tab5:AddButton({
         end
     end
 })
-
+--------------------------------------------------
+			-- === Tab 10: Teleportes === --
+--------------------------------------------------
 local sites = {
     {"Hill", CFrame.new(-348.64, 65.94, -458.08)},
     {"Start", CFrame.new(-26.17, 3.48, -0.93)},
@@ -793,7 +797,7 @@ local sites = {
     {"Farm", CFrame.new(-766.41, 2.92, -61.10)}
 }
 for _, tp in ipairs(sites) do
-    Tab9:AddButton({
+    Tab10:AddButton({
         tp[1],
         function()
             RootPart.CFrame = tp[2]
