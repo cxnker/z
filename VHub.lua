@@ -109,7 +109,7 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Duration = 10
 })
 
-local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/nxvap/VictoryHub/refs/heads/main/VictoryUi.lua"))()
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/z/refs/heads/main/TestUi.lua"))()
 local Window = Lib:MakeWindow({
     Title = "Victory Hub | Brookhaven RP 🌠 ",
     SubTitle = " by Roun95",
