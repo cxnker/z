@@ -490,7 +490,7 @@ Tab3:AddButton({
     end
 })
 
-Tab3:AddSection({"Ropa 3D"})
+Tab3:AddSection({"》 3D Clothes"})
 
 local clothes = {
     {"Black-Arm-Bandages-1-0", 11458078735},
@@ -675,11 +675,11 @@ Tab3:AddButton({
     end
 })
 
-Tab4:AddSection({"Nombre + Bio RGB"})
+Tab4:AddSection({"》 RGB Player"})
 local rgbSpeed = 1
 
 Tab4:AddSlider({
-    Name = "Ajusta la velocidad del RGB",
+    Name = "Adjust RGB Speed",
     Min = 1,
     Max = 9,
     Increase = 1,
@@ -705,7 +705,7 @@ end
 
 local nameBioRGBActive = false
 Tab4:AddToggle({
-    Name = "Enable RGB",
+    Name = "Name and Bio RGB",
     Default = false,
     Callback = function(state)
         nameBioRGBActive = state
@@ -723,7 +723,7 @@ Tab4:AddToggle({
 })
 
 Tab5:AddButton({
-    Name = "Desbanear de todas las casas",
+    Name = "Unbanned from all houses",
     Callback = function()
         local successCount = 0
         local failCount = 0
@@ -755,22 +755,22 @@ Tab5:AddButton({
         end
         if successCount > 0 then
             StarterGui:SetCore("SendNotification", {
-                Title = "Exito",
-                Text = "Desbaneado de " .. successCount .. " casas.",
+                Title = "Success",
+                Text = "Unbanned from " .. successCount .. " houses",
                 Duration = 5
             })
         end
         if failCount > 0 then
             StarterGui:SetCore("SendNotification", {
-                Title = "Aviso",
-                Text = "Falta ser desbaneado de " .. failCount .. " casas.",
+                Title = "Failed",
+                Text = "Not unbanned from " .. failCount .. " houses",
                 Duration = 5
             })
         end
         if successCount == 0 and failCount == 0 then
             StarterGui:SetCore("SendNotification", {
-                Title = "Aviso",
-                Text = "Ningun baneo encontrado.",
+                Title = "Warn",
+                Text = "Not banned houses find",
                 Duration = 5
             })
         end
@@ -778,12 +778,12 @@ Tab5:AddButton({
 })
 
 local sites = {
-    {"Colina", CFrame.new(-348.64, 65.94, -458.08)},
-    {"Inicio", CFrame.new(-26.17, 3.48, -0.93)},
+    {"Hill", CFrame.new(-348.64, 65.94, -458.08)},
+    {"Start", CFrame.new(-26.17, 3.48, -0.93)},
     {"Hotel", CFrame.new(159.10, 3.32, 164.97)},
-    {"Playa", CFrame.new(55.69, 2.94, -1403.60)},
-    {"Playa2", CFrame.new(42.39, 2.94, 1336.14)},
-    {"Granja", CFrame.new(-766.41, 2.92, -61.10)}
+    {"Beach", CFrame.new(55.69, 2.94, -1403.60)},
+    {"Beach2", CFrame.new(42.39, 2.94, 1336.14)},
+    {"Farm", CFrame.new(-766.41, 2.92, -61.10)}
 }
 for _, tp in ipairs(sites) do
     Tab9:AddButton({
