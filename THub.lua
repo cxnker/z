@@ -26,10 +26,14 @@ local Tab8 = Window:MakeTab({"Troll", "skull"})
 local Tab9 = Window:MakeTab({"Teleportes", "mappin"})
 local Tab10 = Window:MakeTab({"Scripts", "scroll"})
 local Tab11 = Window:MakeTab({"Graphics", "wind"})
-
+--------------------------------------------------
+			-- === Tab 1: Info === --
+--------------------------------------------------
 Tab1:AddSection({"》 Based on v1.3"})
 Tab1:AddParagraph({"• Executor", identifyexecutor()})
-
+--------------------------------------------------
+			-- === Tab 2: Player === --
+--------------------------------------------------
 Tab2:AddSection({"》 Player Character"})
 local selectedPlayerName = nil
 local headsitActive = false
@@ -245,13 +249,13 @@ Tab2:AddButton({
 })
 
 Tab2:AddSection({"》 ESP"})
-local billboardGuis = {}
+local espGuis = {}
 local connections = {}
 local espEnabled = false
 local selectedColor = "RGB"
 
 Tab2:AddDropdown({
-    Name = "Seleccionar color",
+    Name = "Select color",
     Default = "RGB",
     Options = {
         "RGB", "Black", "White", "Red",
@@ -261,7 +265,7 @@ Tab2:AddDropdown({
         selectedColor = value
     end
 })
-local function getESPColor()
+local function espColor()
     if selectedColor == "RGB" then
         local h = (tick() % 5) / 5
         return Color3.fromHSV(h, 1, 1)
@@ -291,35 +295,35 @@ local function updateESP(player)
     if Character then
         local head = Character:FindFirstChild("Head")
         if head then
-            if billboardGuis[player] then
-                billboardGuis[player]:Destroy()
+            if espGuis[player] then
+                espGuis[player]:Destroy()
             end
 
-            local billboard = Instance.new("BillboardGui")
-            billboard.Parent = head
-            billboard.Adornee = head
-            billboard.Size = UDim2.new(0,200,0,50)
-            billboard.StudsOffset = Vector3.new(0,3,0)
-            billboard.AlwaysOnTop = true
+            local espGui = Instance.new("BillboardGui")
+            espGui.Parent = head
+            espGui.Adornee = head
+            espGui.Size = UDim2.new(0,200,0,50)
+            espGui.StudsOffset = Vector3.new(0,3,0)
+            espGui.AlwaysOnTop = true
 
-            local textLabel = Instance.new("TextLabel")
-            textLabel.Parent = billboard
-            textLabel.Size = UDim2.new(1,0,1,0)
-            textLabel.BackgroundTransparency = 1
-            textLabel.TextStrokeTransparency = 0.5
-            textLabel.Font = Enum.Font.SourceSansBold
-            textLabel.TextSize = 14
-            textLabel.Text = player.Name .. " | " .. player.AccountAge .. " days"
-            textLabel.TextColor3 = getESPColor()
-            billboardGuis[player] = billboard
+            local espText = Instance.new("TextLabel")
+            espText.Parent = espGui
+            espText.Size = UDim2.new(1,0,1,0)
+            espText.BackgroundTransparency = 1
+            espText.TextStrokeTransparency = 0.5
+            espText.Font = Enum.Font.SourceSansBold
+            espText.TextSize = 14
+            espText.Text = player.Name .. " | " .. player.AccountAge .. " days"
+            espText.TextColor3 = espColor()
+            espGuis[player] = espGui
         end
     end
 end
 
 local function removeESP(player)
-    if billboardGuis[player] then
-        billboardGuis[player]:Destroy()
-        billboardGuis[player] = nil
+    if espGuis[player] then
+        espGuis[player]:Destroy()
+        espGuis[player] = nil
     end
 end
 
@@ -340,9 +344,9 @@ espToggle:Callback(function(value)
             end
             if selectedColor == "RGB" then
                 for _, player in pairs(Players:GetPlayers()) do
-                    local gui = billboardGuis[player]
+                    local gui = espGuis[player]
                     if gui and gui:FindFirstChild("TextLabel") then
-                        gui.TextLabel.TextColor3 = getESPColor()
+                        gui.TextLabel.TextColor3 = espColor()
                     end
                 end
             end
@@ -368,11 +372,13 @@ espToggle:Callback(function(value)
             conn:Disconnect()
         end
         connections = {}
-        billboardGuis = {}
+        espGuis = {}
     end
 end)
-
-Tab3:AddSection({"》 Copiar avatar"})
+--------------------------------------------------
+			-- === Tab 3: Avatar === --
+--------------------------------------------------
+Tab3:AddSection({"》 Copy avatar"})
 local Remotes = ReplicatedStorage.Remotes
 local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
 
@@ -390,7 +396,7 @@ local function GetPlayerNames()
 end
 
 local updateList = Tab3:AddDropdown({
-    Name = "Seleccionar jugador",
+    Name = "Update list",
     Options = GetPlayerNames(),
     Default = "",
     Callback = function(playername)
@@ -404,7 +410,7 @@ local function updatePlayers()
 end
 updatePlayers()
 
-Tab3:AddButton({"Actualizar lista", function()
+Tab3:AddButton({"Update list", function()
     updatePlayers()
 end})
 
@@ -412,7 +418,7 @@ Players.PlayerAdded:Connect(updatePlayers)
 Players.PlayerRemoving:Connect(updatePlayers)
 
 Tab3:AddButton({
-    Name = "Copiar avatar",
+    Name = "Copy avatar",
     Callback = function()
         if not Target then return end
 
@@ -509,11 +515,11 @@ for _, btn in ipairs(clothes) do
     })
 end
 
-Tab3:AddSection({"Editor de avatar (Tu avatar se reiniciara)"})
-Tab3:AddParagraph({"Ajusta las proporciones de tu avatar para un mejor resultado"})
+Tab3:AddSection({"》 Character editor"})
+Tab3:AddParagraph({"Adjust the proportions of your avatar for a better result"})
 
 Tab3:AddButton({
-    Name = "Mini-Plushie (Headless)",
+    Name = "Mini-Plushie + Headless",
     Callback = function()
         local args = {
             {
@@ -530,7 +536,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "S15-Thin-Hourglass (Headless)",
+    Name = "S15-Thin-Hourglass + Headless",
     Callback = function()
         local args = {
             {
@@ -547,7 +553,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "inf15-Thin (Headless)",
+    Name = "inf15-Thin + Headless",
     Callback = function()
         local args = {
             {
@@ -564,7 +570,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "Blush-Fashion-Doll (Headless)",
+    Name = "Blush-Fashion-Doll + Headless",
     Callback = function()
         local args = {
             {
@@ -581,7 +587,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "E-Girl Body (Headless)",
+    Name = "(M)-Girl Body + Headless",
     Callback = function()
         local args = {
             {
@@ -598,7 +604,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "E-Girl Body (Headless/Korblox)",
+    Name = "(M)-Girl Body + Headless/Korblox",
     Callback = function()
         local args = {
             {
@@ -615,7 +621,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "E-Boy Body (Headless)",
+    Name = "(M)-Boy Body + Headless",
     Callback = function()
         local args = {
             {
@@ -632,7 +638,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "E-Girl Body ()",
+    Name = "(M)-Girl Body",
     Callback = function()
         local args = {
             {
@@ -649,7 +655,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "Classic-Female-v2-Torso (Headless)",
+    Name = "Classic-Female-v2-Torso + Headless",
     Callback = function()
         local args = {
             {
@@ -673,7 +679,9 @@ Tab3:AddButton({
         ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
-
+--------------------------------------------------
+			-- === Tab 4: RGB === --
+--------------------------------------------------
 Tab4:AddSection({"》 RGB Player"})
 local rgbSpeed = 1
 
