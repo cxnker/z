@@ -27,8 +27,8 @@ local Tab9 = Window:MakeTab({"Teleportes", "mappin"})
 local Tab10 = Window:MakeTab({"Scripts", "scroll"})
 local Tab11 = Window:MakeTab({"Graphics", "wind"})
 
-Tab1:AddParagraph({"Executor", identifyexecutor()})
-Tab1:AddSection({"Based on v1.3"})
+Tab1:AddSection({"》 Based on v1.3"})
+Tab1:AddParagraph({"• Executor", identifyexecutor()})
 
 Tab2:AddSection({"》 Player Character"})
 local selectedPlayerName = nil
@@ -254,8 +254,8 @@ Tab2:AddDropdown({
     Name = "Seleccionar color",
     Default = "RGB",
     Options = {
-        "RGB", "Blanco", "Negro", "Rojo",
-        "Verde", "Azul", "Amarillo", "Rosado", "Morado"
+        "RGB", "Black", "White", "Red",
+        "Green", "Blue", "Yellow", "Pink", "Purple"
     },
     Callback = function(value)
         selectedColor = value
@@ -265,21 +265,21 @@ local function getESPColor()
     if selectedColor == "RGB" then
         local h = (tick() % 5) / 5
         return Color3.fromHSV(h, 1, 1)
-    elseif selectedColor == "Negro" then
+    elseif selectedColor == "Black" then
         return Color3.fromRGB(0, 0, 0)
-    elseif selectedColor == "Blanco" then
+    elseif selectedColor == "White" then
         return Color3.fromRGB(255, 255, 255)
-    elseif selectedColor == "Rojo" then
+    elseif selectedColor == "Red" then
         return Color3.fromRGB(255, 0, 0)
-    elseif selectedColor == "Verde" then
+    elseif selectedColor == "Green" then
         return Color3.fromRGB(0, 255, 0)
-    elseif selectedColor == "Azul" then
+    elseif selectedColor == "Blue" then
         return Color3.fromRGB(0, 170, 255)
-    elseif selectedColor == "Amarillo" then
+    elseif selectedColor == "Yellow" then
         return Color3.fromRGB(255, 255, 0)
-    elseif selectedColor == "Rosado" then
+    elseif selectedColor == "Pink" then
         return Color3.fromRGB(255, 105, 180)
-    elseif selectedColor == "Morado" then
+    elseif selectedColor == "Purple" then
         return Color3.fromRGB(128, 0, 128)
     end
     return Color3.new(1, 1, 1)
@@ -309,7 +309,7 @@ local function updateESP(player)
             textLabel.TextStrokeTransparency = 0.5
             textLabel.Font = Enum.Font.SourceSansBold
             textLabel.TextSize = 14
-            textLabel.Text = player.Name .. " | " .. player.AccountAge .. " dias"
+            textLabel.Text = player.Name .. " | " .. player.AccountAge .. " days"
             textLabel.TextColor3 = getESPColor()
             billboardGuis[player] = billboard
         end
@@ -324,8 +324,7 @@ local function removeESP(player)
 end
 
 local espToggle = Tab2:AddToggle({
-    Name = "Espiar jugadores",
-    Description = "Muestra la entidad de los jugadores.",
+    Name = "Enable ESP",
     Default = false
 })
 
