@@ -28,20 +28,20 @@ local Tab10 = Window:MakeTab({"Scripts", "scroll"})
 local Tab11 = Window:MakeTab({"Graphics", "wind"})
 
 Tab1:AddParagraph({"Executor", identifyexecutor()})
-Tab1:AddSection({"Based in v1.4"})
+Tab1:AddSection({"Based on v1.3"})
 
-Tab2:AddSection({"Personaje del jugador"})
+Tab2:AddSection({"》 Player Character"})
 local selectedPlayerName = nil
 local headsitActive = false
 local function headsitOnPlayer(targetPlayer)
     if not targetPlayer.Character or not targetPlayer.Character:FindFirstChild("Head") then
-        warn("Su personaje no tiene cabeza.")
+        warn("Character has no Head")
         return false
     end
     local targetHead = targetPlayer.Character.Head
     local localRoot = Character:FindFirstChild("HumanoidRootPart")
     if not localRoot then
-        warn("Su personaje no tiene HumanoidRootPart.")
+        warn("Character has no HumanoidRootPart")
         return false
     end
     localRoot.CFrame = targetHead.CFrame * CFrame.new(0, 2.2, 0)
@@ -57,7 +57,7 @@ local function headsitOnPlayer(targetPlayer)
     if Humanoid then
         Humanoid.Sit = true
     end
-    print("Headsit activado en " .. targetPlayer.Name)
+    print("Headsit activated on " .. targetPlayer.Name)
     return true
 end
 
@@ -73,7 +73,7 @@ local function removeHeadsit()
     if Humanoid then
         Humanoid.Sit = false
     end
-    print("Headsit desactivado.")
+    print("Headsit disabled")
 end
 
 local function findPlayerByPartialName(partial)
@@ -88,8 +88,8 @@ end
 
 local function notifyPlayerSelected(player)
 	StarterGui:SetCore("SendNotification", {
-        Title = "Jugador Seleccionado",
-        Text = player.Name .. " fue seleccionado!",
+        Title = "Player selected",
+        Text = player.Name .. " selected",
         Icon = Players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100),
         Duration = 5
     })
@@ -97,7 +97,7 @@ end
 
 Tab2:AddTextBox({
     Name = "Headsit Player",
-    Description = "Ingrese parte del nombre del jugador",
+    Description = "Enter part of the player name",
     PlaceholderText = "ej: Rou → Roun95",
     Callback = function(Value)
     local foundPlayer = findPlayerByPartialName(Value)
@@ -105,12 +105,12 @@ Tab2:AddTextBox({
             selectedPlayerName = foundPlayer.Name
             notifyPlayerSelected(foundPlayer)
         else
-            warn("Ningun jugador encontrado con ese nombre.")
+            warn("No player found with that name")
         end
     end
 })
 
-Tab2:AddButton({"Activar Headsit", function()
+Tab2:AddButton({"Enable Headsit", function()
     if not selectedPlayerName then
         return
     end
@@ -127,7 +127,7 @@ end
 })
 
 Tab2:AddSlider({
-    Name = "Velocidad",
+    Name = "Speed",
     Min = 1,
     Max = 900,
     Increase = 1,
@@ -138,7 +138,7 @@ Tab2:AddSlider({
 })
 
 Tab2:AddSlider({
-    Name = "Salto",
+    Name = "Jump",
     Min = 1,
     Max = 900,
     Increase = 1,
@@ -149,7 +149,7 @@ Tab2:AddSlider({
 })
 
 Tab2:AddSlider({
-    Name = "Gravedad",
+    Name = "Gravity",
     Min = 1,
     Max = 900,
     Increase = 1,
@@ -244,7 +244,7 @@ Tab2:AddButton({
 	end
 })
 
-Tab2:AddSection({"ESP"})
+Tab2:AddSection({"》 ESP"})
 local billboardGuis = {}
 local connections = {}
 local espEnabled = false
@@ -373,7 +373,7 @@ espToggle:Callback(function(value)
     end
 end)
 
-Tab3:AddSection({"Copiar avatar"})
+Tab3:AddSection({"》 Copiar avatar"})
 local Remotes = ReplicatedStorage.Remotes
 local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
 
@@ -417,8 +417,7 @@ Tab3:AddButton({
     Callback = function()
         if not Target then return end
 
-        local LP = Players.LocalPlayer
-        local LChar = LP.Character
+        local LChar = LocalPlayer.Character
         local TPlayer = Players:FindFirstChild(Target)
 
         if TPlayer and TPlayer.Character then
