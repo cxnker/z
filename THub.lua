@@ -551,7 +551,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "Mini-Plushie + Headless",
+    Name = "(Mini-Plushie) and Headless",
     Callback = function()
 	ChangeCharacterBody:InvokeServer({
 		[1] = 112722466960512,
@@ -565,7 +565,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "S15-Thin-Hourglass + Headless",
+    Name = "(S15-Thin-Hourglass) and Headless",
     Callback = function()
 	ChangeCharacterBody:InvokeServer({
 		[1] = 129543160215232,
@@ -579,41 +579,35 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "inf15-Thin + Headless",
+    Name = "(inf15-Thin) and Headless",
     Callback = function()
-        local args = {
-            {
-                84418052877367,
-                124343282827669,
-                99519402284266,
-                115905570886697,
-                92757812011061,
-                15093053680
-            }
-        }
-        ChangeCharacterBody:InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 92757812011061,
+		[2] = 99519402284266,
+		[3] = 115905570886697,
+		[4] = 84418052877367,
+		[5] = 124343282827669,
+		[6] = 134082579,
+	})
+	end
 })
 
 Tab3:AddButton({
-    Name = "Blush-Fashion-Doll + Headless",
+    Name = "(Blush-Fashion-Doll) and Headless",
     Callback = function()
-        local args = {
-            {
-                127241951574732,
-                118303475394830,
-                18839824209,
-                18839824132,
-                115745153758680,
-                15093053680
-            }
-        }
-        ChangeCharacterBody:InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 115745153758680,
+		[2] = 18839824209,
+		[3] = 18839824132,
+		[4] = 127241951574732,
+		[5] = 118303475394830,
+		[6] = 134082579,
+	})
+	end
 })
 
 Tab3:AddButton({
-    Name = "(M)-Girl Body + Headless",
+    Name = "[M] Girl Body and Headless",
     Callback = function()
         local args = {
             {
@@ -630,7 +624,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "(M)-Girl Body + Headless/Korblox",
+    Name = "[M] Girl Body and Headless/Korblox",
     Callback = function()
         local args = {
             {
@@ -647,7 +641,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "(M)-Boy Body + Headless",
+    Name = "[M] Boy Body and Headless",
     Callback = function()
         local args = {
             {
@@ -664,7 +658,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "(M)-Girl Body",
+    Name = "[M] Girl Body V2",
     Callback = function()
         local args = {
             {
@@ -681,29 +675,31 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "Classic-Female-v2-Torso + Headless",
+    Name = "(Classic-Female-v2-Torso) and Headless/Korblox",
     Callback = function()
-        local args = {
-            {
-                4637265517,
-                15093053680
-            }
-        }
-        ChangeCharacterBody:InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 4637265517,
+		[2] = 0,
+		[3] = 0,
+		[4] = 139607718,
+		[5] = 0,
+		[6] = 134082579,
+	})
+	end
 })
 
 Tab3:AddButton({
-    Name = "Headless/Korblox (BETA)",
+    Name = "Headless/Korblox",
     Callback = function()
-        local args = {
-            {
-                139607718,
-                15093053680
-            }
-        }
-        ChangeCharacterBody:InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = 0,
+		[3] = 0,
+		[4] = 139607718,
+		[5] = 0,
+		[6] = 134082579,
+	})
+	end
 })
 --------------------------------------------------
 			-- === Tab 4: RGB === --
