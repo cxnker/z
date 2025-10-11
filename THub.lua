@@ -532,7 +532,7 @@ Tab3:AddButton({
 Tab3:AddButton({
     Name = "Invisible Test",
     Callback = function()
-	ChangeCharacterBody:InvokeServer({15312911732, 14532583477, 14532583469, 14532583517, 14532583483, 134082579,})
+	ChangeCharacterBody:InvokeServer({ 15312911732, 14532583477, 14532583469, 14532583517, 14532583483, 134082579, })
 	end
 })
 
@@ -609,35 +609,29 @@ Tab3:AddButton({
 Tab3:AddButton({
     Name = "[M] Girl Body and Headless",
     Callback = function()
-        local args = {
-            {
-                127241951574732,
-                118303475394830,
-                18839824209,
-                18839824132,
-                114206707267907,
-                15093053680
-            }
-        }
-        ChangeCharacterBody:InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 114206707267907,
+		[2] = 18839824209,
+		[3] = 18839824132,
+		[4] = 127241951574732,
+		[5] = 118303475394830,
+		[6] = 134082579,
+	})
+	end
 })
 
 Tab3:AddButton({
     Name = "[M] Girl Body and Headless/Korblox",
     Callback = function()
-        local args = {
-            {
-                139607718,
-                118303475394830,
-                18839824209,
-                18839824132,
-                114206707267907,
-                15093053680
-            }
-        }
-        ChangeCharacterBody:InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 114206707267907,
+		[2] = 18839824209,
+		[3] = 18839824132,
+		[4] = 139607718,
+		[5] = 118303475394830,
+		[6] = 134082579,
+	})
+	end
 })
 
 Tab3:AddButton({
@@ -660,18 +654,15 @@ Tab3:AddButton({
 Tab3:AddButton({
     Name = "[M] Girl Body V2",
     Callback = function()
-        local args = {
-            {
-                127968751428204,
-                101521138059051,
-                18839824209,
-                18839824132,
-                114206707267907,
-                14970560459
-            }
-        }
-        ChangeCharacterBody:InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 114206707267907,
+		[2] = 18839824209,
+		[3] = 18839824132,
+		[4] = 127968751428204,
+		[5] = 101521138059051,
+		[6] = 14970560459,
+	})
+	end
 })
 
 Tab3:AddButton({
