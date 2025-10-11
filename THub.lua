@@ -537,6 +537,20 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
+    Name = "Invisible Ordenado",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 15312911732, -- Torso
+		[2] = 14532583477, -- Right Arm
+		[3] = 14532583469, -- Left Arm
+		[4] = 14532583517, -- Right Leg
+		[5] = 14532583483, -- Left Leg
+		[6] = 134082579, -- Head
+	})
+	end
+})
+
+Tab3:AddButton({
     Name = "Mini-Plushie + Headless",
     Callback = function()
         local args = {
