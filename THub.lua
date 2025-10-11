@@ -244,7 +244,7 @@ RunService.Stepped:Connect(function()
 Tab2:AddButton({
     Name = "Fly GUI",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/cxnker/x/refs/heads/main/Scripts/Fly.lua"))()
+        loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
 	end
 })
 
@@ -517,6 +517,41 @@ end
 
 Tab3:AddSection({"》 Character editor"})
 Tab3:AddParagraph({"Adjust the proportions of your avatar for a better result"})
+
+Tab3:AddButton({
+    Name = "BETA",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+    	[1] = 4637265517,
+    	[2] = 48474356,
+    	[3] = 14547141130,
+	})
+    end
+})
+
+Tab3:AddButton({
+    Name = "BETA55",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({ [1] = "15312911732", [2] = "14532583477", [3] = "14532583469", [4] = "14532583517", [5] = "14532583483", [6] = "134082579", })
+	end
+})
+
+Tab3:AddButton({
+    Name = "BETA5",
+    Callback = function()
+        local args = {
+            {
+                15312911732, -- Right Leg
+                14532583477,  -- Left Leg
+                14532583469,  -- Right Arm
+                14532583517,  -- Left Arm
+                14532583483, -- Torso
+                134082579   -- Head
+            }
+        }
+        ChangeCharacterBody:InvokeServer(unpack(args))
+    end
+})
 
 Tab3:AddButton({
     Name = "Mini-Plushie + Headless",
