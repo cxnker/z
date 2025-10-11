@@ -519,12 +519,15 @@ Tab3:AddSection({"》 Character editor"})
 Tab3:AddParagraph({"Adjust the proportions of your avatar for a better result"})
 
 Tab3:AddButton({
-    Name = "Skelly+Girl Robloxian Torso",
+    Name = "ROBLOX-Girl-Torso and Skelly Right Leg/Headless",
     Callback = function()
 	ChangeCharacterBody:InvokeServer({
-    	[1] = 4637265517,
-    	[2] = 48474356,
-    	[3] = 14547141130,
+    	[1] = 48474356,
+    	[2] = 0,
+		[3] = 0,
+		[4] = 14547141130,
+	 	[5] = 0,
+		[6] = 134082579,
 	})
     end
 })
