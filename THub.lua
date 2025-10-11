@@ -537,7 +537,7 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "Invisible Ordenado",
+    Name = "Invisible",
     Callback = function()
 	ChangeCharacterBody:InvokeServer({
 		[1] = 15312911732, -- Torso
@@ -553,35 +553,29 @@ Tab3:AddButton({
 Tab3:AddButton({
     Name = "Mini-Plushie + Headless",
     Callback = function()
-        local args = {
-            {
-                107431241133468, -- Right Leg
-                103380121023771,  -- Left Leg
-                76079756909323,  -- Right Arm
-                82598238110471,  -- Left Arm
-                112722466960512, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ChangeCharacterBody:InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 112722466960512,
+		[2] = 76079756909323,
+		[3] = 82598238110471,
+		[4] = 107431241133468,
+		[5] = 103380121023771,
+		[6] = 134082579,
+	})
+	end
 })
 
 Tab3:AddButton({
     Name = "S15-Thin-Hourglass + Headless",
     Callback = function()
-        local args = {
-            {
-                128776848621889,
-                81547744637409,
-                133466157082146,
-                73001997018020,
-                129543160215232,
-                15093053680
-            }
-        }
-        ChangeCharacterBody:InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 129543160215232,
+		[2] = 133466157082146,
+		[3] = 73001997018020,
+		[4] = 128776848621889,
+		[5] = 81547744637409,
+		[6] = 134082579,
+	})
+	end
 })
 
 Tab3:AddButton({
