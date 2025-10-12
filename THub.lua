@@ -533,9 +533,16 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "Invisible Test",
+    Name = "Invisible Works",
     Callback = function()
-	ChangeCharacterBody:InvokeServer({ 15312911732, 14532583477, 14532583469, 14532583517, 14532583483, 134082579, })
+	ChangeCharacterBody:InvokeServer({
+		15312911732, -- Torso
+		14532583477, -- Right Arm
+		14532583469, -- Left Arm
+		14532583517, -- Right Leg
+		14532583483, -- Left Leg
+		134082579, -- Head
+	})
 	end
 })
 
