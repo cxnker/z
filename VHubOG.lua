@@ -431,7 +431,8 @@ Tab2:AddDropdown({
         selectedColor = value
     end
 })
-local function espColor()
+
+local function getESPColor()
     if selectedColor == "RGB" then
         local h = (tick() % 5) / 5
         return Color3.fromHSV(h, 1, 1)
@@ -459,66 +460,71 @@ local function updateESP(player)
     if player == LocalPlayer then return end
     if not espEnabled then return end
 
-    if Character then
-        local head = Character:FindFirstChild("Head")
+	local character = player.Character
+    if character then
+        local head = character:FindFirstChild("Head")
         if head then
-            if espGuis[player] then
-                espGuis[player]:Destroy()
+            if billboardGuis[player] then
+                billboardGuis[player]:Destroy()
             end
 
-            local espGui = Instance.new("BillboardGui")
-            espGui.Parent = head
-            espGui.Adornee = head
-            espGui.Size = UDim2.new(0,200,0,50)
-            espGui.StudsOffset = Vector3.new(0,3,0)
-            espGui.AlwaysOnTop = true
+            local billboard = Instance.new("BillboardGui")
+            billboard.Parent = head
+            billboard.Adornee = head
+            billboard.Size = UDim2.new(0,200,0,50)
+            billboard.StudsOffset = Vector3.new(0,3,0)
+            billboard.AlwaysOnTop = true
 
-            local espText = Instance.new("TextLabel")
-            espText.Parent = espGui
-            espText.Size = UDim2.new(1,0,1,0)
-            espText.BackgroundTransparency = 1
-            espText.TextStrokeTransparency = 0.5
-            espText.Font = Enum.Font.SourceSansBold
-            espText.TextSize = 14
-            espText.Text = player.Name .. " | " .. player.AccountAge .. " days"
-            espText.TextColor3 = espColor()
-            espGuis[player] = espGui
+            local textLabel = Instance.new("TextLabel")
+            textLabel.Parent = billboard
+            textLabel.Size = UDim2.new(1,0,1,0)
+            textLabel.BackgroundTransparency = 1
+            textLabel.TextStrokeTransparency = 0.5
+            textLabel.Font = Enum.Font.GothamBold
+            textLabel.TextSize = 14
+            textLabel.Text = player.Name .. " | " .. player.AccountAge .. " dias"
+            textLabel.TextColor3 = getESPColor()
+
+            billboardGuis[player] = billboard
         end
     end
 end
 
 local function removeESP(player)
-    if espGuis[player] then
-        espGuis[player]:Destroy()
-        espGuis[player] = nil
+    if billboardGuis[player] then
+        billboardGuis[player]:Destroy()
+        billboardGuis[player] = nil
     end
 end
 
-local espToggle = Tab2:AddToggle({
+local Toggle1 = Tab2:AddToggle({
     Name = "Enable ESP",
     Default = false
 })
 
-espToggle:Callback(function(value)
+Toggle1:Callback(function(value)
     espEnabled = value
+
     if espEnabled then
         for _, player in pairs(Players:GetPlayers()) do
             updateESP(player)
         end
+
         local updateConnection = RunService.Heartbeat:Connect(function()
             for _, player in pairs(Players:GetPlayers()) do
                 updateESP(player)
             end
             if selectedColor == "RGB" then
                 for _, player in pairs(Players:GetPlayers()) do
-                    local gui = espGuis[player]
+                    local gui = billboardGuis[player]
                     if gui and gui:FindFirstChild("TextLabel") then
-                        gui.TextLabel.TextColor3 = espColor()
+                        gui.TextLabel.TextColor3 = getESPColor()
                     end
                 end
             end
         end)
         table.insert(connections, updateConnection)
+
         local playerAdded = Players.PlayerAdded:Connect(function(player)
             updateESP(player)
             local charConn = player.CharacterAdded:Connect(function()
@@ -527,6 +533,7 @@ espToggle:Callback(function(value)
             table.insert(connections, charConn)
         end)
         table.insert(connections, playerAdded)
+
         local playerRemoving = Players.PlayerRemoving:Connect(function(player)
             removeESP(player)
         end)
@@ -539,7 +546,7 @@ espToggle:Callback(function(value)
             conn:Disconnect()
         end
         connections = {}
-        espGuis = {}
+        billboardGuis = {}
     end
 end)
 ----------------------------------------------------------------------------------------------------
@@ -547,12 +554,11 @@ end)
 ----------------------------------------------------------------------------------------------------
 Tab3:AddSection({"》 Copy Avatar"})
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
-local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
 
 local PlayerValue
 local Target = nil
 
-local function GetPlayerNames()
+local function GetPlayerNamess()
     local playerNames = {}
     for _, player in ipairs(Players:GetPlayers()) do
         if player.Name ~= LocalPlayer.Name then
@@ -562,58 +568,59 @@ local function GetPlayerNames()
     return playerNames
 end
 
-local updateList = Tab3:AddDropdown({
-    Name = "Update list",
-    Options = GetPlayerNames(),
+local Dropdown = Tab3:AddDropdown({
+    Name = "Select player",
+    Options = GetPlayerNamess(),
     Default = "",
-    Callback = function(playername)
-        PlayerValue = playername
-        Target = playername
+    Flag = "player list",
+    Callback = function(playernamee)
+        PlayerValue = playernamee
+        Target = playernamee
     end
 })
 
-local function updatePlayers()
-    updateList:Set(GetPlayerNames())
+local function UpdatePlayerss()
+    Dropdown:Set(GetPlayerNamess())
 end
-updatePlayers()
+UpdatePlayerss()
 
 Tab3:AddButton({"Update list", function()
-    updatePlayers()
+    UpdatePlayerss()
 end})
 
-Players.PlayerAdded:Connect(updatePlayers)
-Players.PlayerRemoving:Connect(updatePlayers)
+Players.PlayerAdded:Connect(UpdatePlayerss)
+Players.PlayerRemoving:Connect(UpdatePlayerss)
 
 Tab3:AddButton({
     Name = "Copy avatar",
     Callback = function()
         if not Target then return end
 
-        local LChar = LocalPlayer.Character
+        local LP = Players.LocalPlayer
+        local LChar = LP.Character
         local TPlayer = Players:FindFirstChild(Target)
 
         if TPlayer and TPlayer.Character then
             local LHumanoid = LChar and LChar:FindFirstChildOfClass("Humanoid")
             local THumanoid = TPlayer.Character:FindFirstChildOfClass("Humanoid")
             if LHumanoid and THumanoid then
-
                 local LDesc = LHumanoid:GetAppliedDescription()
                 for _, acc in ipairs(LDesc:GetAccessories(true)) do
                     if acc.AssetId and tonumber(acc.AssetId) then
-                        Wear:InvokeServer(tonumber(acc.AssetId))
+                        Remotes.Wear:InvokeServer(tonumber(acc.AssetId))
                         task.wait(0.2)
                     end
                 end
                 if tonumber(LDesc.Shirt) then
-                    Wear:InvokeServer(tonumber(LDesc.Shirt))
+                    Remotes.Wear:InvokeServer(tonumber(LDesc.Shirt))
                     task.wait(0.2)
                 end
                 if tonumber(LDesc.Pants) then
-                    Wear:InvokeServer(tonumber(LDesc.Pants))
+                    Remotes.Wear:InvokeServer(tonumber(LDesc.Pants))
                     task.wait(0.2)
                 end
                 if tonumber(LDesc.Face) then
-                    Wear:InvokeServer(tonumber(LDesc.Face))
+                    Remotes.Wear:InvokeServer(tonumber(LDesc.Face))
                     task.wait(0.2)
                 end
                 local PDesc = THumanoid:GetAppliedDescription()
@@ -627,24 +634,23 @@ Tab3:AddButton({
                         [6] = PDesc.Head
                     }
                 }
-                ChangeCharacterBody:InvokeServer(unpack(argsBody))
+                Remotes.ChangeCharacterBody:InvokeServer(unpack(argsBody))
                 task.wait(0.5)
-
                 if tonumber(PDesc.Shirt) then
-                    Wear:InvokeServer(tonumber(PDesc.Shirt))
+                    Remotes.Wear:InvokeServer(tonumber(PDesc.Shirt))
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.Pants) then
-                    Wear:InvokeServer(tonumber(PDesc.Pants))
+                    Remotes.Wear:InvokeServer(tonumber(PDesc.Pants))
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.Face) then
-                    Wear:InvokeServer(tonumber(PDesc.Face))
+                    Remotes.Wear:InvokeServer(tonumber(PDesc.Face))
                     task.wait(0.3)
                 end
                 for _, v in ipairs(PDesc:GetAccessories(true)) do
                     if v.AssetId and tonumber(v.AssetId) then
-                        Wear:InvokeServer(tonumber(v.AssetId))
+                        Remotes.Wear:InvokeServer(tonumber(v.AssetId))
                         task.wait(0.3)
                     end
                 end
@@ -654,28 +660,47 @@ Tab3:AddButton({
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.IdleAnimation) then
-                    Wear:InvokeServer(tonumber(PDesc.IdleAnimation))
+                    Remotes.Wear:InvokeServer(tonumber(PDesc.IdleAnimation))
                     task.wait(0.3)
                 end
-				if tonumber(PDesc.WalkAnimation) then
-                    Wear:InvokeServer(tonumber(PDesc.WalkAnimation))
+                if tonumber(PDesc.WalkAnimation) then
+                    Remotes.Wear:InvokeServer(tonumber(PDesc.WalkAnimation))
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.RunAnimation) then
-                    Wear:InvokeServer(tonumber(PDesc.RunAnimation))
+                    Remotes.Wear:InvokeServer(tonumber(PDesc.RunAnimation))
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.JumpAnimation) then
-                    Wear:InvokeServer(tonumber(PDesc.JumpAnimation))
+                    Remotes.Wear:InvokeServer(tonumber(PDesc.JumpAnimation))
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.FallAnimation) then
-                    Wear:InvokeServer(tonumber(PDesc.FallAnimation))
+                    Remotes.Wear:InvokeServer(tonumber(PDesc.FallAnimation))
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.SwimAnimation) then
-                    Wear:InvokeServer(tonumber(PDesc.SwimAnimation))
+                    Remotes.Wear:InvokeServer(tonumber(PDesc.SwimAnimation))
                     task.wait(0.3)
+                end
+                local Bag = TPlayer:FindFirstChild("PlayersBag")
+                if Bag then
+                    if Bag:FindFirstChild("RPName") and Bag.RPName.Value ~= "" then
+                        Remotes.RPNameText:FireServer("RolePlayName", Bag.RPName.Value)
+                        task.wait(0.3)
+                    end
+                    if Bag:FindFirstChild("RPBio") and Bag.RPBio.Value ~= "" then
+                        Remotes.RPNameText:FireServer("RolePlayBio", Bag.RPBio.Value)
+                        task.wait(0.3)
+                    end
+                    if Bag:FindFirstChild("RPNameColor") then
+                        Remotes.RPNameColor:FireServer("PickingRPNameColor", Bag.RPNameColor.Value)
+                        task.wait(0.3)
+                    end
+                    if Bag:FindFirstChild("RPBioColor") then
+                        Remotes.RPNameColor:FireServer("PickingRPBioColor", Bag.RPBioColor.Value)
+                        task.wait(0.3)
+                    end
                 end
             end
         end
@@ -705,7 +730,7 @@ Tab3:AddDropdown({
         if clothes[selected] then
             pcall(function()
                 local args = {clothes[selected]}
-                Wear:InvokeServer(unpack(args))
+                ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(unpack(args))
                 StarterGui:SetCore("SendNotification", {
                     Title = "Avatar",
                     Text = "Avatar " .. selected .. " equiped!",
@@ -720,160 +745,156 @@ Tab3:AddSection({"》 Avatar editor"})
 Tab3:AddParagraph({"Adjust the proportions of your avatar for a better result"})
 
 Tab3:AddButton({
-    Name = "Invisible",
-    Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		[1] = 15312911732, -- Torso
-		[2] = 14532583477, -- Right Arm
-		[3] = 14532583469, -- Left Arm
-		[4] = 14532583517, -- Right Leg
-		[5] = 14532583483, -- Left Leg
-		[6] = 134082579, -- Head
-	})
-	end
-})
-
-Tab3:AddButton({
-    Name = "(Mini-Plushie) and Headless",
-    Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		[1] = 112722466960512,
-		[2] = 76079756909323,
-		[3] = 82598238110471,
-		[4] = 107431241133468,
-		[5] = 103380121023771,
-		[6] = 134082579,
-	})
-	end
-})
-
-Tab3:AddButton({
-    Name = "(S15-Thin-Hourglass) and Headless",
-    Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		[1] = 129543160215232,
-		[2] = 133466157082146,
-		[3] = 73001997018020,
-		[4] = 128776848621889,
-		[5] = 81547744637409,
-		[6] = 134082579,
-	})
-	end
-})
-
-Tab3:AddButton({
-    Name = "(inf15-Thin) and Headless",
-    Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		[1] = 92757812011061,
-		[2] = 99519402284266,
-		[3] = 115905570886697,
-		[4] = 84418052877367,
-		[5] = 124343282827669,
-		[6] = 134082579,
-	})
-	end
-})
-
-Tab3:AddButton({
-    Name = "(Blush-Fashion-Doll) and Headless",
-    Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		[1] = 115745153758680,
-		[2] = 18839824209,
-		[3] = 18839824132,
-		[4] = 127241951574732,
-		[5] = 118303475394830,
-		[6] = 134082579,
-	})
-	end
-})
-
-Tab3:AddButton({
-    Name = "[M] Girl Body and Headless",
-    Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		[1] = 114206707267907,
-		[2] = 18839824209,
-		[3] = 18839824132,
-		[4] = 127241951574732,
-		[5] = 118303475394830,
-		[6] = 134082579,
-	})
-	end
-})
-
-Tab3:AddButton({
-    Name = "[M] Girl Body and Headless/Korblox",
-    Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		[1] = 114206707267907,
-		[2] = 18839824209,
-		[3] = 18839824132,
-		[4] = 139607718,
-		[5] = 118303475394830,
-		[6] = 134082579,
-	})
-	end
-})
-
-Tab3:AddButton({
-    Name = "[M] Boy Body and Headless",
+    Name = "Mini-Plushie + (Headless)",
     Callback = function()
         local args = {
             {
-                2517207746,
-                2517204456,
-                4416788553,
-                4416785861,
-                32336059,
-                15093053680
+                107431241133468, -- Right Leg
+                103380121023771,  -- Left Leg
+                76079756909323,  -- Right Arm
+                82598238110471,  -- Left Arm
+                112722466960512, -- Torso
+                15093053680   -- Head
             }
         }
-        ChangeCharacterBody:InvokeServer(unpack(args))
+        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
     end
 })
-
 Tab3:AddButton({
-    Name = "[M] Girl Body V2",
+    Name = "S15-Thin-Hourglass + (Headless)",
     Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		[1] = 114206707267907,
-		[2] = 18839824209,
-		[3] = 18839824132,
-		[4] = 127968751428204,
-		[5] = 101521138059051,
-		[6] = 14970560459,
-	})
-	end
+        local args = {
+            {
+                128776848621889, -- Right Leg
+                81547744637409,  -- Left Leg
+                133466157082146,  -- Right Arm
+                73001997018020,  -- Left Arm
+                129543160215232, -- Torso
+                15093053680   -- Head
+            }
+        }
+        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+    end
 })
-
 Tab3:AddButton({
-    Name = "(Classic-Female-v2-Torso) and Headless/Korblox",
+    Name = "inf15-Thin + (Headless)",
     Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		[1] = 4637265517,
-		[2] = 0,
-		[3] = 0,
-		[4] = 139607718,
-		[5] = 0,
-		[6] = 134082579,
-	})
-	end
+        local args = {
+            {
+                84418052877367, -- Right Leg
+                124343282827669,  -- Left Leg
+                99519402284266,  -- Right Arm
+                115905570886697,  -- Left Arm
+                92757812011061, -- Torso
+                15093053680   -- Head
+            }
+        }
+        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+    end
 })
-
 Tab3:AddButton({
-    Name = "Headless/Korblox",
+    Name = "Blush-Fashion-Doll + (Headless)",
     Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		[1] = 0,
-		[2] = 0,
-		[3] = 0,
-		[4] = 139607718,
-		[5] = 0,
-		[6] = 134082579,
-	})
-	end
+        local args = {
+            {
+                127241951574732, -- Right Leg
+                118303475394830,  -- Left Leg
+                18839824209,  -- Right Arm
+                18839824132,  -- Left Arm
+                115745153758680, -- Torso
+                15093053680   -- Head
+            }
+        }
+        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+    end
+})
+Tab3:AddButton({
+    Name = "(+18) Girl Body + (Headless)",
+    Callback = function()
+        local args = {
+            {
+                127241951574732, -- Right Leg
+                118303475394830,  -- Left Leg
+                18839824209,  -- Right Arm
+                18839824132,  -- Left Arm
+                114206707267907, -- Torso
+                15093053680   -- Head
+            }
+        }
+        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+    end
+})
+Tab3:AddButton({
+    Name = "(+18) Girl Body + (Headless/Korblox)",
+    Callback = function()
+        local args = {
+            {
+                139607718, -- Right Leg
+                118303475394830,  -- Left Leg
+                18839824209,  -- Right Arm
+                18839824132,  -- Left Arm
+                114206707267907, -- Torso
+                15093053680   -- Head
+            }
+        }
+        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+    end
+})
+Tab3:AddButton({
+    Name = "(+18) Boy Body + (Headless)",
+    Callback = function()
+        local args = {
+            {
+                2517207746, -- Right Leg
+                2517204456,  -- Left Leg
+                4416788553,  -- Right Arm
+                4416785861,  -- Left Arm
+                32336059, -- Torso
+                15093053680   -- Head
+            }
+        }
+        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+    end
+})
+Tab3:AddButton({
+    Name = "(+18) Girl Body",
+    Callback = function()
+        local args = {
+            {
+                127968751428204, -- Right Leg
+                101521138059051,  -- Left Leg
+                18839824209,  -- Right Arm
+                18839824132,  -- Left Arm
+                114206707267907, -- Torso
+                14970560459   -- Head
+            }
+        }
+        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+    end
+})
+Tab3:AddButton({
+    Name = "Classic-Female-v2-Torso + (Headless)",
+    Callback = function()
+        local args = {
+            {
+                4637265517, -- Torso
+                15093053680   -- Head
+            }
+        }
+        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+    end
+})
+Tab3:AddButton({
+    Name = "Headless/Korblox (BETA)",
+    Callback = function()
+        local args = {
+            {
+                139607718, -- Right Leg
+                15093053680   -- Head
+            }
+        }
+        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+    end
 })
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab4: RGB === --
