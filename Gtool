@@ -115,37 +115,6 @@ local function getPlayerFromMouse(mouse)
     return nil
 end
 
--- IDs para equipar
-local itemIDs = {
-    17770317484,
-    17812415139,
-    17812417356,
-    17771175724,
-    17822749561,
-    17772174303,
-    892265784,
-    892267099,
-    892268340
-}
-
--- Função para equipar itens
-local function equipItems(list)
-    for _, id in ipairs(list) do
-        local success, err = pcall(function()
-            ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(id)
-        end)
-        if success then
-            print("✅ Item ID "..id.." equipado com sucesso!")
-        else
-            warn("⚠️ Falha ao equipar Item ID "..id.." | "..tostring(err))
-        end
-        task.wait(0.3)
-    end
-end
-
--- Equipar tudo ao executar o script
-equipItems(itemIDs)
-
 -- Equipar tool
 tool.Equipped:Connect(function(mouse)
     local character = tool.Parent
