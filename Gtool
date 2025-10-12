@@ -1,15 +1,12 @@
--- Serviços
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
 
--- Variáveis
 local buggedPlayers = {}
 local bugConnections = {}
 local Remote = ReplicatedStorage.RE:FindFirstChild("1Gu1n")
 
--- Criação da Tool
 local tool = Instance.new("Tool")
 tool.Name = "Admin Bug"
 tool.RequiresHandle = true
@@ -185,13 +182,7 @@ end)
 
 -- Desequipar tool
 tool.Unequipped:Connect(function()
-    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ResetCharacterAppearance"):FireServer()
     createNotification("​📥  ​Admin Bug saved", "Unequipped tool, Equip all clothes")
-
-    -- Equipar itens automaticamente após 2 segundos
-    task.delay(2, function()
-        equipItems(itemIDs)
-    end)
 end)
 
 -- Limpeza quando player sai
