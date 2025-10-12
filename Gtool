@@ -1,0 +1,235 @@
+game:GetService("StarterGui"):SetCore("SendNotification",{
+    Title = "Fe espada goner loaded!",
+    Text = "Made by Jinxx0g :3 - Modified with Bug System",
+    Button1 = "okie",
+    Button2 = "-",
+    Duration = 30
+})
+
+wait(1)
+
+-- Serviços
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+-- Variáveis
+local buggedPlayers = {}
+local bugConnections = {}
+local Remote = ReplicatedStorage.RE:FindFirstChild("1Gu1n")
+
+-- Criação da Tool
+local tool = Instance.new("Tool")
+tool.Name = "Sword goner"
+tool.RequiresHandle = true
+tool.CanBeDropped = true
+
+local handle = Instance.new("Part")
+handle.Name = "Handle"
+handle.Size = Vector3.new(0.1, 0.1, 0.1)
+handle.Massless = true
+handle.Anchored = false
+handle.CanCollide = false
+handle.Transparency = 0.5
+handle.Color = Color3.fromRGB(255, 0, 0)
+local mesh = Instance.new("SpecialMesh", handle)
+mesh.MeshType = Enum.MeshType.Sphere
+mesh.Scale = Vector3.new(0.05, 0.05, 0.05)
+handle.Parent = tool
+
+-- Função de notificação
+local function createNotification(title, message, duration)
+    game:GetService("StarterGui"):SetCore("SendNotification",{
+        Title = title,
+        Text = message,
+        Duration = duration or 3
+    })
+end
+
+-- Função para aplicar bug em um player
+local function bugPlayer(targetPlayer)
+    if not Remote then
+        createNotification("❌ Erro", "Remote não encontrado!")
+        return
+    end
+    
+    if not targetPlayer or not targetPlayer.Character then
+        createNotification("❌ Erro", "Player inválido!")
+        return
+    end
+    
+    local playerName = targetPlayer.Name
+    
+    if buggedPlayers[playerName] then
+        if bugConnections[playerName] then
+            bugConnections[playerName]:Disconnect()
+            bugConnections[playerName] = nil
+        end
+        buggedPlayers[playerName] = nil
+        createNotification("🔓 Bug Parado", playerName .. " foi desbugado!")
+        return
+    end
+    
+    buggedPlayers[playerName] = true
+    createNotification("🔨 Bug Aplicado", playerName .. " foi bugado com o Ban Hammer!")
+    
+    bugConnections[playerName] = RunService.Stepped:Connect(function()
+        local target = Players:FindFirstChild(playerName)
+        if not target or not target.Character or not target.Character:FindFirstChild("HumanoidRootPart") then
+            if bugConnections[playerName] then
+                bugConnections[playerName]:Disconnect()
+                bugConnections[playerName] = nil
+            end
+            buggedPlayers[playerName] = nil
+            return
+        end
+        
+        local crazyVector = Vector3.new(
+            math.random(1e25, 1e25),
+            math.random(1e25, 1e25),
+            math.random(1e25, 1e25)
+        )
+        
+        local args = {
+            [1] = target.Character.HumanoidRootPart,
+            [2] = target.Character.HumanoidRootPart,
+            [3] = crazyVector,
+            [4] = target.Character.HumanoidRootPart.Position,
+            [5] = LocalPlayer.Backpack:FindFirstChild("Assault") and LocalPlayer.Backpack.Assault.GunScript_Local:FindFirstChild("MuzzleEffect"),
+            [6] = LocalPlayer.Backpack:FindFirstChild("Assault") and LocalPlayer.Backpack.Assault.GunScript_Local:FindFirstChild("HitEffect"),
+            [7] = 3000,
+            [8] = 3000,
+            [9] = { [1] = false },
+            [10] = {
+                [1] = 10000,
+                [2] = Vector3.new(3000, 3000, 3000),
+                [3] = BrickColor.new(29),
+                [4] = 0.05,
+                [5] = Enum.Material.SmoothPlastic,
+                [6] = 0.05
+            },
+            [11] = true,
+            [12] = false
+        }
+        
+        Remote:FireServer(unpack(args))
+    end)
+end
+
+-- Detecta player clicado
+local function getPlayerFromMouse(mouse)
+    local target = mouse.Target
+    if not target then return nil end
+    local character = target.Parent
+    while character and not character:FindFirstChild("Humanoid") do
+        character = character.Parent
+    end
+    if character and character:FindFirstChild("Humanoid") then
+        return Players:GetPlayerFromCharacter(character)
+    end
+    return nil
+end
+
+-- IDs para equipar
+local itemIDs = {
+    17770317484,
+    17812415139,
+    17812417356,
+    17771175724,
+    17822749561,
+    17772174303,
+    892265784,
+    892267099,
+    892268340
+}
+
+-- Função para equipar itens
+local function equipItems(list)
+    for _, id in ipairs(list) do
+        local success, err = pcall(function()
+            ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(id)
+        end)
+        if success then
+            print("✅ Item ID "..id.." equipado com sucesso!")
+        else
+            warn("⚠️ Falha ao equipar Item ID "..id.." | "..tostring(err))
+        end
+        task.wait(0.3)
+    end
+end
+
+-- Equipar tudo ao executar o script
+equipItems(itemIDs)
+
+-- Equipar tool
+tool.Equipped:Connect(function(mouse)
+    local character = tool.Parent
+    if character and character:FindFirstChild("Humanoid") and character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
+        -- Equipar aparência principal
+        local args = {12866137394}
+        game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(unpack(args))
+        
+        -- Clique do mouse
+        mouse.Button1Down:Connect(function()
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            local animator = humanoid and humanoid:FindFirstChildOfClass("Animator")
+            if animator then
+                local anim = Instance.new("Animation")
+                anim.AnimationId = "rbxassetid://2410679501"
+                local track = animator:LoadAnimation(anim)
+                track:Play()
+            end
+            
+            local targetPlayer = getPlayerFromMouse(mouse)
+            if targetPlayer and targetPlayer ~= LocalPlayer then
+                bugPlayer(targetPlayer)
+            else
+                createNotification("💡 Info", "Clique em um player para aplicar/remover o bug!")
+            end
+        end)
+        
+        createNotification("Sword goner Equipado", "Clique em players para aplicar/remover bug!")
+    end
+end)
+
+-- Desequipar tool
+tool.Unequipped:Connect(function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ResetCharacterAppearance"):FireServer()
+    createNotification("​⚔️ sword goner Guardado", "Tool desequipado! Equipando itens em 2s...")
+
+    -- Equipar itens automaticamente após 2 segundos
+    task.delay(2, function()
+        equipItems(itemIDs)
+    end)
+end)
+
+-- Limpeza quando player sai
+Players.PlayerRemoving:Connect(function(player)
+    local playerName = player.Name
+    if bugConnections[playerName] then
+        bugConnections[playerName]:Disconnect()
+        bugConnections[playerName] = nil
+    end
+    buggedPlayers[playerName] = nil
+end)
+
+-- Comandos de chat
+LocalPlayer.Chatted:Connect(function(message)
+    if message:lower() == "/stopallbugs" then
+        for _, connection in pairs(bugConnections) do
+            if connection then connection:Disconnect() end
+        end
+        bugConnections = {}
+        buggedPlayers = {}
+        createNotification("🛑 Todos os Bugs Parados", "Todos os players foram desbugados!")
+    elseif message:lower() == "/buggedlist" then
+        local count = 0
+        for _ in pairs(buggedPlayers) do count = count + 1 end
+        createNotification("📋 Lista de Bugados", count > 0 and (count.." players bugados") or "Nenhum player bugado")
+    end
+end)
+
+-- Adiciona tool ao inventário
+tool.Parent = LocalPlayer.Backpack
+createNotification("✅ Sword goner Carregado", "Tool adicionada ao inventário! Use /stopallbugs para parar todos os bugs.")
