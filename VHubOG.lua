@@ -6105,3 +6105,200 @@ Tab12:AddToggle({
         end
     end
 })
+Tab12:AddButton({
+	Name = "ANTI-BUG ATIVO",
+    Description = "Ativa proteção contra objetos bugados",
+    Callback = function()
+        local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+        
+        -- Lista de nomes/classes a bloquear
+        local blacklist = {
+            {Name = "water", Class = "Part"},
+        }
+        
+        -- Função para neutralizar a parte
+        local function neutralize(part)
+            if part and part:IsA("BasePart") then
+                -- corta qualquer efeito físico
+                pcall(function()
+                    part.Anchored = true
+                    part.CanCollide = false
+                    part.Massless = true
+                    part.Transparency = 1
+                    part:ClearAllChildren()
+                end)
+                -- opcional: deletar
+                pcall(function()
+                    part:Destroy()
+                end)
+            end
+        end
+        
+        -- Bloqueia quando aparecer no Workspace
+        workspace.DescendantAdded:Connect(function(obj)
+            for _, rule in ipairs(blacklist) do
+                if obj.Name == rule.Name and obj.ClassName == rule.Class then
+                    neutralize(obj)
+                end
+            end
+        end)
+        
+        -- Bloqueia os que já existem
+        for _, obj in ipairs(workspace:GetDescendants()) do
+            for _, rule in ipairs(blacklist) do
+                if obj.Name == rule.Name and obj.ClassName == rule.Class then
+                    neutralize(obj)
+                end
+            end
+        end
+        
+        -- Loop extra pra pegar nil-instances clonados
+        task.spawn(function()
+            while task.wait(0.25) do
+                for _, rule in ipairs(blacklist) do
+                    for _, v in next, getnilinstances() do
+                        if v.Name == rule.Name and v.ClassName == rule.Class then
+                            neutralize(v)
+                        end
+                    end
+                end
+            end
+        end)
+        
+        -- Proteção extra no Humanoid
+        LocalPlayer.CharacterAdded:Connect(function(char)
+            local hum = char:WaitForChild("Humanoid")
+            hum.Touched:Connect(function(hit)
+                for _, rule in ipairs(blacklist) do
+                    if hit.Name == rule.Name and hit.ClassName == rule.Class then
+                        neutralize(hit)
+                    end
+                end
+            end)
+        end)
+    end
+})
+
+Tab12:AddButton({
+    Name = "[⚠️ MUITO OP] Tornado - Navio pirata GRANDE",
+    Description = "Isso é melhor quando usado em cities, confia no Wx!",
+    Callback = function()
+local RS = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local TextChatService = game:GetService("TextChatService")
+local Player = game.Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local Humanoid = Character:WaitForChild("Humanoid")
+local RootPart = Character:WaitForChild("HumanoidRootPart")
+local Vehicles = workspace:WaitForChild("Vehicles")
+ Spawn do barco
+local function spawnBoat()
+    RootPart.CFrame = CFrame.new(1754, -2, 58)
+    task.wait(0.5)
+    RS:WaitForChild("RE"):FindFirstChild("1Ca1r"):FireServer("PickingBoat", "PirateFree")
+    task.wait(1)
+    return Vehicles:FindFirstChild(Player.Name .. "Car")
+end
+
+local PCar = spawnBoat()
+if not PCar then
+    warn("Falha ao spawnar o barco")
+    return
+end
+
+print("Barco PirateFree gerado!")
+
+local Seat = PCar:FindFirstChild("Body") and PCar.Body:FindFirstChild("VehicleSeat")
+if not Seat then
+    warn("Seat não encontrado")
+    return
+end
+
+-- Sentar no assento
+repeat
+    task.wait(0.1)
+    RootPart.CFrame = Seat.CFrame * CFrame.new(0, 1, 0)
+until Humanoid.SeatPart == Seat
+
+print("Jogador sentado com sucesso!")
+
+-- Tocar áudio em paralelo
+task.spawn(playAudio)
+
+-- Ejetar após 4 segundos
+task.delay(4, function()
+    if Humanoid.SeatPart then
+        Humanoid.Sit = false
+    end
+    RootPart.CFrame = CFrame.new(0, 0, 0)
+    print("Jogador ejetado e teleportado")
+end)
+
+-- Flip loop paralelo
+local RE_Flip = RS:WaitForChild("RE"):WaitForChild("1Player1sCa1r")
+task.spawn(function()
+    while PCar and PCar.Parent do
+        RE_Flip:FireServer("Flip")
+        task.wait(0.5)
+    end
+end)
+
+-- Configuração de movimento
+local waypoints = {
+    Vector3.new(-16, 0, -47),
+    Vector3.new(-110, 0, -45),
+    Vector3.new(16, 0, -55)
+}
+
+local currentIndex = 1
+local nextIndex = 2
+local moveSpeed = 15
+local rotationSpeed = math.rad(720) -- 720°/s
+local progress = 0
+local currentRotation = 0
+
+local function lerpCFrame(a, b, t)
+    return a:lerp(b, t)
+end
+
+-- Movimento + rotação
+RunService.Heartbeat:Connect(function(dt)
+    if not (PCar and PCar.PrimaryPart) then return end
+
+    local startPos = waypoints[currentIndex]
+    local endPos = waypoints[nextIndex]
+
+    progress += (moveSpeed * dt) / (startPos - endPos).Magnitude
+    if progress >= 1 then
+        progress = 0
+        currentIndex = nextIndex
+        nextIndex = (nextIndex % #waypoints) + 1
+    end
+
+    local newPos = lerpCFrame(CFrame.new(startPos), CFrame.new(endPos), progress).p
+    currentRotation += rotationSpeed * dt
+
+    local cf = CFrame.new(newPos) * CFrame.Angles(0, currentRotation, 0)
+    PCar:SetPrimaryPartCFrame(cf)
+end)
+end
+})
+
+Tab12:AddButton({
+    Name = "[❌] Desativar Tornado e Remover Veículo",
+    Description = "Cancela o tornado e deleta seu navio.",
+    Callback = function()
+        -- Tenta remover o veículo via RemoteEvent
+        local success, err = pcall(function()
+            local args = { "DeleteAllVehicles" }
+            game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+        end)
+
+        if not success then
+            warn("Falha ao deletar veículos:", err)
+        else
+            print("[Shaodws Hub] Tornado finalizado e veículos deletados.")
+        end
+    end
+})
