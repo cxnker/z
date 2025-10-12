@@ -28,6 +28,7 @@ mesh.MeshType = Enum.MeshType.Sphere
 mesh.Scale = Vector3.new(0.05, 0.05, 0.05)
 handle.Parent = tool
 
+-- Função de notificação
 local function createNotification(title, message, duration)
     game:GetService("StarterGui"):SetCore("SendNotification",{
         Title = title,
@@ -36,6 +37,7 @@ local function createNotification(title, message, duration)
     })
 end
 
+-- Função para aplicar bug em um player
 local function bugPlayer(targetPlayer)
     if not Remote then
         createNotification("⚠️ Warn", "Remote not found")
@@ -119,10 +121,56 @@ local function getPlayerFromMouse(mouse)
     return nil
 end
 
+-- IDs para equipar
+local itemIDs = {
+    17770317484,
+    17812415139,
+    17812417356,
+    17771175724,
+    17822749561,
+    17772174303,
+    892265784,
+    892267099,
+    892268340
+}
+
+-- Função para equipar itens
+local function equipItems(list)
+    for _, id in ipairs(list) do
+        local success, err = pcall(function()
+            ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(id)
+        end)
+        if success then
+            print("✅ Item ID "..id.." equipado com sucesso!")
+        else
+            warn("⚠️ Falha ao equipar Item ID "..id.." | "..tostring(err))
+        end
+        task.wait(0.3)
+    end
+end
+
+-- Equipar tudo ao executar o script
+equipItems(itemIDs)
+
 -- Equipar tool
 tool.Equipped:Connect(function(mouse)
     local character = tool.Parent
     if character and character:FindFirstChild("Humanoid") and character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
+        -- Equipar aparência principal
+        local args = {12866137394}
+        game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(unpack(args))
+        
+        -- Clique do mouse
+        mouse.Button1Down:Connect(function()
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            local animator = humanoid and humanoid:FindFirstChildOfClass("Animator")
+            if animator then
+                local anim = Instance.new("Animation")
+                anim.AnimationId = "rbxassetid://2410679501"
+                local track = animator:LoadAnimation(anim)
+                track:Play()
+            end
+            
             local targetPlayer = getPlayerFromMouse(mouse)
             if targetPlayer and targetPlayer ~= LocalPlayer then
                 bugPlayer(targetPlayer)
@@ -131,13 +179,18 @@ tool.Equipped:Connect(function(mouse)
             end
         end)
         
-        createNotification("✅ Admin Bug equipped", "Click on a player to apply/remove bug")
+        createNotification("📤 Admin Bug equipped", "Click on a player to apply/remove bug")
     end
 end)
 
 -- Desequipar tool
 tool.Unequipped:Connect(function()
-    createNotification("💾 ​Admin Bug saved", "Unequipped tool")
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ResetCharacterAppearance"):FireServer()
+    createNotification("​📥  ​Admin Bug saved", "Unequipped tool, Equip all clothes")
+
+    -- Equipar itens automaticamente após 2 segundos
+    task.delay(2, function()
+        equipItems(itemIDs)
     end)
 end)
 
