@@ -90,7 +90,7 @@ PercentText.Text = "0%"
 PercentText.Parent = BarBackground
 
 -- Loading Animation
-local totalTime = 6 -- Seconds
+local totalTime = 7 -- Seconds
 local steps = 100
 local delayPerStep = totalTime / steps
 
@@ -408,459 +408,10 @@ RunService.Stepped:Connect(function()
 	end)
 
 Tab2:AddButton({
-    Name = "Fly GUI Universal",
+    Name = "Fly GUI",
     Callback = function()
-local main = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local up = Instance.new("TextButton")
-local down = Instance.new("TextButton")
-local onof = Instance.new("TextButton")
-local TextLabel = Instance.new("TextLabel")
-local plus = Instance.new("TextButton")
-local speed = Instance.new("TextLabel")
-local mine = Instance.new("TextButton")
-local closebutton = Instance.new("TextButton")
-local mini = Instance.new("TextButton")
-local mini2 = Instance.new("TextButton")
-
-main.Name = "main"
-main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-main.ResetOnSpawn = false
-
-Frame.Parent = main
-Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-Frame.BorderColor3 = Color3.fromRGB(30, 30, 30)
-Frame.Position = UDim2.new(0.1, 0, 0.1, 0)
-Frame.Size = UDim2.new(0, 189, 0, 54)
-
-up.Name = "up"
-up.Parent = Frame
-up.BackgroundColor3 = Color3.fromRGB(74,76,81)
-up.Size = UDim2.new(0, 44, 0, 27)
-up.Font = Enum.Font.SourceSans
-up.Text = "↑"
-up.TextColor3 = Color3.fromRGB(202,178,251)
-up.TextSize = 14
-
-down.Name = "down"
-down.Parent = Frame
-down.BackgroundColor3 = Color3.fromRGB(74,76,81)
-down.Position = UDim2.new(0, 0, 0.52, 0)
-down.Size = UDim2.new(0, 44, 0, 27)
-down.Font = Enum.Font.SourceSans
-down.Text = "↓"
-down.TextColor3 = Color3.fromRGB(202,178,251)
-down.TextSize = 14
-
-onof.Name = "onof"
-onof.Parent = Frame
-onof.BackgroundColor3 = Color3.fromRGB(74,76,81)
-onof.Position = UDim2.new(0.72, 0, 0.52, 0)
-onof.Size = UDim2.new(0, 54, 0, 27)
-onof.Font = Enum.Font.SourceSans
-onof.Text = "FLY"
-onof.TextColor3 = Color3.fromRGB(202,178,251)
-onof.TextSize = 14
-
-TextLabel.Parent = Frame
-TextLabel.BackgroundColor3 = Color3.fromRGB(46,49,54)
-TextLabel.Position = UDim2.new(0.475, 0, 0, 0)
-TextLabel.Size = UDim2.new(0, 100, 0, 27)
-TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "FLY GUI"
-TextLabel.TextColor3 = Color3.fromRGB(202,178,251)
-TextLabel.TextSize = 25
-TextLabel.TextWrapped = true
-
-plus.Name = "plus"
-plus.Parent = Frame
-plus.BackgroundColor3 = Color3.fromRGB(54,57,62)
-plus.Position = UDim2.new(0.236, 0, 0, 0)
-plus.Size = UDim2.new(0, 44, 0, 27)
-plus.Font = Enum.Font.SourceSans
-plus.Text = "+"
-plus.TextColor3 = Color3.fromRGB(202,178,251)
-plus.TextSize = 25
-plus.TextWrapped = true
-
-speed.Name = "speed"
-speed.Parent = Frame
-speed.BackgroundColor3 = Color3.fromRGB(74,76,81)
-speed.Position = UDim2.new(0.48, 0, 0.52, 0)
-speed.Size = UDim2.new(0, 44, 0, 27)
-speed.Font = Enum.Font.SourceSans
-speed.Text = "1"
-speed.TextColor3 = Color3.fromRGB(202,178,251)
-speed.TextScaled = true
-speed.TextSize = 14
-speed.TextWrapped = true
-
-mine.Name = "mine"
-mine.Parent = Frame
-mine.BackgroundColor3 = Color3.fromRGB(54,57,62)
-mine.Position = UDim2.new(0.24, 0, 0.516, 0)
-mine.Size = UDim2.new(0, 44, 0, 27)
-mine.Font = Enum.Font.SourceSans
-mine.Text = "-"
-mine.TextColor3 = Color3.fromRGB(202,178,251)
-mine.TextSize = 25
-mine.TextWrapped = true
-
-closebutton.Name = "Close"
-closebutton.Parent = main.Frame
-closebutton.BackgroundColor3 = Color3.fromRGB(54,57,62)
-closebutton.Font = "SourceSans"
-closebutton.Size = UDim2.new(0, 44, 0, 27)
-closebutton.Text = "x"
-closebutton.TextColor3 = Color3.fromRGB(202,178,251)
-closebutton.TextSize = 25
-closebutton.Position =  UDim2.new(0, 0, -1, 27)
-
-mini.Name = "minimize"
-mini.Parent = main.Frame
-mini.BackgroundColor3 = Color3.fromRGB(46,49,54)
-mini.Font = "SourceSans"
-mini.Size = UDim2.new(0, 44, 0, 27)
-mini.Text = "-"
-mini.TextColor3 = Color3.fromRGB(202,178,251)
-mini.TextSize = 35
-mini.Position = UDim2.new(0, 44, -1, 27)
-
-mini2.Name = "minimize2"
-mini2.Parent = main.Frame
-mini2.BackgroundColor3 = Color3.fromRGB(46,49,54)
-mini2.Font = "SourceSans"
-mini2.Size = UDim2.new(0, 44, 0, 27)
-mini2.Text = "+"
-mini2.TextColor3 = Color3.fromRGB(202,178,251)
-mini2.TextSize = 30
-mini2.Position = UDim2.new(0, 44, -1, 54)
-mini2.Visible = false
-
-speeds = 1
-
-local speaker = game:GetService("Players").LocalPlayer
-
-local chr = game.Players.LocalPlayer.Character
-local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-
-nowe = false
-
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "Notify";
-    Text = "Follow me for more scripts: @Roun95";
-    Icon = game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("Roun95"), Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)})
-    Duration = 10;
-
-Frame.Active = true -- main = gui
-Frame.Draggable = true
-
-onof.MouseButton1Down:connect(function()
-
-	if nowe == true then
-		nowe = false
-
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
-		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
-	else 
-		nowe = true
-
-		for i = 1, speeds do
-			spawn(function()
-
-				local hb = game:GetService("RunService").Heartbeat	
-
-				tpwalking = true
-				local chr = game.Players.LocalPlayer.Character
-				local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-				while tpwalking and hb:Wait() and chr and hum and hum.Parent do
-					if hum.MoveDirection.Magnitude > 0 then
-						chr:TranslateBy(hum.MoveDirection)
-					end
-				end
-
-			end)
-		end
-		game.Players.LocalPlayer.Character.Animate.Disabled = true
-		local Char = game.Players.LocalPlayer.Character
-		local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
-
-		for i,v in next, Hum:GetPlayingAnimationTracks() do
-			v:AdjustSpeed(0)
-		end
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
-		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+        loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
 	end
-
-	if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
-
-		local plr = game.Players.LocalPlayer
-		local torso = plr.Character.Torso
-		local flying = true
-		local deb = true
-		local ctrl = {f = 0, b = 0, l = 0, r = 0}
-		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
-		local maxspeed = 50
-		local speed = 0
-
-
-		local bg = Instance.new("BodyGyro", torso)
-		bg.P = 9e4
-		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
-		bg.cframe = torso.CFrame
-		local bv = Instance.new("BodyVelocity", torso)
-		bv.velocity = Vector3.new(0,0.1,0)
-		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
-		if nowe == true then
-			plr.Character.Humanoid.PlatformStand = true
-		end
-		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
-			game:GetService("RunService").RenderStepped:Wait()
-
-			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
-				speed = speed+.5+(speed/maxspeed)
-				if speed > maxspeed then
-					speed = maxspeed
-				end
-			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
-				speed = speed-1
-				if speed < 0 then
-					speed = 0
-				end
-			end
-			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
-				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
-			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
-				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-			else
-				bv.velocity = Vector3.new(0,0,0)
-			end
-			--	game.Players.LocalPlayer.Character.Animate.Disabled = true
-			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
-		end
-		ctrl = {f = 0, b = 0, l = 0, r = 0}
-		lastctrl = {f = 0, b = 0, l = 0, r = 0}
-		speed = 0
-		bg:Destroy()
-		bv:Destroy()
-		plr.Character.Humanoid.PlatformStand = false
-		game.Players.LocalPlayer.Character.Animate.Disabled = false
-		tpwalking = false
-
-	else
-		local plr = game.Players.LocalPlayer
-		local UpperTorso = plr.Character.UpperTorso
-		local flying = true
-		local deb = true
-		local ctrl = {f = 0, b = 0, l = 0, r = 0}
-		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
-		local maxspeed = 50
-		local speed = 0
-
-
-		local bg = Instance.new("BodyGyro", UpperTorso)
-		bg.P = 9e4
-		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
-		bg.cframe = UpperTorso.CFrame
-		local bv = Instance.new("BodyVelocity", UpperTorso)
-		bv.velocity = Vector3.new(0,0.1,0)
-		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
-		if nowe == true then
-			plr.Character.Humanoid.PlatformStand = true
-		end
-		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
-			wait()
-
-			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
-				speed = speed+.5+(speed/maxspeed)
-				if speed > maxspeed then
-					speed = maxspeed
-				end
-			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
-				speed = speed-1
-				if speed < 0 then
-					speed = 0
-				end
-			end
-			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
-				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
-			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
-				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-			else
-				bv.velocity = Vector3.new(0,0,0)
-			end
-
-			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
-		end
-		ctrl = {f = 0, b = 0, l = 0, r = 0}
-		lastctrl = {f = 0, b = 0, l = 0, r = 0}
-		speed = 0
-		bg:Destroy()
-		bv:Destroy()
-		plr.Character.Humanoid.PlatformStand = false
-		game.Players.LocalPlayer.Character.Animate.Disabled = false
-		tpwalking = false
-	end
-end)
-
-local tis
-
-up.MouseButton1Down:connect(function()
-	tis = up.MouseEnter:connect(function()
-		while tis do
-			wait()
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,1,0)
-		end
-	end)
-end)
-
-up.MouseLeave:connect(function()
-	if tis then
-		tis:Disconnect()
-		tis = nil
-	end
-end)
-
-local dis
-
-down.MouseButton1Down:connect(function()
-	dis = down.MouseEnter:connect(function()
-		while dis do
-			wait()
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-1,0)
-		end
-	end)
-end)
-
-down.MouseLeave:connect(function()
-	if dis then
-		dis:Disconnect()
-		dis = nil
-	end
-end)
-
-game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
-	wait(0.7)
-	game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
-	game.Players.LocalPlayer.Character.Animate.Disabled = false
-
-end)
-
-plus.MouseButton1Down:connect(function()
-	speeds = speeds + 1
-	speed.Text = speeds
-	if nowe == true then
-
-		tpwalking = false
-		for i = 1, speeds do
-			spawn(function()
-
-				local hb = game:GetService("RunService").Heartbeat	
-
-				tpwalking = true
-				local chr = game.Players.LocalPlayer.Character
-				local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-				while tpwalking and hb:Wait() and chr and hum and hum.Parent do
-					if hum.MoveDirection.Magnitude > 0 then
-						chr:TranslateBy(hum.MoveDirection)
-					end
-				end
-
-			end)
-		end
-	end
-end)
-mine.MouseButton1Down:connect(function()
-	if speeds == 1 then
-		speed.Text = 'cannot be less than 1'
-		wait(1)
-		speed.Text = speeds
-	else
-		speeds = speeds - 1
-		speed.Text = speeds
-		if nowe == true then
-			tpwalking = false
-			for i = 1, speeds do
-				spawn(function()
-
-					local hb = game:GetService("RunService").Heartbeat	
-
-					tpwalking = true
-					local chr = game.Players.LocalPlayer.Character
-					local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-					while tpwalking and hb:Wait() and chr and hum and hum.Parent do
-						if hum.MoveDirection.Magnitude > 0 then
-							chr:TranslateBy(hum.MoveDirection)
-						end
-					end
-
-				end)
-			end
-		end
-	end
-end)
-
-closebutton.MouseButton1Click:Connect(function()
-	main:Destroy()
-end)
-
-mini.MouseButton1Click:Connect(function()
-	up.Visible = false
-	down.Visible = false
-	onof.Visible = false
-	plus.Visible = false
-	speed.Visible = false
-	mine.Visible = false
-	mini.Visible = false
-	mini2.Visible = true
-	main.Frame.BackgroundTransparency = 1
-	closebutton.Position =  UDim2.new(0, 0, -1, 54)
-end)
-
-mini2.MouseButton1Click:Connect(function()
-	up.Visible = true
-	down.Visible = true
-	onof.Visible = true
-	plus.Visible = true
-	speed.Visible = true
-	mine.Visible = true
-	mini.Visible = true
-	mini2.Visible = false
-	main.Frame.BackgroundTransparency = 0 
-	closebutton.Position =  UDim2.new(0, 0, -1, 27)
-end)
-    end
 })
 
 Tab2:AddSection({"》 ESP"})
@@ -873,33 +424,32 @@ Tab2:AddDropdown({
     Name = "Select color",
     Default = "RGB",
     Options = {
-        "RGB", "Blanco", "Negro", "Rojo",
-        "Verde", "Azul", "Amarillo", "Rosado", "Morado"
+        "RGB", "Black", "White", "Red",
+        "Green", "Blue", "Yellow", "Pink", "Purple"
     },
     Callback = function(value)
         selectedColor = value
     end
 })
-
-local function getESPColor()
+local function espColor()
     if selectedColor == "RGB" then
         local h = (tick() % 5) / 5
         return Color3.fromHSV(h, 1, 1)
-    elseif selectedColor == "Negro" then
+    elseif selectedColor == "Black" then
         return Color3.fromRGB(0, 0, 0)
-    elseif selectedColor == "Blanco" then
+    elseif selectedColor == "White" then
         return Color3.fromRGB(255, 255, 255)
-    elseif selectedColor == "Rojo" then
+    elseif selectedColor == "Red" then
         return Color3.fromRGB(255, 0, 0)
-    elseif selectedColor == "Verde" then
+    elseif selectedColor == "Green" then
         return Color3.fromRGB(0, 255, 0)
-    elseif selectedColor == "Azul" then
+    elseif selectedColor == "Blue" then
         return Color3.fromRGB(0, 170, 255)
-    elseif selectedColor == "Amarillo" then
+    elseif selectedColor == "Yellow" then
         return Color3.fromRGB(255, 255, 0)
-    elseif selectedColor == "Rosado" then
+    elseif selectedColor == "Pink" then
         return Color3.fromRGB(255, 105, 180)
-    elseif selectedColor == "Morado" then
+    elseif selectedColor == "Purple" then
         return Color3.fromRGB(128, 0, 128)
     end
     return Color3.new(1, 1, 1)
@@ -909,71 +459,66 @@ local function updateESP(player)
     if player == LocalPlayer then return end
     if not espEnabled then return end
 
-	local character = player.Character
-    if character then
-        local head = character:FindFirstChild("Head")
+    if Character then
+        local head = Character:FindFirstChild("Head")
         if head then
-            if billboardGuis[player] then
-                billboardGuis[player]:Destroy()
+            if espGuis[player] then
+                espGuis[player]:Destroy()
             end
 
-            local billboard = Instance.new("BillboardGui")
-            billboard.Parent = head
-            billboard.Adornee = head
-            billboard.Size = UDim2.new(0,200,0,50)
-            billboard.StudsOffset = Vector3.new(0,3,0)
-            billboard.AlwaysOnTop = true
+            local espGui = Instance.new("BillboardGui")
+            espGui.Parent = head
+            espGui.Adornee = head
+            espGui.Size = UDim2.new(0,200,0,50)
+            espGui.StudsOffset = Vector3.new(0,3,0)
+            espGui.AlwaysOnTop = true
 
-            local textLabel = Instance.new("TextLabel")
-            textLabel.Parent = billboard
-            textLabel.Size = UDim2.new(1,0,1,0)
-            textLabel.BackgroundTransparency = 1
-            textLabel.TextStrokeTransparency = 0.5
-            textLabel.Font = Enum.Font.GothamBold
-            textLabel.TextSize = 14
-            textLabel.Text = player.Name .. " | " .. player.AccountAge .. " dias"
-            textLabel.TextColor3 = getESPColor()
-
-            billboardGuis[player] = billboard
+            local espText = Instance.new("TextLabel")
+            espText.Parent = espGui
+            espText.Size = UDim2.new(1,0,1,0)
+            espText.BackgroundTransparency = 1
+            espText.TextStrokeTransparency = 0.5
+            espText.Font = Enum.Font.SourceSansBold
+            espText.TextSize = 14
+            espText.Text = player.Name .. " | " .. player.AccountAge .. " days"
+            espText.TextColor3 = espColor()
+            espGuis[player] = espGui
         end
     end
 end
 
 local function removeESP(player)
-    if billboardGuis[player] then
-        billboardGuis[player]:Destroy()
-        billboardGuis[player] = nil
+    if espGuis[player] then
+        espGuis[player]:Destroy()
+        espGuis[player] = nil
     end
 end
 
-local Toggle1 = Tab2:AddToggle({
+local espToggle = Tab2:AddToggle({
     Name = "Enable ESP",
     Default = false
 })
 
-Toggle1:Callback(function(value)
+espToggle:Callback(function(value)
     espEnabled = value
-
     if espEnabled then
         for _, player in pairs(Players:GetPlayers()) do
             updateESP(player)
         end
-
         local updateConnection = RunService.Heartbeat:Connect(function()
             for _, player in pairs(Players:GetPlayers()) do
                 updateESP(player)
             end
             if selectedColor == "RGB" then
                 for _, player in pairs(Players:GetPlayers()) do
-                    local gui = billboardGuis[player]
+                    local gui = espGuis[player]
                     if gui and gui:FindFirstChild("TextLabel") then
-                        gui.TextLabel.TextColor3 = getESPColor()
+                        gui.TextLabel.TextColor3 = espColor()
                     end
                 end
             end
         end)
         table.insert(connections, updateConnection)
-
         local playerAdded = Players.PlayerAdded:Connect(function(player)
             updateESP(player)
             local charConn = player.CharacterAdded:Connect(function()
@@ -982,7 +527,6 @@ Toggle1:Callback(function(value)
             table.insert(connections, charConn)
         end)
         table.insert(connections, playerAdded)
-
         local playerRemoving = Players.PlayerRemoving:Connect(function(player)
             removeESP(player)
         end)
@@ -995,7 +539,7 @@ Toggle1:Callback(function(value)
             conn:Disconnect()
         end
         connections = {}
-        billboardGuis = {}
+        espGuis = {}
     end
 end)
 ----------------------------------------------------------------------------------------------------
@@ -1003,11 +547,12 @@ end)
 ----------------------------------------------------------------------------------------------------
 Tab3:AddSection({"》 Copy Avatar"})
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
+local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
 
 local PlayerValue
 local Target = nil
 
-local function GetPlayerNamess()
+local function GetPlayerNames()
     local playerNames = {}
     for _, player in ipairs(Players:GetPlayers()) do
         if player.Name ~= LocalPlayer.Name then
@@ -1017,59 +562,58 @@ local function GetPlayerNamess()
     return playerNames
 end
 
-local Dropdown = Tab3:AddDropdown({
-    Name = "Select player",
-    Options = GetPlayerNamess(),
+local updateList = Tab3:AddDropdown({
+    Name = "Update list",
+    Options = GetPlayerNames(),
     Default = "",
-    Flag = "player list",
-    Callback = function(playernamee)
-        PlayerValue = playernamee
-        Target = playernamee
+    Callback = function(playername)
+        PlayerValue = playername
+        Target = playername
     end
 })
 
-local function UpdatePlayerss()
-    Dropdown:Set(GetPlayerNamess())
+local function updatePlayers()
+    updateList:Set(GetPlayerNames())
 end
-UpdatePlayerss()
+updatePlayers()
 
 Tab3:AddButton({"Update list", function()
-    UpdatePlayerss()
+    updatePlayers()
 end})
 
-Players.PlayerAdded:Connect(UpdatePlayerss)
-Players.PlayerRemoving:Connect(UpdatePlayerss)
+Players.PlayerAdded:Connect(updatePlayers)
+Players.PlayerRemoving:Connect(updatePlayers)
 
 Tab3:AddButton({
     Name = "Copy avatar",
     Callback = function()
         if not Target then return end
 
-        local LP = Players.LocalPlayer
-        local LChar = LP.Character
+        local LChar = LocalPlayer.Character
         local TPlayer = Players:FindFirstChild(Target)
 
         if TPlayer and TPlayer.Character then
             local LHumanoid = LChar and LChar:FindFirstChildOfClass("Humanoid")
             local THumanoid = TPlayer.Character:FindFirstChildOfClass("Humanoid")
             if LHumanoid and THumanoid then
+
                 local LDesc = LHumanoid:GetAppliedDescription()
                 for _, acc in ipairs(LDesc:GetAccessories(true)) do
                     if acc.AssetId and tonumber(acc.AssetId) then
-                        Remotes.Wear:InvokeServer(tonumber(acc.AssetId))
+                        Wear:InvokeServer(tonumber(acc.AssetId))
                         task.wait(0.2)
                     end
                 end
                 if tonumber(LDesc.Shirt) then
-                    Remotes.Wear:InvokeServer(tonumber(LDesc.Shirt))
+                    Wear:InvokeServer(tonumber(LDesc.Shirt))
                     task.wait(0.2)
                 end
                 if tonumber(LDesc.Pants) then
-                    Remotes.Wear:InvokeServer(tonumber(LDesc.Pants))
+                    Wear:InvokeServer(tonumber(LDesc.Pants))
                     task.wait(0.2)
                 end
                 if tonumber(LDesc.Face) then
-                    Remotes.Wear:InvokeServer(tonumber(LDesc.Face))
+                    Wear:InvokeServer(tonumber(LDesc.Face))
                     task.wait(0.2)
                 end
                 local PDesc = THumanoid:GetAppliedDescription()
@@ -1083,23 +627,24 @@ Tab3:AddButton({
                         [6] = PDesc.Head
                     }
                 }
-                Remotes.ChangeCharacterBody:InvokeServer(unpack(argsBody))
+                ChangeCharacterBody:InvokeServer(unpack(argsBody))
                 task.wait(0.5)
+
                 if tonumber(PDesc.Shirt) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.Shirt))
+                    Wear:InvokeServer(tonumber(PDesc.Shirt))
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.Pants) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.Pants))
+                    Wear:InvokeServer(tonumber(PDesc.Pants))
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.Face) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.Face))
+                    Wear:InvokeServer(tonumber(PDesc.Face))
                     task.wait(0.3)
                 end
                 for _, v in ipairs(PDesc:GetAccessories(true)) do
                     if v.AssetId and tonumber(v.AssetId) then
-                        Remotes.Wear:InvokeServer(tonumber(v.AssetId))
+                        Wear:InvokeServer(tonumber(v.AssetId))
                         task.wait(0.3)
                     end
                 end
@@ -1109,47 +654,28 @@ Tab3:AddButton({
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.IdleAnimation) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.IdleAnimation))
+                    Wear:InvokeServer(tonumber(PDesc.IdleAnimation))
                     task.wait(0.3)
                 end
-                if tonumber(PDesc.WalkAnimation) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.WalkAnimation))
+				if tonumber(PDesc.WalkAnimation) then
+                    Wear:InvokeServer(tonumber(PDesc.WalkAnimation))
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.RunAnimation) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.RunAnimation))
+                    Wear:InvokeServer(tonumber(PDesc.RunAnimation))
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.JumpAnimation) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.JumpAnimation))
+                    Wear:InvokeServer(tonumber(PDesc.JumpAnimation))
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.FallAnimation) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.FallAnimation))
+                    Wear:InvokeServer(tonumber(PDesc.FallAnimation))
                     task.wait(0.3)
                 end
                 if tonumber(PDesc.SwimAnimation) then
-                    Remotes.Wear:InvokeServer(tonumber(PDesc.SwimAnimation))
+                    Wear:InvokeServer(tonumber(PDesc.SwimAnimation))
                     task.wait(0.3)
-                end
-                local Bag = TPlayer:FindFirstChild("PlayersBag")
-                if Bag then
-                    if Bag:FindFirstChild("RPName") and Bag.RPName.Value ~= "" then
-                        Remotes.RPNameText:FireServer("RolePlayName", Bag.RPName.Value)
-                        task.wait(0.3)
-                    end
-                    if Bag:FindFirstChild("RPBio") and Bag.RPBio.Value ~= "" then
-                        Remotes.RPNameText:FireServer("RolePlayBio", Bag.RPBio.Value)
-                        task.wait(0.3)
-                    end
-                    if Bag:FindFirstChild("RPNameColor") then
-                        Remotes.RPNameColor:FireServer("PickingRPNameColor", Bag.RPNameColor.Value)
-                        task.wait(0.3)
-                    end
-                    if Bag:FindFirstChild("RPBioColor") then
-                        Remotes.RPNameColor:FireServer("PickingRPBioColor", Bag.RPBioColor.Value)
-                        task.wait(0.3)
-                    end
                 end
             end
         end
@@ -1179,7 +705,7 @@ Tab3:AddDropdown({
         if clothes[selected] then
             pcall(function()
                 local args = {clothes[selected]}
-                ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(unpack(args))
+                Wear:InvokeServer(unpack(args))
                 StarterGui:SetCore("SendNotification", {
                     Title = "Avatar",
                     Text = "Avatar " .. selected .. " equiped!",
@@ -1194,156 +720,160 @@ Tab3:AddSection({"》 Avatar editor"})
 Tab3:AddParagraph({"Adjust the proportions of your avatar for a better result"})
 
 Tab3:AddButton({
-    Name = "Mini-Plushie + (Headless)",
+    Name = "Invisible",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 15312911732, -- Torso
+		[2] = 14532583477, -- Right Arm
+		[3] = 14532583469, -- Left Arm
+		[4] = 14532583517, -- Right Leg
+		[5] = 14532583483, -- Left Leg
+		[6] = 134082579, -- Head
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "(Mini-Plushie) and Headless",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 112722466960512,
+		[2] = 76079756909323,
+		[3] = 82598238110471,
+		[4] = 107431241133468,
+		[5] = 103380121023771,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "(S15-Thin-Hourglass) and Headless",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 129543160215232,
+		[2] = 133466157082146,
+		[3] = 73001997018020,
+		[4] = 128776848621889,
+		[5] = 81547744637409,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "(inf15-Thin) and Headless",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 92757812011061,
+		[2] = 99519402284266,
+		[3] = 115905570886697,
+		[4] = 84418052877367,
+		[5] = 124343282827669,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "(Blush-Fashion-Doll) and Headless",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 115745153758680,
+		[2] = 18839824209,
+		[3] = 18839824132,
+		[4] = 127241951574732,
+		[5] = 118303475394830,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "[M] Girl Body and Headless",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 114206707267907,
+		[2] = 18839824209,
+		[3] = 18839824132,
+		[4] = 127241951574732,
+		[5] = 118303475394830,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "[M] Girl Body and Headless/Korblox",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 114206707267907,
+		[2] = 18839824209,
+		[3] = 18839824132,
+		[4] = 139607718,
+		[5] = 118303475394830,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "[M] Boy Body and Headless",
     Callback = function()
         local args = {
             {
-                107431241133468, -- Right Leg
-                103380121023771,  -- Left Leg
-                76079756909323,  -- Right Arm
-                82598238110471,  -- Left Arm
-                112722466960512, -- Torso
-                15093053680   -- Head
+                2517207746,
+                2517204456,
+                4416788553,
+                4416785861,
+                32336059,
+                15093053680
             }
         }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
+
 Tab3:AddButton({
-    Name = "S15-Thin-Hourglass + (Headless)",
+    Name = "[M] Girl Body V2",
     Callback = function()
-        local args = {
-            {
-                128776848621889, -- Right Leg
-                81547744637409,  -- Left Leg
-                133466157082146,  -- Right Arm
-                73001997018020,  -- Left Arm
-                129543160215232, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 114206707267907,
+		[2] = 18839824209,
+		[3] = 18839824132,
+		[4] = 127968751428204,
+		[5] = 101521138059051,
+		[6] = 14970560459,
+	})
+	end
 })
+
 Tab3:AddButton({
-    Name = "inf15-Thin + (Headless)",
+    Name = "(Classic-Female-v2-Torso) and Headless/Korblox",
     Callback = function()
-        local args = {
-            {
-                84418052877367, -- Right Leg
-                124343282827669,  -- Left Leg
-                99519402284266,  -- Right Arm
-                115905570886697,  -- Left Arm
-                92757812011061, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 4637265517,
+		[2] = 0,
+		[3] = 0,
+		[4] = 139607718,
+		[5] = 0,
+		[6] = 134082579,
+	})
+	end
 })
+
 Tab3:AddButton({
-    Name = "Blush-Fashion-Doll + (Headless)",
+    Name = "Headless/Korblox",
     Callback = function()
-        local args = {
-            {
-                127241951574732, -- Right Leg
-                118303475394830,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                115745153758680, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
-})
-Tab3:AddButton({
-    Name = "(+18) Girl Body + (Headless)",
-    Callback = function()
-        local args = {
-            {
-                127241951574732, -- Right Leg
-                118303475394830,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                114206707267907, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
-})
-Tab3:AddButton({
-    Name = "(+18) Girl Body + (Headless/Korblox)",
-    Callback = function()
-        local args = {
-            {
-                139607718, -- Right Leg
-                118303475394830,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                114206707267907, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
-})
-Tab3:AddButton({
-    Name = "(+18) Boy Body + (Headless)",
-    Callback = function()
-        local args = {
-            {
-                2517207746, -- Right Leg
-                2517204456,  -- Left Leg
-                4416788553,  -- Right Arm
-                4416785861,  -- Left Arm
-                32336059, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
-})
-Tab3:AddButton({
-    Name = "(+18) Girl Body",
-    Callback = function()
-        local args = {
-            {
-                127968751428204, -- Right Leg
-                101521138059051,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                114206707267907, -- Torso
-                14970560459   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
-})
-Tab3:AddButton({
-    Name = "Classic-Female-v2-Torso + (Headless)",
-    Callback = function()
-        local args = {
-            {
-                4637265517, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
-})
-Tab3:AddButton({
-    Name = "Headless/Korblox (BETA)",
-    Callback = function()
-        local args = {
-            {
-                139607718, -- Right Leg
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = 0,
+		[3] = 0,
+		[4] = 139607718,
+		[5] = 0,
+		[6] = 134082579,
+	})
+	end
 })
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab4: RGB === --
