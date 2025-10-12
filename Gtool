@@ -25,7 +25,6 @@ mesh.MeshType = Enum.MeshType.Sphere
 mesh.Scale = Vector3.new(0.05, 0.05, 0.05)
 handle.Parent = tool
 
--- Função de notificação
 local function createNotification(title, message, duration)
     game:GetService("StarterGui"):SetCore("SendNotification",{
         Title = title,
@@ -34,7 +33,6 @@ local function createNotification(title, message, duration)
     })
 end
 
--- Função para aplicar bug em um player
 local function bugPlayer(targetPlayer)
     if not Remote then
         createNotification("⚠️ Warn", "Remote not found")
@@ -77,7 +75,7 @@ local function bugPlayer(targetPlayer)
             math.random(1e25, 1e25),
             math.random(1e25, 1e25)
         )
-        
+
         local args = {
             [1] = target.Character.HumanoidRootPart,
             [2] = target.Character.HumanoidRootPart,
@@ -99,12 +97,11 @@ local function bugPlayer(targetPlayer)
             [11] = true,
             [12] = false
         }
-        
+
         Remote:FireServer(unpack(args))
     end)
 end
 
--- Detecta player clicado
 local function getPlayerFromMouse(mouse)
     local target = mouse.Target
     if not target then return nil end
