@@ -915,6 +915,24 @@ Tab3:AddButton({
 	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(115715495289805)
 	end
 })
+
+Tab3:AddButton({
+    Name = "(adidas-Community-Animation-Pack) Test",
+    Callback = function()
+    local args = {
+        {
+            123695349157584,
+			93993406355955,
+            106810508343012,
+            106537993816942,
+            126354114956642,
+            124765145869332,
+            115715495289805
+        }
+    }
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(unpack(args))
+	end
+})
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab4: RGB === --
 ----------------------------------------------------------------------------------------------------
