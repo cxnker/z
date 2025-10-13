@@ -119,8 +119,7 @@ tool.Equipped:Connect(function(mouse)
     local character = tool.Parent
     if character and character:FindFirstChild("Humanoid") and character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
 
-        local args = {12928981934}
-        game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
 
         mouse.Button1Down:Connect(function()
             local humanoid = character:FindFirstChildOfClass("Humanoid")
@@ -169,7 +168,7 @@ LocalPlayer.Chatted:Connect(function(message)
     elseif message:lower() == "/buggedlist" then
         local count = 0
         for _ in pairs(buggedPlayers) do count = count + 1 end
-        createNotification("📋 Player Bug list", count > 0 and (count.." player bugs") or "no player bugs")
+        createNotification("📋 Player Bug list", count > 0 and (count.." players bugged") or "No bugged players were found")
     end
 end)
 
