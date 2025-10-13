@@ -136,7 +136,7 @@ local Tab12 = Window:MakeTab({"Protection", "rbxassetid://10734951847"})
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab 1: Info === --
 ----------------------------------------------------------------------------------------------------
-Tab1:AddSection({"》 Version 2.1"})
+Tab1:AddSection({"》 Version 2.1 Ultimate"})
 Tab1:AddDiscordInvite({
     Name = "Nova Studio | Victory Support",
     Description = "Official group of the Victory & Nova development team",
@@ -144,7 +144,7 @@ Tab1:AddDiscordInvite({
     Invite = "https://discord.gg/Q9R5FDapth",
 })
 Tab1:AddParagraph({"Executor", identifyexecutor()})
-Tab1:AddParagraph({"Credits", "• Roun95\n• Developer and designer\n\n• Contribution\n• Deluxe_Studios (Nova Hub)"})
+Tab1:AddParagraph({"Credits", "• Roun95\n• Developer and designer\n\n• Contribution\n• Deluxe_Studios (Nova Hub)\n\n• Créditos à equipe do Lyra Hub ;)"})
 
 Tab1:AddButton({
     Name = "Rejoin server",
@@ -169,7 +169,7 @@ end
 })
 
 Tab1:AddSection({"》 Information"})
-Tab1:AddParagraph({"News", "• New troll options\n• Extended options and improvements\n• New protection features\n• Vfly, Telekinesis, Admin Tool and more"})
+Tab1:AddParagraph({"News", "• New troll options\n• Extended options and improvements\n• New protection features\n• Vfly, Telekinesis, (Exclusive) Admin Tools and more\n• Proyect created with great effort and dedication for you, thanks you for the support ♡, Owner Roun95;)"})
 ----------------------------------------------------------------------------------------------------
                                 -- === Tab 2: Player === --
 ----------------------------------------------------------------------------------------------------
@@ -4070,7 +4070,7 @@ end)
 	end
 })
 
-Tab8:AddSection({"》 [OP] Premium Commands"})
+Tab8:AddSection({"》 [OP] Victory Exclusive Commands"})
 
 Tab8:AddButton({
     Name = "[Click] Admin Fling (Tool)",
