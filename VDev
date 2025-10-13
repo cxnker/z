@@ -144,7 +144,7 @@ Tab1:AddDiscordInvite({
     Invite = "https://discord.gg/Q9R5FDapth",
 })
 Tab1:AddParagraph({"Executor", identifyexecutor()})
-Tab1:AddParagraph({"Credits", "• Roun95\n• Developer and designer\n\n• Contribution\n• Deluxe_Studios (Nova Hub)\n\n• Créditos à equipe do Lyra Hub ;)"})
+Tab1:AddParagraph({"Credits", "• Developer and designer\n• Roun95\n\n• Contribution\n• Deluxe_Studios (Nova Hub)\n\n• Créditos à equipe do Lyra Hub ;)"})
 
 Tab1:AddButton({
     Name = "Rejoin server",
@@ -743,158 +743,163 @@ Tab3:AddDropdown({
 
 Tab3:AddSection({"》 Avatar editor"})
 Tab3:AddParagraph({"Adjust the proportions of your avatar for a better result"})
+local ChangeCharacterBody = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody")
 
 Tab3:AddButton({
-    Name = "Mini-Plushie + (Headless)",
+    Name = "(FE) Invisible Character",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		15312911732, -- Torso
+		14532583477, -- Right Arm
+		14532583469, -- Left Arm
+		14532583517, -- Right Leg
+		14532583483, -- Left Leg
+		134082579, -- Head
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "(Mini-Plushie) and Headless",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 112722466960512,
+		[2] = 76079756909323,
+		[3] = 82598238110471,
+		[4] = 107431241133468,
+		[5] = 103380121023771,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "(S15-Thin-Hourglass) and Headless",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 129543160215232,
+		[2] = 133466157082146,
+		[3] = 73001997018020,
+		[4] = 128776848621889,
+		[5] = 81547744637409,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "(inf15-Thin) and Headless",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 92757812011061,
+		[2] = 99519402284266,
+		[3] = 115905570886697,
+		[4] = 84418052877367,
+		[5] = 124343282827669,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "(Blush-Fashion-Doll) and Headless",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 115745153758680,
+		[2] = 18839824209,
+		[3] = 18839824132,
+		[4] = 127241951574732,
+		[5] = 118303475394830,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "[M] Girl Body and Headless",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 114206707267907,
+		[2] = 18839824209,
+		[3] = 18839824132,
+		[4] = 127241951574732,
+		[5] = 118303475394830,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "[M] Girl Body and Headless/Korblox",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 114206707267907,
+		[2] = 18839824209,
+		[3] = 18839824132,
+		[4] = 139607718,
+		[5] = 118303475394830,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "[M] Boy Body and Headless",
     Callback = function()
         local args = {
             {
-                107431241133468, -- Right Leg
-                103380121023771,  -- Left Leg
-                76079756909323,  -- Right Arm
-                82598238110471,  -- Left Arm
-                112722466960512, -- Torso
-                15093053680   -- Head
+                2517207746,
+                2517204456,
+                4416788553,
+                4416785861,
+                32336059,
+                15093053680
             }
         }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
+        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
+
 Tab3:AddButton({
-    Name = "S15-Thin-Hourglass + (Headless)",
+    Name = "[M] Girl Body V2",
     Callback = function()
-        local args = {
-            {
-                128776848621889, -- Right Leg
-                81547744637409,  -- Left Leg
-                133466157082146,  -- Right Arm
-                73001997018020,  -- Left Arm
-                129543160215232, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 114206707267907,
+		[2] = 18839824209,
+		[3] = 18839824132,
+		[4] = 127968751428204,
+		[5] = 101521138059051,
+		[6] = 14970560459,
+	})
+	end
 })
+
 Tab3:AddButton({
-    Name = "inf15-Thin + (Headless)",
+    Name = "(Classic-Female-v2-Torso) and Headless/Korblox",
     Callback = function()
-        local args = {
-            {
-                84418052877367, -- Right Leg
-                124343282827669,  -- Left Leg
-                99519402284266,  -- Right Arm
-                115905570886697,  -- Left Arm
-                92757812011061, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 4637265517,
+		[2] = 0,
+		[3] = 0,
+		[4] = 139607718,
+		[5] = 0,
+		[6] = 134082579,
+	})
+	end
 })
+
 Tab3:AddButton({
-    Name = "Blush-Fashion-Doll + (Headless)",
+    Name = "Headless/Korblox",
     Callback = function()
-        local args = {
-            {
-                127241951574732, -- Right Leg
-                118303475394830,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                115745153758680, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
-})
-Tab3:AddButton({
-    Name = "(+18) Girl Body + (Headless)",
-    Callback = function()
-        local args = {
-            {
-                127241951574732, -- Right Leg
-                118303475394830,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                114206707267907, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
-})
-Tab3:AddButton({
-    Name = "(+18) Girl Body + (Headless/Korblox)",
-    Callback = function()
-        local args = {
-            {
-                139607718, -- Right Leg
-                118303475394830,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                114206707267907, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
-})
-Tab3:AddButton({
-    Name = "(+18) Boy Body + (Headless)",
-    Callback = function()
-        local args = {
-            {
-                2517207746, -- Right Leg
-                2517204456,  -- Left Leg
-                4416788553,  -- Right Arm
-                4416785861,  -- Left Arm
-                32336059, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
-})
-Tab3:AddButton({
-    Name = "(+18) Girl Body",
-    Callback = function()
-        local args = {
-            {
-                127968751428204, -- Right Leg
-                101521138059051,  -- Left Leg
-                18839824209,  -- Right Arm
-                18839824132,  -- Left Arm
-                114206707267907, -- Torso
-                14970560459   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
-})
-Tab3:AddButton({
-    Name = "Classic-Female-v2-Torso + (Headless)",
-    Callback = function()
-        local args = {
-            {
-                4637265517, -- Torso
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
-})
-Tab3:AddButton({
-    Name = "Headless/Korblox (BETA)",
-    Callback = function()
-        local args = {
-            {
-                139607718, -- Right Leg
-                15093053680   -- Head
-            }
-        }
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChangeCharacterBody"):InvokeServer(unpack(args))
-    end
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = 0,
+		[3] = 0,
+		[4] = 139607718,
+		[5] = 0,
+		[6] = 134082579,
+	})
+	end
 })
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab4: RGB === --
