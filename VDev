@@ -1039,6 +1039,121 @@ Tab5:AddButton({
         end
     end
 })
+--eligebetê casa
+
+local RunService = game:GetService("RunService")
+local toggledHouse = false
+local houseConn
+
+Tab5:AddToggle({
+    Name = "eligebetê casa🏳️‍🌈",
+    Default = false,
+    Callback = function(Value)
+        toggledHouse = Value
+        if toggledHouse then
+            local hue = 0
+            houseConn = RunService.RenderStepped:Connect(function(dt)
+                hue = (hue + dt * 0.25) % 1 -- velocidade RGB suave e pouco rápida
+                local color = Color3.fromHSV(hue, 1, 1)
+
+                local args = {
+                    "ColorPickHouse",
+                    color
+                }
+                game:GetService("ReplicatedStorage"):WaitForChild("RE")
+                    :WaitForChild("1Player1sHous1e"):FireServer(unpack(args))
+            end)
+        else
+            if houseConn then
+                houseConn:Disconnect()
+                houseConn = nil
+            end
+        end
+    end
+})
+
+-- loop cortinas
+
+local RunService = game:GetService("RunService")
+local loopCurtains = false
+local curtainsConn
+
+Tab5:AddToggle({
+    Name = "Loop Cortinas",
+    Default = false,
+    Callback = function(Value)
+        loopCurtains = Value
+        if loopCurtains then
+            curtainsConn = RunService.RenderStepped:Connect(function()
+                local args = { "Curtains" }
+                game:GetService("ReplicatedStorage")
+                    :WaitForChild("RE")
+                    :WaitForChild("1Player1sHous1e"):FireServer(unpack(args))
+            end)
+        else
+            if curtainsConn then
+                curtainsConn:Disconnect()
+                curtainsConn = nil
+            end
+        end
+    end
+})
+
+-- loop nome da casa
+
+local RunService = game:GetService("RunService")
+
+-- Lista de nomes aleatórios
+local randomNames = {
+    "Victory", "ExploitMaster", "Roun95", "Hyper", "ShadowsDev",
+    "Lyra", "Hexagon", "Anonymous", "VirusMaker", "TrollFace"
+}
+
+-- TextBoxes para os nomes
+local NameBox1, NameBox2
+local Name1, Name2
+
+NameBox1 = Tab5:AddTextBox({
+    Name = "Nome 1",
+    Description = "Primeiro nome",
+    PlaceholderText = "Digite um nome",
+    Callback = function(Value)
+        Name1 = Value
+    end
+})
+
+NameBox2 = Tab5:AddTextBox({
+    Name = "Nome 2",
+    Description = "Segundo nome",
+    PlaceholderText = "Digite outro nome",
+    Callback = function(Value)
+        Name2 = Value
+    end
+})
+
+-- Toggle para ativar loop
+local loopToggle = false
+local loopConn
+
+Tab5:AddToggle({
+    Name = "Loop Nomes Aleatórios",
+    Default = false,
+    Callback = function(Value)
+        loopToggle = Value
+        if loopToggle then
+            loopConn = RunService.RenderStepped:Connect(function()
+                local nameToSend = math.random(0, 1) == 0 and (Name1 or randomNames[math.random(#randomNames)]) or (Name2 or randomNames[math.random(#randomNames)])
+                local args = { "BusinessName", nameToSend }
+                game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPHous1eEven1t"):FireServer(unpack(args))
+            end)
+        else
+            if loopConn then
+                loopConn:Disconnect()
+                loopConn = nil
+            end
+        end
+    end
+})
 ----------------------------------------------------------------------------------------------------
                                 	-- === Tab8: Cars === --
 ----------------------------------------------------------------------------------------------------
