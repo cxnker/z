@@ -145,7 +145,8 @@ tool.Equipped:Connect(function(mouse)
 end)
 
 tool.Unequipped:Connect(function()
-    createNotification("​📥  ​Admin Bug saved", "Unequipped tool, Equip all clothes")
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
+    createNotification("​📥 ​Admin Bug saved", "Unequipped tool")
 end)
 
 Players.PlayerRemoving:Connect(function(player)
