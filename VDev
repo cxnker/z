@@ -901,6 +901,20 @@ Tab3:AddButton({
 	})
 	end
 })
+
+Tab3:AddSection({"》 Animations"})
+Tab3:AddButton({
+    Name = "(adidas-Community-Animation-Pack) Animation",
+    Callback = function()
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(123695349157584)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(93993406355955)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(106810508343012)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(106537993816942)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(126354114956642)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(124765145869332)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(115715495289805)
+	end
+})
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab4: RGB === --
 ----------------------------------------------------------------------------------------------------
