@@ -1047,7 +1047,7 @@ Tab4:AddToggle({
     end
 })
 
-Tab4:AddSection({"Loop Name"})
+Tab4:AddSection({"》 Loop Name"})
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Remote = ReplicatedStorage:WaitForChild("RE"):WaitForChild("1RPNam1eTex1t")
@@ -1207,7 +1207,7 @@ Tab4:AddToggle({
     end
 })
 
-Tab4:AddSection({"Name (Color combination)"})
+Tab4:AddSection({"》 Name (Color combination)"})
 
 local function LerpColor(c1, c2, t)
     return Color3.new(
@@ -1290,7 +1290,7 @@ Tab4:AddToggle({
     end
 })
 
-Tab4:AddSection({"Bio"})
+Tab4:AddSection({"》 Bio"})
 
 local function LerpColor(c1, c2, t)
     return Color3.new(
@@ -1357,6 +1357,8 @@ Tab4:AddToggle({
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab5: House === --
 ----------------------------------------------------------------------------------------------------
+Tab5:AddSection({"》 House functions"})
+
 Tab5:AddButton({
     Name = "Unbanned from all houses",
     Callback = function()
@@ -2403,6 +2405,7 @@ Tab6:AddToggle({
 ----------------------------------------------------------------------------------------------------
                                 	-- === Tab7: Music === --
 ----------------------------------------------------------------------------------------------------
+Tab7:AddSection({"》 Music player"})
 local loopAtivo = false
 local InputID = ""
 
@@ -2467,6 +2470,8 @@ Tab7:AddToggle({
         end
     end
 })
+
+Tab7:AddSection({"》 Music player (All server)"})
 
 local function createSoundDropdown(title, musicOptions, defaultOption)
 	local musicNames = {}
@@ -2555,6 +2560,8 @@ createSoundDropdown("Select an option", {
     }
 }, "SUS")
 -----------------------------------------------------------------------------
+Tab8:AddSection({"》 Troll Options"})
+
 local selectedPlayer = nil
 local isFollowingKill = false
 local isFollowingPull = false
