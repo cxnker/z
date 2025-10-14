@@ -6599,7 +6599,8 @@ Tab12:AddToggle({
         end
     end
 })
-local Tab1 = Window:MakeTab({"rgb🏳️‍🌈", "paint"})
+
+local Tab15 = Window:MakeTab({"rgb🏳️‍🌈", "paint"})
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Remote = ReplicatedStorage:WaitForChild("RE"):WaitForChild("1RPNam1eColo1r")
@@ -6626,7 +6627,7 @@ end
 
 
 -- Toggle
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "LGBT name🏳️‍🌈",
     Default = false,
     Callback = function(v)
@@ -6641,7 +6642,7 @@ Tab1:AddToggle({
 })
 
 -- Slider de Velocidade
-Tab1:AddSlider({
+Tab15:AddSlider({
     Name = "velocidade do rgb",
     Min = 1,
     Max = 100,
@@ -6677,7 +6678,7 @@ local function StartBioRGB()
 end
 
 -- Toggle
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "LGBT bio🏳️‍🌈",
     Default = false,
     Callback = function(v)
@@ -6692,7 +6693,7 @@ Tab1:AddToggle({
 })
 
 -- Slider de Velocidade
-Tab1:AddSlider({
+Tab15:AddSlider({
     Name = "velocidade do rgb",
     Min = 1,
     Max = 100,
@@ -6704,7 +6705,7 @@ Tab1:AddSlider({
     end
 })
 
-local Section = Tab1:AddSection({"loop names"})
+Tab15:AddSection({"loop names"})
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Remote = ReplicatedStorage:WaitForChild("RE"):WaitForChild("1RPNam1eTex1t")
@@ -6715,7 +6716,7 @@ local name2 = "SegundoNome"
 local speed = 1 -- tempo em segundos (vai ser ajustado pelo slider)
 
 -- TextBox para primeiro nome
-Tab1:AddTextBox({
+Tab15:AddTextBox({
     Name = "Primeiro Nome",
     Description = "Digite o primeiro nome",
     PlaceholderText = "Ex: I AM",
@@ -6726,7 +6727,7 @@ Tab1:AddTextBox({
 })
 
 -- TextBox para segundo nome
-Tab1:AddTextBox({
+Tab15:AddTextBox({
     Name = "Segundo Nome",
     Description = "Digite o segundo nome",
     PlaceholderText = "Ex: HACKER!☠️",
@@ -6737,7 +6738,7 @@ Tab1:AddTextBox({
 })
 
 -- Slider para controlar velocidade
-Tab1:AddSlider({
+Tab15:AddSlider({
     Name = "Velocidade do Loop",
     Min = 0.1,
     Max = 5,
@@ -6767,7 +6768,7 @@ local function StartNameLoop()
 end
 
 -- Toggle
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Loop Nomes",
     Default = false,
     Callback = function(v)
@@ -6788,7 +6789,7 @@ local blinkRunning = false
 local blinkName = "NomeBlink" -- pode usar o mesmo TextBox do loop ou criar outro
 
 -- TextBox para o nome do blink
-Tab1:AddTextBox({
+Tab15:AddTextBox({
     Name = "Nome Pisca-Pisca",
     Description = "Digite o nome para piscar",
     PlaceholderText = "Ex: I AM",
@@ -6799,7 +6800,7 @@ Tab1:AddTextBox({
 })
 
 -- Toggle do pisca-pisca
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Pisca-Pisca",
     Default = false,
     Callback = function(v)
@@ -6834,7 +6835,7 @@ local blinkRunningBio = false
 local blinkNameBio = "BioPisca" -- nome que vai piscar
 
 -- TextBox para o nome da bio pisca-pisca
-Tab1:AddTextBox({
+Tab15:AddTextBox({
     Name = "Bio Pisca-Pisca",
     Description = "Digite o nome da bio para piscar",
     PlaceholderText = "Ex: BIO",
@@ -6845,7 +6846,7 @@ Tab1:AddTextBox({
 })
 
 -- Toggle do pisca-pisca da bio
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Pisca-Pisca Bio",
     Default = false,
     Callback = function(v)
@@ -6873,7 +6874,7 @@ Tab1:AddToggle({
     end
 })
 
-local Section = Tab1:AddSection({"combinações ⚫🔴🔵🟢🟠🟣/nomes"})
+Tab15:AddSection({"combinações ⚫🔴🔵🟢🟠🟣/nomes"})
 
 -- Função para suavizar transição de cores
 local function LerpColor(c1, c2, t)
@@ -6914,7 +6915,7 @@ end
 local stopLoops = {}
 
 -- 🔴⚫ Vermelho e Preto
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Vermelho e Preto 🔴⚫",
     Default = false,
     Callback = function(v)
@@ -6930,7 +6931,7 @@ Tab1:AddToggle({
 })
 
 -- 🟡⚫ Amarelo e Preto
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Amarelo e Preto 🟡⚫",
     Default = false,
     Callback = function(v)
@@ -6946,7 +6947,7 @@ Tab1:AddToggle({
 })
 
 -- 🔵🟢 Azul e Verde
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Azul e Verde 🔵🟢",
     Default = false,
     Callback = function(v)
@@ -6962,7 +6963,7 @@ Tab1:AddToggle({
 })
 
 -- 🟣⚪ Roxo e Branco
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Roxo e Branco 🟣⚪",
     Default = false,
     Callback = function(v)
@@ -6978,7 +6979,7 @@ Tab1:AddToggle({
 })
 
 -- 🟠🔵 Laranja e Azul Neon
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Laranja e Azul 🔶🔵",
     Default = false,
     Callback = function(v)
@@ -6994,7 +6995,7 @@ Tab1:AddToggle({
 })
 
 -- ❄⚪ Ciano e Branco
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Ciano e Branco ❄⚪",
     Default = false,
     Callback = function(v)
@@ -7010,7 +7011,7 @@ Tab1:AddToggle({
 })
 
 -- 🔴🟠🟡 Vermelho, Laranja e Amarelo 🔥
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Vermelho Laranja Amarelo 🔥",
     Default = false,
     Callback = function(v)
@@ -7027,7 +7028,7 @@ Tab1:AddToggle({
 })
 
 -- 🟢🔵🟣 Verde Azul Roxo 🌌
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Verde Azul Roxo 🌌",
     Default = false,
     Callback = function(v)
@@ -7043,7 +7044,7 @@ Tab1:AddToggle({
     end
 })
 
-local Section = Tab1:AddSection({"Bio"})
+Tab5:AddSection({"Bio"})
 
 -- Função para suavizar transição de cores
 local function LerpColor(c1, c2, t)
@@ -7082,7 +7083,7 @@ end
 local stopLoops = {}
 
 -- 🔴⚫ Vermelho e Preto
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Bio Vermelho e Preto 🔴⚫",
     Default = false,
     Callback = function(v)
@@ -7098,7 +7099,7 @@ Tab1:AddToggle({
 })
 
 -- 🟡⚫ Amarelo e Preto
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Bio Amarelo e Preto 🟡⚫",
     Default = false,
     Callback = function(v)
@@ -7114,7 +7115,7 @@ Tab1:AddToggle({
 })
 
 -- 🔵🟢 Azul e Verde
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Bio Azul e Verde 🔵🟢",
     Default = false,
     Callback = function(v)
@@ -7130,7 +7131,7 @@ Tab1:AddToggle({
 })
 
 -- 🟣⚪ Roxo e Branco
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Bio Roxo e Branco 🟣⚪",
     Default = false,
     Callback = function(v)
@@ -7146,7 +7147,7 @@ Tab1:AddToggle({
 })
 
 -- 🟠🔵 Laranja e Azul Neon
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Bio Laranja e Azul 🔶🔵",
     Default = false,
     Callback = function(v)
@@ -7162,7 +7163,7 @@ Tab1:AddToggle({
 })
 
 -- ❄⚪ Ciano e Branco
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Bio Ciano e Branco ❄⚪",
     Default = false,
     Callback = function(v)
@@ -7178,7 +7179,7 @@ Tab1:AddToggle({
 })
 
 -- 🔥 Vermelho, Laranja e Amarelo
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Bio Vermelho Laranja Amarelo 🔥",
     Default = false,
     Callback = function(v)
@@ -7195,7 +7196,7 @@ Tab1:AddToggle({
 })
 
 -- 🌌 Verde Azul Roxo
-Tab1:AddToggle({
+Tab15:AddToggle({
     Name = "Bio Verde Azul Roxo 🌌",
     Default = false,
     Callback = function(v)
