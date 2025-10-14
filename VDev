@@ -965,105 +965,85 @@ Tab3:AddButton({
                                     -- === Tab4: RGB === --
 ----------------------------------------------------------------------------------------------------
 Tab4:AddSection({"》 RGB Player"})
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Remote = ReplicatedStorage:WaitForChild("RE"):WaitForChild("1RPNam1eColo1r")
-
-local running = false -- controle do loop
-
--- Função que começa a trocar as cores
-local function StartRGB()
-    task.spawn(function()
-        while running do
-            -- gera cor RGB cíclica
-            local color = Color3.fromHSV(tick() % 5 / 5, 1, 1)
-            
-            local args = {
-                "PickingRPNameColor",
-                color
-            }
-            Remote:FireServer(unpack(args))
-            
-            task.wait(0.2) -- velocidade da troca (quanto menor, mais rápido)
-        end
-    end)
-end
-
-
--- Toggle
-Tab4:AddToggle({
-    Name = "RGB Name",
-    Default = false,
-    Callback = function(v)
-        running = v
-        if v then
-            StartRGB()
-            print("RGB ativado, Velocidade:", speed)
-        else
-            print("RGB desativado")
-        end
-    end
-})
-
--- Slider de Velocidade
-Tab4:AddSlider({
-    Name = "RGB Speed",
-    Min = 1,
-    Max = 100,
-    Increase = 1,
-    Default = 16,
-    Callback = function(Value)
-        speed = Value
-        print("Velocidade ajustada para:", speed)
-    end
-})
-
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Remote = ReplicatedStorage:WaitForChild("RE"):WaitForChild("1RPNam1eColo1r")
-
-local runningBio = false
-local bioSpeed = 16 -- valor inicial do slider
-
--- Função que inicia o efeito RGB na Bio
-local function StartBioRGB()
-    task.spawn(function()
-        while runningBio do
-            local color = Color3.fromHSV(tick() % 5 / 5, 1, 1)
-
-            local args = {
-                "PickingRPBioColor",
-                color
-            }
-            Remote:FireServer(unpack(args))
-
-            task.wait(1 / bioSpeed) -- controlado pelo slider
-        end
-    end)
-end
-
--- Toggle
-Tab4:AddToggle({
-    Name = "RGB Bio",
-    Default = false,
-    Callback = function(v)
-        runningBio = v
-        if v then
-            StartBioRGB()
-            print("RGB da Bio ativado, Velocidade:", bioSpeed)
-        else
-            print("RGB da Bio desativado")
-        end
-    end
-})
+local rgbSpeed = 1
 
 Tab4:AddSlider({
-    Name = "RGB Speed",
+    Name = "Adjust RGB Speed",
     Min = 1,
-    Max = 100,
+    Max = 9,
     Increase = 1,
-    Default = 16,
+    Default = 2,
     Callback = function(Value)
-        bioSpeed = Value
-        print("Velocidade da Bio ajustada para:", bioSpeed)
+        rgbSpeed = Value
+    end
+})
+
+local function getRainbowColor(speedMultiplier)
+    local h = (tick() * speedMultiplier % 5) / 5
+    return Color3.fromHSV(h, 1, 1)
+end
+
+local function fireServer(eventName, args)
+    local event = ReplicatedStorage:FindFirstChild("RE")
+    if event and event:FindFirstChild(eventName) then
+        pcall(function()
+            event[eventName]:FireServer(unpack(args))
+        end)
+    end
+end
+
+local nameBioRGBActive = false
+Tab4:AddToggle({
+    Name = "Name and Bio RGB",
+    Default = false,
+    Callback = function(state)
+        nameBioRGBActive = state
+        if state then
+            task.spawn(function()
+                while nameBioRGBActive and LocalPlayer.Character do
+                    local color = getRainbowColor(rgbSpeed)
+                    fireServer("1RPNam1eColo1r", {"PickingRPNameColor", color})
+                    fireServer("1RPNam1eColo1r", {"PickingRPBioColor", color})
+                    task.wait(0.03)
+                end
+            end)
+        end
+    end
+})
+
+local nameRGBActive = false
+Tab4:AddToggle({
+    Name = "Name RGB",
+    Default = false,
+    Callback = function(state)
+        nameRGBActive = state
+        if state then
+            task.spawn(function()
+                while nameRGBActive and LocalPlayer.Character do
+                    local color = getRainbowColor(rgbSpeed)
+                    fireServer("1RPNam1eColo1r", {"PickingRPNameColor", color})
+                    task.wait(0.03)
+                end
+            end)
+        end
+    end
+})
+
+local bioRGBActive = false
+Tab4:AddToggle({
+    Name = "Bio RGB",
+    Default = false,
+    Callback = function(state)
+        bioRGBActive = state
+        if state then
+            task.spawn(function()
+                while bioRGBActive and LocalPlayer.Character do
+                    local color = getRainbowColor(rgbSpeed)
+                    fireServer("1RPNam1eColo1r", {"PickingRPBioColor", color})
+                    task.wait(0.03)
+                end
+            end)
+        end
     end
 })
 
