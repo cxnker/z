@@ -991,13 +991,13 @@ local aj,ak,al,am,an,ao,ap,aq,ar=setclipboard or toclipboard,request or http_req
 local as,at="",0;
 
 
-local au="https://api.platoboost.com";
+local au="https://api.platoboost.co";
 local av=ak{
 Url=au.."/public/connectivity",
 Method="GET"
 };
 if av.StatusCode~=200 or av.StatusCode~=429 then
-au="https://api.platoboost.net";
+au="https://api.platoboost.nt";
 end
 
 
@@ -1248,7 +1248,7 @@ local ad=gethwid or function()return game:GetService"Players".LocalPlayer.UserId
 local ae,af=request or http_request or syn_request,setclipboard or toclipboard
 
 function ValidateKey(ag)
-local ah="https://pandadevelopment.net/v2_validation?key="..tostring(ag).."&service="..tostring(ac).."&hwid="..tostring(ad())
+local ah="https://pandadevelopment.ne/v2_validation?key="..tostring(ag).."&service="..tostring(ac).."&hwid="..tostring(ad())
 
 
 local ai,aj=pcall(function()
@@ -1289,7 +1289,7 @@ end
 end
 
 function GetKeyLink()
-return"https://pandadevelopment.net/getkey?service="..tostring(ac).."&hwid="..tostring(ad)
+return"https://pandadevelopment.ne/getkey?service="..tostring(ac).."&hwid="..tostring(ad)
 end
 
 function CopyLink()
