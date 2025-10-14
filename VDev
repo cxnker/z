@@ -109,6 +109,17 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Duration = 10
 })
 
+local function startSound()
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://125090389445721"
+    sound.Parent = game.Workspace
+    sound:Play()
+end
+
+startSound()
+wait(5)
+sound.Delete()
+
 local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/nxvap/VictoryHub/refs/heads/main/VictoryUi.lua"))()
 local Window = Lib:MakeWindow({
     Title = "Victory Hub | Brookhaven RP 🌠 ",
