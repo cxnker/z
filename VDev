@@ -1028,6 +1028,177 @@ Tab4:AddToggle({
         end
     end
 })
+
+Tab4:AddSection({"Bio + Names 🗝️"})
+
+Tab4:AddButton({"👑KING", function()
+    local args = {
+        "RolePlayName",
+        "👑KING"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"👑QUEEN", function()
+    local args = {
+        "RolePlayName",
+        "👑QUEEN"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"😈DEVIL", function()
+    local args = {
+        "RolePlayName",
+        "😈DEVIL"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"👼ANGEL", function()
+    local args = {
+        "RolePlayName",
+        "👼ANGEL"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"🐉DRAGON", function()
+    local args = {
+        "RolePlayName",
+        "🐉DRAGON"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"🔥FIRE", function()
+    local args = {
+        "RolePlayName",
+        "🔥FIRE"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"❄️ICE", function()
+    local args = {
+        "RolePlayName",
+        "❄️ICE"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"🌙MOON", function()
+    local args = {
+        "RolePlayName",
+        "🌙MOON"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"☀️SUN", function()
+    local args = {
+        "RolePlayName",
+        "☀️SUN"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"⭐STAR", function()
+    local args = {
+        "RolePlayName",
+        "⭐STAR"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"🛡️KNIGHT", function()
+    local args = {
+        "RolePlayName",
+        "🛡️KNIGHT"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"☠️DARKLORD", function()
+    local args = {
+        "RolePlayName",
+        "☠️DARKLORD"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"💀NIGHTMARE", function()
+    local args = {
+        "RolePlayName",
+        "💀NIGHTMARE"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"🔥INFERNO", function()
+    local args = {
+        "RolePlayName",
+        "🔥INFERNO"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"👹TERRORX", function()
+    local args = {
+        "RolePlayName",
+        "👹TERRORX"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"🕵️‍♂️GHOSTHACK", function()
+    local args = {
+        "RolePlayName",
+        "🕵️‍♂️GHOSTHACK"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+
+Tab4:AddButton({"☠️ANOMINUS☠️", function()
+    local args = {
+        "RolePlayName",
+        "☠️ANOMINUS☠️"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"⚜️LEGENDARY⚜️", function()
+    local args = {
+        "RolePlayName",
+        "⚜️LEGENDARY⚜️"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"🔥AURA🔥", function()
+    local args = {
+        "RolePlayName",
+        "🔥AURA🔥"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"🩸BLOODHUNTER", function()
+    local args = {
+        "RolePlayBio",
+        "🩸BLOODHUNTER"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
+
+Tab4:AddButton({"⚡ELECTROSHOCK", function()
+    local args = {
+        "RolePlayBio",
+        "⚡ELECTROSHOCK"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end})
 ----------------------------------------------------------------------------------------------------
                                     -- === Tab5: House === --
 ----------------------------------------------------------------------------------------------------
