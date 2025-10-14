@@ -7210,33 +7210,3 @@ Tab1:AddToggle({
         end
     end
 })
-
-local Tab1 = Window:MakeTab({"Avatar", "person"})
-
-
-Tab1:AddToggle({
-    Name = "Loop BodySize ⚡",
-    Default = false,
-    Callback = function(v)
-        if v then
-            -- Ativa o loop
-            getgenv().LoopSize = true
-            task.spawn(function()
-                while getgenv().LoopSize do
-                    -- Aumenta
-                    local args = {[1] = true}
-                    game:GetService("ReplicatedStorage").Remotes.IncrementBodySize:FireServer(unpack(args))
-                    task.wait(0.3)
-
-                    -- Diminui
-                    args = {[1] = false}
-                    game:GetService("ReplicatedStorage").Remotes.IncrementBodySize:FireServer(unpack(args))
-                    task.wait(0.3)
-                end
-            end)
-        else
-            -- Desativa o loop
-            getgenv().LoopSize = false
-        end
-    end
-})
