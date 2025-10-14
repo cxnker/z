@@ -39,7 +39,7 @@ StarterGui:SetCore("SendNotification", {
 })
 
 -- Interface WindUI
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local WindUI = loadstring(game:HttpGet("https://github.com/cxnker/z/raw/main/WindUiLib.lua"))()
 local Window = WindUI:CreateWindow({
     Title = "Hexagon Hub",
     Icon = "rbxassetid://137031510785437",
@@ -76,4 +76,5 @@ StarterGui:SetCore("SendNotification", {
     Duration = 5
 
 })
+
 
