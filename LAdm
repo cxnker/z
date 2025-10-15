@@ -88,6 +88,46 @@ local ProtectionTab = Window:Tab({
 -- AVATAR
 -- ==============================
 
+local Remotes = ReplicatedStorage.Remotes
+local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
+
+AvatarTab:Section({Title = "3D Clothes", Icon = "tag"})
+
+local clothes = {
+    {"Black-Arm-Bandages-1-0", 11458078735},
+    {"Black-Oversized-Warmers", 10789914680},
+    {"Black-Oversized-Off-Shoulder-Hoodie", 18396592827},
+    {"White-Oversized-Off-Shoulder-Hoodie", 18396754379},
+    {"Left-Leg-Spikes", 10814325667}
+}
+
+for _, btn in ipairs(clothes) do
+    AvatarTab:Button({
+        Title = btn[1],
+        function()
+			local args = {btn[2]}
+            Wear:InvokeServer(unpack(args))
+        end
+    })
+end
+
+AvatarTab:Section({Title = "Character Editor", Icon = "tag"})
+
+AvatarTab:Button({
+    Title = "(Mini-Plushie) and Headless",
+    Desc = "AVISO: Vai resetar seu avatar",
+    Locked = false,
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 112722466960512,
+		[2] = 76079756909323,
+		[3] = 82598238110471,
+		[4] = 107431241133468,
+		[5] = 103380121023771,
+		[6] = 134082579,
+	})
+	end
+})
 -- ==============================
 -- RGB
 -- ==============================
@@ -103,12 +143,14 @@ local ProtectionTab = Window:Tab({
 -- ==============================
 -- SCRIPTS
 -- ==============================
+
 ScriptsTab:Button({
     Title = "Fly Gui V3 (Universal)",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
 	end
 })
+
 -- ==============================
 -- ADMIN
 -- ==============================
@@ -120,6 +162,7 @@ ScriptsTab:Button({
 -- ==============================
 -- TELEPORTS
 -- ==============================
+
 TeleportTab:Section({Title = "Teleports", Icon = "pin"})
 
 local sites = {
@@ -143,3 +186,4 @@ end
 -- ==============================
 -- PROTECTION
 -- ==============================
+
