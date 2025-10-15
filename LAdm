@@ -51,6 +51,11 @@ local ScriptsTab = Window:Tab({
     Icon = "scroll",
     Locked = false,
 })
+local TeleportesTab = Window:Tab({
+    Title = "Teleportes",
+    Icon = "pin",
+    Locked = false,
+})
 local AdminTab = Window:Tab({
     Title = "Admin",
     Icon = "crown",
@@ -59,10 +64,5 @@ local AdminTab = Window:Tab({
 local VipTab = Window:Tab({
     Title = "Vip",
     Icon = "sparkles",
-    Locked = false,
-})
-local TeleportesTab = Window:Tab({
-    Title = "Teleportes",
-    Icon = "pin",
     Locked = false,
 })
