@@ -123,6 +123,33 @@ AvatarTab:Button({
     end
 })
 
+AvatarTab:Button({
+    Title = "Black Oversized Off Shoulder Hoodie",
+    Desc = "TYPE: Sweater",
+    Locked = false,
+    Callback = function()
+        equipClothes(18396592827, "Black-Oversized-Off-Shoulder-Hoodie")
+    end
+})
+
+AvatarTab:Button({
+    Title = "White Oversized Off Shoulder Hoodie",
+    Desc = "TYPE: Sweater",
+    Locked = false,
+    Callback = function()
+        equipClothes(18396754379, "White-Oversized-Off-Shoulder-Hoodie")
+    end
+})
+
+AvatarTab:Button({
+    Title = "Left Leg Spikes",
+    Desc = "TYPE: Pants",
+    Locked = false,
+    Callback = function()
+        equipClothes(10814325667, "Left-Leg-Spikes")
+    end
+})
+
 AvatarTab:Section({Title = "Character Editor", Icon = "tag"})
 
 AvatarTab:Button({
@@ -144,6 +171,8 @@ AvatarTab:Button({
 -- ==============================
 -- RGB
 -- ==============================
+
+RGBTab:Section({Title = "Names", Icon = "pencil"})
 
 local names = {
     {"ＨＥＸＡＧＯＮ ＨＵＢ::", " ＨＥＸＡＧＯＮ ＨＵＢ "},
@@ -217,6 +246,7 @@ end
 -- ==============================
 -- PROTECTION
 -- ==============================
+
 
 
 
