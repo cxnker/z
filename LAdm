@@ -43,19 +43,19 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
 local Window = WindUI:CreateWindow({
     Title = "Hexagon Hub 🃏",
     Icon = "rbxassetid://130960642678383",
-    Author = "by Nova • Hexagon Dev",
+    Author = "by Nova • Dev",
     Size = UDim2.fromOffset(600, 480),
     Transparent = true,
     Theme = "Midnight",
     Resizable = true,
 })
 
-local Section1 = Window:Section({Title = "Elements", Icon = "info", Opened = true})
-local Tab1 = Section1:Tab({Title = "Player", Icon = "hammer", Locked = false})
-local Tab2 = Section1:Tab({Title = "Avatar", Icon = "hammer", Locked = false})
-local Section2 = Tab1:Section({Title = "》 Player Character", Icon = "album", Opened = true})
+local Section1 = Window:Section({Title = "Elements", Icon = "code", Opened = true})
+local Tab1 = Section1:Tab({Title = "Info", Icon = "info", Locked = false})
+local Tab2 = Section1:Tab({Title = "Player", Icon = "hammer", Locked = false})
+local Section2 = Tab2:Section({Title = "》 Player Character", Icon = "album", Opened = true})
 
-local PlayersDD = Section2:Dropdown({
+Section2:Dropdown({
     Title = "Jogadores (SelectedPlayer)",
     Callback = function(option)
         SelectedPlayer = Players:FindFirstChild(option)
@@ -71,11 +71,21 @@ Section2:Button({
     end
 })
 
+WindUI:Notify({
+    Title = "Linux Hub Carregado!",
+    Content = "Bem-vindo ao Linux Hub V4 - Nova Aba RGB!",
+    Duration = 6.5,
+    Icon = "check-circle",
+})
+
+-- Tag de versão
+Window:Tag({
+    Title = "v3.4.0",
+    Color = Color3.fromHex("#ff6b6b")
+})
+
 StarterGui:SetCore("SendNotification", {
     Title = "Lyra Devs",
     Text = "Carregado! Botões enviam comandos para o chat (RBXGeneral). Manual: ;cmd nomejogador OU ;cmd (usa SelectedPlayer). Control via joystick exclusivo para Lyra Devs!",
     Duration = 5
-
 })
-
-
