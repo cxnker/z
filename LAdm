@@ -1,3 +1,8 @@
+local Players, RunService, ReplicatedStorage, StarterGui = game:GetService("Players"), game:GetService("RunService"), game:GetService("ReplicatedStorage"), game:GetService("StarterGui")
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitForChild("HumanoidRootPart")
+
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 local Window = WindUI:CreateWindow({
     Title = "Hexagon Client 🃏",
@@ -15,11 +20,6 @@ WindUI:Notify({
     Duration = 10,
     Icon = "check-circle",
 })
-
-local Players, RunService, ReplicatedStorage, StarterGui = game:GetService("Players"), game:GetService("RunService"), game:GetService("ReplicatedStorage"), game:GetService("StarterGui")
-local LocalPlayer = Players.LocalPlayer
-local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitForChild("HumanoidRootPart")
 
 local InfoTab = Window:Tab({
     Title = "Info",
@@ -76,11 +76,51 @@ local ProtectionTab = Window:Tab({
     Icon = "shield",
     Locked = false,
 })
+-- ==============================
+-- INFO
+-- ==============================
+
+-- ==============================
+-- PLAYER
+-- ==============================
+
+-- ==============================
+-- AVATAR
+-- ==============================
+
+-- ==============================
+-- RGB
+-- ==============================
+
+-- ==============================
+-- MUSIC
+-- ==============================
+
+-- ==============================
+-- TROLL
+-- ==============================
+
+-- ==============================
+-- SCRIPTS
+-- ==============================
+ScriptsTab:Button({
+    Title = "Fly Gui V3 (Universal)",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
+	end
+})
+-- ==============================
+-- ADMIN
+-- ==============================
+
+-- ==============================
+-- VIP
+-- ==============================
 
 -- ==============================
 -- TELEPORTS
 -- ==============================
-TeleportTab:Section({Title = "Teleports", Icon = "album"})
+TeleportTab:Section({Title = "Teleports", Icon = "pin"})
 
 local sites = {
     {"Hill", CFrame.new(-348.64, 65.94, -458.08)},
@@ -100,3 +140,6 @@ for _, tp in pairs(sites) do
     })
 end
 
+-- ==============================
+-- PROTECTION
+-- ==============================
