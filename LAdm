@@ -18,13 +18,6 @@ local Section1 = Window:Section({Title = "Info", Icon = "code", Opened = true})
 local Tab1 = Section1:Tab({Title = "Player", Icon = "hammer", Locked = false})
 local Section2 = Tab1:Section({Title = "Player ajust", Icon = "album", Opened = true})
 
-local PlayersDD = Section2:Dropdown({
-    Title = "Jogadores (SelectedPlayer)",
-    Callback = function(option)
-        SelectedPlayer = Players:FindFirstChild(option)
-    end
-})
-
 Section2:Slider({
     Flag = "SliderTest",
     Title = "Speed",
@@ -66,17 +59,3 @@ Section2:Slider({
         Workspace.Gravity = value
     end
 })
-
-Section2:Button({
-    Title = "Title (SelectedPlayer)",
-    Desc = "Desc (SelectedPlayer)",
-    Locked = false,
-    Callback = function()
-
-    end
-})
-})
-
-
-
-
