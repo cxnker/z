@@ -11,7 +11,7 @@ local Window = WindUI:CreateWindow({
 
 WindUI:Notify({
     Title = "Welcome to Hexagon Client",
-    Content = "Hexagon Notify",
+    Content = "Created by @Roun95",
     Duration = 5,
     Icon = "check-circle",
 })
@@ -21,19 +21,29 @@ local InfoTab = Window:Tab({
     Icon = "info",
     Locked = false,
 })
-local AvatarTab = Window:Tab({
-    Title = "Avatar",
+local PlayerTab = Window:Tab({
+    Title = "Player",
     Icon = "user",
     Locked = false,
 })
-local TagsTab = Window:Tab({
-    Title = "Tags",
+local AvatarTab = Window:Tab({
+    Title = "Avatar",
     Icon = "tag",
     Locked = false,
 })
-local BladeBallTab = Window:Tab({
-    Title = "Blade Ball",
-    Icon = "sword",
+local RGBTab = Window:Tab({
+    Title = "RGB",
+    Icon = "pencil",
+    Locked = false,
+})
+local MusicTab = Window:Tab({
+    Title = "Music",
+    Icon = "music",
+    Locked = false,
+})
+local TrollTab = Window:Tab({
+    Title = "Troll",
+    Icon = "ghost",
     Locked = false,
 })
 local ScriptsTab = Window:Tab({
@@ -46,19 +56,13 @@ local AdminTab = Window:Tab({
     Icon = "crown",
     Locked = false,
 })
-local ScriptsNovosTab = Window:Tab({
-    Title = "Scripts Novos",
+local VipTab = Window:Tab({
+    Title = "Vip",
     Icon = "sparkles",
     Locked = false,
 })
-local BrookhavenTab = Window:Tab({
-    Title = "Brookhaven",
-    Icon = "home",
+local TeleportesTab = Window:Tab({
+    Title = "Teleportes",
+    Icon = "pin",
     Locked = false,
 })
-local TrollTab = Window:Tab({
-    Title = "Troll",
-    Icon = "ghost",
-    Locked = false,
-})
-
