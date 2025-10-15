@@ -50,9 +50,10 @@ local Window = WindUI:CreateWindow({
     Resizable = true,
 })
 
-local Section1 = Window:Section({Title = "Painel Desenvolvedor", Icon = "code", Opened = true})
-local Tab1 = Section1:Tab({Title = "Funções Dev", Icon = "hammer", Locked = false})
-local Section2 = Tab1:Section({Title = "Comandos via Chat (RBXGeneral)", Icon = "album", Opened = true})
+local Section1 = Window:Section({Title = "Elements", Icon = "info", Opened = true})
+local Tab1 = Section1:Tab({Title = "Player", Icon = "hammer", Locked = false})
+local Tab2 = Section1:Tab({Title = "Avatar", Icon = "hammer", Locked = false})
+local Section2 = Tab1:Section({Title = "》 Player Character", Icon = "album", Opened = true})
 
 local PlayersDD = Section2:Dropdown({
     Title = "Jogadores (SelectedPlayer)",
@@ -76,4 +77,5 @@ StarterGui:SetCore("SendNotification", {
     Duration = 5
 
 })
+
 
