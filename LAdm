@@ -101,12 +101,11 @@ local clothes = {
     {"Left-Leg-Spikes", 10814325667}
 }
 
-for _, btn in ipairs(clothes) do
+for _, cl in ipairs(clothes) do
     AvatarTab:Button({
-        Title = btn[1],
+        Title = cl[1],
         function()
-			local args = {btn[2]}
-            Wear:InvokeServer(unpack(args))
+            Wear:InvokeServer(unpack({cl[2]}))
         end
     })
 end
@@ -128,24 +127,25 @@ AvatarTab:Button({
 	})
 	end
 })
+
 -- ==============================
 -- RGB
 -- ==============================
 
 local names = {
-    {"ＨＥＸＡＧＯＮ ＨＵＢ:: ", " ＪＯＫＥＲ "},
-    {"ＴＵＢＥＲＳ９３", " ＴＵＢＥＲＳ９３ "},
-    {"::ＨＥＸＡＧＯＮ ＨＵＢ::", " ＤＥＶ "},
+    {"ＨＥＸＡＧＯＮ ＨＵＢ::", " ＨＥＸＡＧＯＮ ＨＵＢ "},
+    {"ＪＯＫＥＲ", " ＪＯＫＥＲ "},
     {"ＡＤＭＩＮ", " ＡＤＭＩＮ "},
+    {"ＤＥＶ", " ＤＥＶ "},
     {"ＣＯ０ＬＫＩＤ", " ＣＯ０ＬＫＩＤ "},
     {"ＴＵＢＥＲＳ９３", " ＴＵＢＥＲＳ９３ "},
 }
 
-for _, name in ipairs(names) do
+for _, nm in ipairs(names) do
     RGBTab:Button({
-        Title = "Name: " .. name[1],
+        Title = "Name: " .. nm[1],
         Callback = function()
-            game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer("RolePlayName", name[2])
+            ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayName", nm[2])
         end
     })
 end
@@ -204,6 +204,7 @@ end
 -- ==============================
 -- PROTECTION
 -- ==============================
+
 
 
 
