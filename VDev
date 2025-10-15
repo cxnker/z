@@ -799,18 +799,13 @@ Tab3:AddTextBox({
     end
 })
 
-Tab3:AddButton({
-    Name = "Equip All",
-    Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		[1] = value1,
-		[2] = value2,
-		[3] = value3,
-		[4] = value4,
-		[5] = value5,
-		[6] = value6,
-	})
-	end
+Tab3:AddTextBox({
+    Name = "Change Body Parts",
+    Description = "Put the ID of the body parts here",
+    PlaceholderText = "Ex: 134082579, 139607718, 139...",
+    Callback = function(changeBody)
+	ChangeCharacterBody:InvokeServer({ changeBody })
+    end
 })
 --------------------------------------------------
 			-- === Tab 4: RGB === --
