@@ -62,7 +62,12 @@ local AdminTab = Window:Tab({
     Locked = false,
 })
 local VipTab = Window:Tab({
-    Title = "Vip",
+    Title = "VIP",
     Icon = "sparkles",
+    Locked = false,
+})
+local ProtectionTab = Window:Tab({
+    Title = "Protection",
+    Icon = "shield",
     Locked = false,
 })
