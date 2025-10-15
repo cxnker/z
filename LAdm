@@ -17,33 +17,12 @@ LocalPlayer.CharacterAdded:Connect(function(character)
     Humanoid = character:WaitForChild("Humanoid")
 end)
 
-local whitelistDev = {
-    ["Deluxe_Studios"] = true,        -- Exemplo 2: Dev principal (Lyra Devs)
-    ["Roun95"] = true,      -- Exemplo 3: Dev secundário (Lyra Devs)
-}
-
-if not whitelistDev[LocalPlayer.Name] then
-    StarterGui:SetCore("SendNotification", {
-        Title = "Acesso Negado - Dev Mode",
-        Text = "Você não está na whitelist de devs do Lyra Devs! Contate o criador. (Exclusivo para usuários de Lyra Devs)",
-        Duration = 5
-    })
-    return
-end
-
--- Notificação de acesso Dev
-StarterGui:SetCore("SendNotification", {
-    Title = "Lyra Devs",
-    Text = "Acesso Desenvolvedor liberado! Whitelist confirmada (exclusivo para Lyra Devs).",
-    Duration = 4
-})
-
 -- Interface WindUI
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 local Window = WindUI:CreateWindow({
     Title = "Hexagon Hub 🃏",
     Icon = "rbxassetid://130960642678383",
-    Author = "by Nova • Dev",
+    Author = "by Nova · v1.0.0",
     Size = UDim2.fromOffset(600, 480),
     Transparent = true,
     Theme = "Midnight",
@@ -56,7 +35,7 @@ local Tab2 = Section1:Tab({Title = "Player", Icon = "hammer", Locked = false})
 local Section2 = Tab2:Section({Title = "》 Player Character", Icon = "album", Opened = true})
 
 Section2:Dropdown({
-    Title = "Jogadores (SelectedPlayer)",
+    Title = "Players (SelectedPlayer)",
     Callback = function(option)
         SelectedPlayer = Players:FindFirstChild(option)
     end
@@ -73,19 +52,7 @@ Section2:Button({
 
 WindUI:Notify({
     Title = "Linux Hub Carregado!",
-    Content = "Bem-vindo ao Linux Hub V4 - Nova Aba RGB!",
-    Duration = 6.5,
+    Content = "Hexagon Notify",
+    Duration = 5,
     Icon = "check-circle",
-})
-
--- Tag de versão
-Window:Tag({
-    Title = "v3.4.0",
-    Color = Color3.fromHex("#ff6b6b")
-})
-
-StarterGui:SetCore("SendNotification", {
-    Title = "Lyra Devs",
-    Text = "Carregado! Botões enviam comandos para o chat (RBXGeneral). Manual: ;cmd nomejogador OU ;cmd (usa SelectedPlayer). Control via joystick exclusivo para Lyra Devs!",
-    Duration = 5
 })
