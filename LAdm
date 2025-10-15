@@ -6,48 +6,67 @@ local StarterGui = game:GetService("StarterGui")
 local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 local Humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid")
-local NoclipActived = false
 
-LocalPlayer.CharacterAdded:Connect(function(character)
-    Humanoid = character:WaitForChild("Humanoid")
-end)
-
--- Interface WindUI
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 local Window = WindUI:CreateWindow({
-    Title = "Hexagon Hub 🃏",
+    Title = "Hexagon Client 🃏",
     Icon = "rbxassetid://130960642678383",
     Author = "by Nova · v1.0.0",
     Size = UDim2.fromOffset(600, 480),
     Transparent = true,
-    Theme = "Midnight",
+    Theme = "Dark",
     Resizable = true,
 })
 
-local Section1 = Window:Section({Title = "Elements", Icon = "code", Opened = true})
-local Tab1 = Section1:Tab({Title = "Info", Icon = "info", Locked = false})
-local Tab2 = Section1:Tab({Title = "Player", Icon = "hammer", Locked = false})
-local Section2 = Tab2:Section({Title = "》 Player Character", Icon = "album", Opened = true})
-
-Section2:Dropdown({
-    Title = "Players (SelectedPlayer)",
-    Callback = function(option)
-        SelectedPlayer = Players:FindFirstChild(option)
-    end
-})
-
-Section2:Button({
-    Title = "Title (SelectedPlayer)",
-    Desc = "Desc (SelectedPlayer)",
-    Locked = false,
-    Callback = function()
-
-    end
-})
-
 WindUI:Notify({
-    Title = "Linux Hub Carregado!",
+    Title = "Welcome to Hexagon Client",
     Content = "Hexagon Notify",
     Duration = 5,
     Icon = "check-circle",
+})
+
+local AvatarTab = Window:Tab({
+    Title = "Avatar",
+    Icon = "user",
+    Locked = false,
+})
+local TagsTab = Window:Tab({
+    Title = "Tags",
+    Icon = "tag",
+    Locked = false,
+})
+local BladeBallTab = Window:Tab({
+    Title = "Blade Ball",
+    Icon = "sword",
+    Locked = false,
+})
+local StealBrainrotTab = Window:Tab({
+    Title = "Steal a Brainrot",
+    Icon = "brain",
+    Locked = false,
+})
+local ScriptsTab = Window:Tab({
+    Title = "Scripts",
+    Icon = "scroll",
+    Locked = false,
+})
+local AdminTab = Window:Tab({
+    Title = "Admin",
+    Icon = "crown",
+    Locked = false,
+})
+local ScriptsNovosTab = Window:Tab({
+    Title = "Scripts Novos",
+    Icon = "sparkles",
+    Locked = false,
+})
+local BrookhavenTab = Window:Tab({
+    Title = "Brookhaven",
+    Icon = "home",
+    Locked = false,
+})
+local TrollTab = Window:Tab({
+    Title = "Troll",
+    Icon = "ghost",
+    Locked = false,
 })
