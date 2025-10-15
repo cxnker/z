@@ -16,6 +16,11 @@ WindUI:Notify({
     Icon = "check-circle",
 })
 
+local Players, RunService, ReplicatedStorage, StarterGui = game:GetService("Players"), game:GetService("RunService"), game:GetService("ReplicatedStorage"), game:GetService("StarterGui")
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitForChild("HumanoidRootPart")
+
 local InfoTab = Window:Tab({
     Title = "Info",
     Icon = "info",
@@ -51,8 +56,8 @@ local ScriptsTab = Window:Tab({
     Icon = "scroll",
     Locked = false,
 })
-local TeleportesTab = Window:Tab({
-    Title = "Teleportes",
+local TeleportTab = Window:Tab({
+    Title = "Teleport",
     Icon = "pin",
     Locked = false,
 })
@@ -80,10 +85,11 @@ local sites = {
     {"Beach2", CFrame.new(42.39, 2.94, 1336.14)},
     {"Farm", CFrame.new(-766.41, 2.92, -61.10)}
 }
-for _, tp in ipairs(sites) do
-    TeleportesTab:Button({
-        tp[1],
-        function()
+
+for _, tp in pairs(sites) do
+    TeleportTab:Button({
+        Title = tp[1],
+        Callback = function()
             RootPart.CFrame = tp[2]
         end
     })
