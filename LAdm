@@ -1,12 +1,3 @@
-local Players = game:GetService("Players")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Workspace = game:GetService("Workspace")
-local StarterGui = game:GetService("StarterGui")
-
-local LocalPlayer = Players.LocalPlayer
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-local Humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid")
-
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 local Window = WindUI:CreateWindow({
     Title = "Hexagon Client 🃏",
@@ -25,6 +16,11 @@ WindUI:Notify({
     Icon = "check-circle",
 })
 
+local InfoTab = Window:Tab({
+    Title = "Info",
+    Icon = "info",
+    Locked = false,
+})
 local AvatarTab = Window:Tab({
     Title = "Avatar",
     Icon = "user",
@@ -38,11 +34,6 @@ local TagsTab = Window:Tab({
 local BladeBallTab = Window:Tab({
     Title = "Blade Ball",
     Icon = "sword",
-    Locked = false,
-})
-local StealBrainrotTab = Window:Tab({
-    Title = "Steal a Brainrot",
-    Icon = "brain",
     Locked = false,
 })
 local ScriptsTab = Window:Tab({
@@ -70,3 +61,4 @@ local TrollTab = Window:Tab({
     Icon = "ghost",
     Locked = false,
 })
+
