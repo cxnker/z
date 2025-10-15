@@ -808,23 +808,7 @@ Tab3:AddTextBox({
     PlaceholderText = "Ex: 4637265517, 134082579, 1396...",
     Callback = function(changeBody)
 	ChangeCharacterBody:InvokeServer({
-		changeBody,
-	})
-    end
-})
-
-Tab3:AddTextBox({
-    Name = "Change Body Parts",
-    Description = "Put the ID of the body parts here",
-    PlaceholderText = "Ex: 4637265517, 134082579, 1396...",
-    Callback = function(changeBody)
-	ChangeCharacterBody:InvokeServer({
-		[1] = changeBody,
-		[2] = changeBody,
-		[3] = changeBody,
-		[4] = changeBody,
-		[5] = changeBody,
-		[6] = changeBody,
+		changeBody
 	})
     end
 })
