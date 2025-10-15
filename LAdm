@@ -56,11 +56,6 @@ local ScriptsTab = Window:Tab({
     Icon = "scroll",
     Locked = false,
 })
-local TeleportTab = Window:Tab({
-    Title = "Teleport",
-    Icon = "pin",
-    Locked = false,
-})
 local AdminTab = Window:Tab({
     Title = "Admin",
     Icon = "crown",
@@ -71,11 +66,21 @@ local VipTab = Window:Tab({
     Icon = "sparkles",
     Locked = false,
 })
+local TeleportTab = Window:Tab({
+    Title = "Teleport",
+    Icon = "pin",
+    Locked = false,
+})
 local ProtectionTab = Window:Tab({
     Title = "Protection",
     Icon = "shield",
     Locked = false,
 })
+
+-- ==============================
+-- TELEPORTS
+-- ==============================
+TeleportTab:Section({Title = "Teleports", Icon = "album"})
 
 local sites = {
     {"Hill", CFrame.new(-348.64, 65.94, -458.08)},
@@ -94,3 +99,4 @@ for _, tp in pairs(sites) do
         end
     })
 end
+
