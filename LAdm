@@ -114,11 +114,20 @@ AvatarTab:Button({
     end
 })
 
+AvatarTab:Button({
+    Title = "Black Oversized Warmers",
+    Desc = "TYPE: Sweater",
+    Locked = false,
+    Callback = function()
+        equipClothes(10789914680, "Black-Oversized-Warmers")
+    end
+})
+
 AvatarTab:Section({Title = "Character Editor", Icon = "tag"})
 
 AvatarTab:Button({
     Title = "(Mini-Plushie) and Headless",
-    Desc = "TYPE: Small Body",
+    Desc = "TYPE: Body",
     Locked = false,
     Callback = function()
 	ChangeCharacterBody:InvokeServer({
@@ -208,6 +217,7 @@ end
 -- ==============================
 -- PROTECTION
 -- ==============================
+
 
 
 
