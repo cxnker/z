@@ -1,48 +1,12 @@
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local HttpService = game:GetService("HttpService")
-local TeleportService = game:GetService("TeleportService")
-local TweenService = game:GetService("TweenService")
-local Workspace = game:GetService("Workspace")
-local StarterGui = game:GetService("StarterGui")
-local TextChatService = game:GetService("TextChatService")
-
+local Players, RunService, ReplicatedStorage, StarterGui = game:GetService("Players"), game:GetService("RunService"), game:GetService("ReplicatedStorage"), game:GetService("StarterGui")
 local LocalPlayer = Players.LocalPlayer
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-local Humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid")
-local NoclipActived = false
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitForChild("HumanoidRootPart")
 
-LocalPlayer.CharacterAdded:Connect(function(character)
-    Humanoid = character:WaitForChild("Humanoid")
-end)
-
-local whitelistDev = {
-    ["Deluxe_Studios"] = true,        -- Exemplo 2: Dev principal (Lyra Devs)
-    ["Roun95"] = true,      -- Exemplo 3: Dev secundário (Lyra Devs)
-}
-
-if not whitelistDev[LocalPlayer.Name] then
-    StarterGui:SetCore("SendNotification", {
-        Title = "Acesso Negado - Dev Mode",
-        Text = "Você não está na whitelist de devs do Lyra Devs! Contate o criador. (Exclusivo para usuários de Lyra Devs)",
-        Duration = 5
-    })
-    return
-end
-
--- Notificação de acesso Dev
-StarterGui:SetCore("SendNotification", {
-    Title = "Lyra Devs",
-    Text = "Acesso Desenvolvedor liberado! Whitelist confirmada (exclusivo para Lyra Devs).",
-    Duration = 4
-})
-
--- Interface WindUI
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 local Window = WindUI:CreateWindow({
     Title = "Hexagon Hub",
-    Icon = "rbxassetid://137031510785437",
+    Icon = "rbxassetid://130960642678383",
     Author = "by Nova",
     Size = UDim2.fromOffset(600, 480),
     Transparent = true,
@@ -50,14 +14,56 @@ local Window = WindUI:CreateWindow({
     Resizable = true,
 })
 
-local Section1 = Window:Section({Title = "Painel Desenvolvedor", Icon = "code", Opened = true})
-local Tab1 = Section1:Tab({Title = "Funções Dev", Icon = "hammer", Locked = false})
-local Section2 = Tab1:Section({Title = "Comandos via Chat (RBXGeneral)", Icon = "album", Opened = true})
+local Section1 = Window:Section({Title = "Info", Icon = "code", Opened = true})
+local Tab1 = Section1:Tab({Title = "Player", Icon = "hammer", Locked = false})
+local Section2 = Tab1:Section({Title = "Player ajust", Icon = "album", Opened = true})
 
 local PlayersDD = Section2:Dropdown({
     Title = "Jogadores (SelectedPlayer)",
     Callback = function(option)
         SelectedPlayer = Players:FindFirstChild(option)
+    end
+})
+
+Section2:Slider({
+    Flag = "SliderTest",
+    Title = "Speed",
+    Step = 1,
+    Value = {
+        Min = 1,
+        Max = 900,
+        Default = 16,
+    },
+    Callback = function(value)
+        Humanoid.WalkSpeed = value
+    end
+})
+
+Section2:Slider({
+    Flag = "SliderTest",
+    Title = "Jump",
+    Step = 1,
+    Value = {
+        Min = 1,
+        Max = 900,
+        Default = 50,
+    },
+    Callback = function(value)
+        Humanoid.JumpPower = value
+    end
+})
+
+Section2:Slider({
+    Flag = "SliderTest",
+    Title = "Gravity",
+    Step = 1,
+    Value = {
+        Min = 1,
+        Max = 900,
+        Default = 196,
+    },
+    Callback = function(value)
+        Workspace.Gravity = value
     end
 })
 
@@ -69,13 +75,8 @@ Section2:Button({
 
     end
 })
-
-StarterGui:SetCore("SendNotification", {
-    Title = "Lyra Devs",
-    Text = "Carregado! Botões enviam comandos para o chat (RBXGeneral). Manual: ;cmd nomejogador OU ;cmd (usa SelectedPlayer). Control via joystick exclusivo para Lyra Devs!",
-    Duration = 5
-
 })
+
 
 
 
