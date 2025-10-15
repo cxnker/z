@@ -12,7 +12,7 @@ local Window = WindUI:CreateWindow({
 WindUI:Notify({
     Title = "Welcome to Hexagon Client",
     Content = "Created by @Roun95",
-    Duration = 5,
+    Duration = 10,
     Icon = "check-circle",
 })
 
@@ -71,3 +71,20 @@ local ProtectionTab = Window:Tab({
     Icon = "shield",
     Locked = false,
 })
+
+local sites = {
+    {"Hill", CFrame.new(-348.64, 65.94, -458.08)},
+    {"Start", CFrame.new(-26.17, 3.48, -0.93)},
+    {"Hotel", CFrame.new(159.10, 3.32, 164.97)},
+    {"Beach", CFrame.new(55.69, 2.94, -1403.60)},
+    {"Beach2", CFrame.new(42.39, 2.94, 1336.14)},
+    {"Farm", CFrame.new(-766.41, 2.92, -61.10)}
+}
+for _, tp in ipairs(sites) do
+    TeleportesTab:Button({
+        tp[1],
+        function()
+            RootPart.CFrame = tp[2]
+        end
+    })
+end
