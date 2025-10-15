@@ -93,6 +93,26 @@ local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
 
 AvatarTab:Section({Title = "3D Clothes", Icon = "tag"})
 
+local function equipClothes(clothesID, clothesName)
+    local clothes = { clothesID }
+    local success = pcall(function()
+        return Wear:InvokeServer(unpack(args))
+    end)
+    if success then
+        print("Clothes " .. clothesName .. " Equipped with success")
+    else
+        print("Failed to equip " .. clothesName)
+    end
+end
+
+AvatarTab:Button({
+    Title = "Black Arm Bandages 1.0",
+    Desc = "TYPE: Shirt",
+    Locked = false,
+    Callback = function()
+        equipClothes(11458078735, "Black-Arm-Bandages-1-0")
+    end
+})
 
 AvatarTab:Section({Title = "Character Editor", Icon = "tag"})
 
@@ -188,6 +208,7 @@ end
 -- ==============================
 -- PROTECTION
 -- ==============================
+
 
 
 
