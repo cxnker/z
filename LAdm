@@ -132,6 +132,24 @@ AvatarTab:Button({
 -- RGB
 -- ==============================
 
+local names = {
+    {"ＨＥＸＡＧＯＮ ＨＵＢ:: ", " ＪＯＫＥＲ "},
+    {"ＴＵＢＥＲＳ９３", " ＴＵＢＥＲＳ９３ "},
+    {"::ＨＥＸＡＧＯＮ ＨＵＢ::", " ＤＥＶ "},
+    {"ＡＤＭＩＮ", " ＡＤＭＩＮ "},
+    {"ＣＯ０ＬＫＩＤ", " ＣＯ０ＬＫＩＤ "},
+    {"ＴＵＢＥＲＳ９３", " ＴＵＢＥＲＳ９３ "},
+}
+
+for _, name in ipairs(names) do
+    RGBTab:Button({
+        Title = "Name: " .. name[1],
+        Callback = function()
+            game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer("RolePlayName", name[2])
+        end
+    })
+end
+
 -- ==============================
 -- MUSIC
 -- ==============================
@@ -186,5 +204,6 @@ end
 -- ==============================
 -- PROTECTION
 -- ==============================
+
 
 
