@@ -704,19 +704,113 @@ Tab3:AddButton({
 })
 
 Tab3:AddTextBox({
+    Name = "Torso",
+    Description = "Enter Torso ID",
+    PlaceholderText = "Victory Hub",
+    Callback = function(value1)
+	ChangeCharacterBody:InvokeServer({
+		[1] = value1,
+		[2] = 0,
+		[3] = 0,
+		[4] = 0,
+		[5] = 0,
+		[6] = 0,
+	})
+    end
+})
+
+Tab3:AddTextBox({
+    Name = "Right Arm",
+    Description = "Enter Right Arm ID",
+    PlaceholderText = "Victory Hub",
+    Callback = function(value2)
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = value2,
+		[3] = 0,
+		[4] = 0,
+		[5] = 0,
+		[6] = 0,
+	})
+    end
+})
+
+Tab3:AddTextBox({
+    Name = "Left Arm",
+    Description = "Enter Left Arm ID",
+    PlaceholderText = "Victory Hub",
+    Callback = function(value3)
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = 0,
+		[3] = value3,
+		[4] = 0,
+		[5] = 0,
+		[6] = 0,
+	})
+    end
+})
+
+Tab3:AddTextBox({
+    Name = "Right Leg",
+    Description = "Enter Right Leg ID",
+    PlaceholderText = "Victory Hub",
+    Callback = function(value4)
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = 0,
+		[3] = 0,
+		[4] = value4,
+		[5] = 0,
+		[6] = 0,
+	})
+    end
+})
+
+Tab3:AddTextBox({
+    Name = "Left Leg",
+    Description = "Enter Left Leg ID",
+    PlaceholderText = "Victory Hub",
+    Callback = function(value5)
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = 0,
+		[3] = 0,
+		[4] = 0,
+		[5] = value5,
+		[6] = 0,
+	})
+    end
+})
+
+Tab3:AddTextBox({
     Name = "Head",
     Description = "Enter Head ID",
-    PlaceholderText = "Ej: 134082579",
-    Callback = function(value)
+    PlaceholderText = "Victory Hub",
+    Callback = function(value6)
 	ChangeCharacterBody:InvokeServer({
 		[1] = 0,
 		[2] = 0,
 		[3] = 0,
 		[4] = 0,
 		[5] = 0,
-		[6] = value,
+		[6] = value6,
 	})
     end
+})
+
+Tab3:AddButton({
+    Name = "Equip All",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = value1,
+		[2] = value2,
+		[3] = value3,
+		[4] = value4,
+		[5] = value5,
+		[6] = value6,
+	})
+	end
 })
 --------------------------------------------------
 			-- === Tab 4: RGB === --
