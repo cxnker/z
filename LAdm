@@ -96,7 +96,7 @@ AvatarTab:Section({Title = "3D Clothes", Icon = "tag"})
 local function equipClothes(clothesID, clothesName)
     local clothes = { clothesID }
     local success = pcall(function()
-        return Wear:InvokeServer(unpack(args))
+        return Wear:InvokeServer(unpack(clothes))
     end)
     if success then
         print("Clothes " .. clothesName .. " Equipped with success")
@@ -111,6 +111,38 @@ AvatarTab:Button({
     Locked = false,
     Callback = function()
         equipClothes(11458078735, "Black-Arm-Bandages-1-0")
+    end
+})
+AvatarTab:Button({
+    Title = "Black Oversized Warmers",
+    Desc = "TYPE: Sweater",
+    Locked = false,
+    Callback = function()
+        equipClothes(10789914680, "Black-Oversized-Warmers")
+    end
+})
+AvatarTab:Button({
+    Title = "Black Oversized Off Shoulder Hoodie",
+    Desc = "TYPE: Sweater",
+    Locked = false,
+    Callback = function()
+        equipClothes(18396592827, "Black-Oversized-Off-Shoulder-Hoodie")
+    end
+})
+AvatarTab:Button({
+    Title = "White-Oversized-Off-Shoulder-Hoodie",
+    Desc = "TYPE: Sweater",
+    Locked = false,
+    Callback = function()
+        equipClothes(18396754379, "White-Oversized-Off-Shoulder-Hoodie")
+    end
+})
+AvatarTab:Button({
+    Title = "Left Leg Spikes",
+    Desc = "TYPE: Pants",
+    Locked = false,
+    Callback = function()
+        equipClothes(10814325667, ""Left-Leg-Spikes"")
     end
 })
 
@@ -208,6 +240,7 @@ end
 -- ==============================
 -- PROTECTION
 -- ==============================
+
 
 
 
