@@ -18,7 +18,7 @@ WindUI:Notify({
     Title = "Welcome to Hexagon Client",
     Content = "Created by @Roun95",
     Duration = 10,
-    Icon = "check-circle",
+    Icon = "rbxassetid://130960642678383",
 })
 
 local InfoTab = Window:Tab({
@@ -186,4 +186,5 @@ end
 -- ==============================
 -- PROTECTION
 -- ==============================
+
 
