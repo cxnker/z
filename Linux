@@ -1,36 +1,6 @@
-
--- ===============================================
--- SISTEMA DE WHITELIST - Linux Hub V4
--- ===============================================
-
--- Lista de usuários autorizados
 local WHITELIST = {
-    "LinuxhubDev1",
-    "carol00941",
-    "kanakiwhakO",
-    "crmmff2",
-    "thurr_blox666",
-    "pedroxxjr018",
-    "LBD_NICOLAS",
-    "Geison006",
-    "loki48932",
-    "anthonyroblo3x",
-    "gabrielgg1551r",
-    "minhairmapertuba",
-    "ea_clarinhakkj",
-    "ycarog139",
-    "Olokodois",
-    "MULADEIROSSS",
-    "ravsadino",
-    "user666Ap",
-    "62397_hackerr",
-    "murilo_12303",
-    "darkizinho9910",
-    "FgzinZzz",
-    "ADM_hub6",
+    "Deluxe_Studios",
     "Roun95",
-    "cantanguandi2",
-    "ronia_oys",
 }
 
 -- Verificação de autorização
