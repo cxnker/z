@@ -703,6 +703,9 @@ Tab3:AddButton({
 	end
 })
 
+Tab3:AddSection({"》 Custom Body Parts (Experimental)"})
+Tab3:AddParagraph({"Enter the ID of the item you want to use"})
+
 Tab3:AddTextBox({
     Name = "Torso",
     Description = "Enter Torso ID",
@@ -796,34 +799,6 @@ Tab3:AddTextBox({
 		[5] = 0,
 		[6] = value6,
 	})
-    end
-})
-
-Tab4:AddSection({"》 Custom Body Parts"})
-Tab1:AddParagraph({"• Executor"})
-
-Tab3:AddTextBox({
-    Name = "Change Body Parts",
-    Description = "Put the ID of the body parts here",
-    PlaceholderText = "Ex: 4637265517, 134082579, 1396...",
-    Callback = function(changeBody)
-	ChangeCharacterBody:InvokeServer({
-		changeBody
-	})
-    end
-})
-
-Tab3:AddTextBox({
-    Name = "Change Body Parts",
-    Description = "Put the ID of the body parts here",
-    PlaceholderText = "Ex: 4637265517, 134082579, 1396...",
-    Callback = function(changeBody)
-        local args = {
-            {
-				changeBody
-            }
-        }
-        ChangeCharacterBody:InvokeServer(unpack(args))
     end
 })
 --------------------------------------------------
