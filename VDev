@@ -249,7 +249,7 @@ Tab2:AddButton({
 })
 
 Tab2:AddSection({"》 ESP"})
-local espGuis = {}
+local billboardGuis = {}
 local connections = {}
 local espEnabled = false
 local selectedColor = "RGB"
@@ -265,7 +265,8 @@ Tab2:AddDropdown({
         selectedColor = value
     end
 })
-local function espColor()
+
+local function getESPColor()
     if selectedColor == "RGB" then
         local h = (tick() % 5) / 5
         return Color3.fromHSV(h, 1, 1)
@@ -288,70 +289,76 @@ local function espColor()
     end
     return Color3.new(1, 1, 1)
 end
+
 local function updateESP(player)
     if player == LocalPlayer then return end
     if not espEnabled then return end
 
-    if Character then
-        local head = Character:FindFirstChild("Head")
+	local character = player.Character
+    if character then
+        local head = character:FindFirstChild("Head")
         if head then
-            if espGuis[player] then
-                espGuis[player]:Destroy()
+            if billboardGuis[player] then
+                billboardGuis[player]:Destroy()
             end
 
-            local espGui = Instance.new("BillboardGui")
-            espGui.Parent = head
-            espGui.Adornee = head
-            espGui.Size = UDim2.new(0,200,0,50)
-            espGui.StudsOffset = Vector3.new(0,3,0)
-            espGui.AlwaysOnTop = true
+            local billboard = Instance.new("BillboardGui")
+            billboard.Parent = head
+            billboard.Adornee = head
+            billboard.Size = UDim2.new(0,200,0,50)
+            billboard.StudsOffset = Vector3.new(0,3,0)
+            billboard.AlwaysOnTop = true
 
-            local espText = Instance.new("TextLabel")
-            espText.Parent = espGui
-            espText.Size = UDim2.new(1,0,1,0)
-            espText.BackgroundTransparency = 1
-            espText.TextStrokeTransparency = 0.5
-            espText.Font = Enum.Font.SourceSansBold
-            espText.TextSize = 14
-            espText.Text = player.Name .. " | " .. player.AccountAge .. " days"
-            espText.TextColor3 = espColor()
-            espGuis[player] = espGui
+            local textLabel = Instance.new("TextLabel")
+            textLabel.Parent = billboard
+            textLabel.Size = UDim2.new(1,0,1,0)
+            textLabel.BackgroundTransparency = 1
+            textLabel.TextStrokeTransparency = 0.5
+            textLabel.Font = Enum.Font.GothamBold
+            textLabel.TextSize = 14
+            textLabel.Text = player.Name .. " | " .. player.AccountAge .. " dias"
+            textLabel.TextColor3 = getESPColor()
+
+            billboardGuis[player] = billboard
         end
     end
 end
 
 local function removeESP(player)
-    if espGuis[player] then
-        espGuis[player]:Destroy()
-        espGuis[player] = nil
+    if billboardGuis[player] then
+        billboardGuis[player]:Destroy()
+        billboardGuis[player] = nil
     end
 end
 
-local espToggle = Tab2:AddToggle({
+local Toggle1 = Tab2:AddToggle({
     Name = "Enable ESP",
     Default = false
 })
 
-espToggle:Callback(function(value)
+Toggle1:Callback(function(value)
     espEnabled = value
+
     if espEnabled then
         for _, player in pairs(Players:GetPlayers()) do
             updateESP(player)
         end
+
         local updateConnection = RunService.Heartbeat:Connect(function()
             for _, player in pairs(Players:GetPlayers()) do
                 updateESP(player)
             end
             if selectedColor == "RGB" then
                 for _, player in pairs(Players:GetPlayers()) do
-                    local gui = espGuis[player]
+                    local gui = billboardGuis[player]
                     if gui and gui:FindFirstChild("TextLabel") then
-                        gui.TextLabel.TextColor3 = espColor()
+                        gui.TextLabel.TextColor3 = getESPColor()
                     end
                 end
             end
         end)
         table.insert(connections, updateConnection)
+
         local playerAdded = Players.PlayerAdded:Connect(function(player)
             updateESP(player)
             local charConn = player.CharacterAdded:Connect(function()
@@ -360,6 +367,7 @@ espToggle:Callback(function(value)
             table.insert(connections, charConn)
         end)
         table.insert(connections, playerAdded)
+
         local playerRemoving = Players.PlayerRemoving:Connect(function(player)
             removeESP(player)
         end)
@@ -372,7 +380,7 @@ espToggle:Callback(function(value)
             conn:Disconnect()
         end
         connections = {}
-        espGuis = {}
+        billboardGuis = {}
     end
 end)
 --------------------------------------------------
@@ -700,6 +708,45 @@ Tab3:AddButton({
 		[5] = 0,
 		[6] = 134082579,
 	})
+	end
+})
+
+Tab3:AddSection({"》 Animations"})
+Tab3:AddButton({
+    Name = "(adidas-Community-Animation-Pack) Animation",
+    Callback = function()
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(123695349157584)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(93993406355955)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(106810508343012)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(106537993816942)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(126354114956642)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(124765145869332)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(115715495289805)
+task.wait(0.3)
+	end
+})
+
+Tab3:AddButton({
+    Name = "(adidas-Community-Animation-Pack) Test",
+    Callback = function()
+    local args = {
+        {
+            123695349157584,
+			93993406355955,
+            106810508343012,
+            106537993816942,
+            126354114956642,
+            124765145869332,
+            115715495289805
+        }
+    }
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(unpack(args))
 	end
 })
 
