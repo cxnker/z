@@ -36,8 +36,8 @@ local AvatarTab = Window:Tab({
     Icon = "tag",
     Locked = false,
 })
-local RGBTab = Window:Tab({
-    Title = "RGB",
+local ProfileTab = Window:Tab({
+    Title = "Profile",
     Icon = "pencil",
     Locked = false,
 })
@@ -169,10 +169,10 @@ AvatarTab:Button({
 })
 
 -- ==============================
--- RGB
+-- Profile
 -- ==============================
 
-RGBTab:Section({Title = "Names", Icon = "pencil"})
+ProfileTab:Section({Title = "Names", Icon = "pencil"})
 
 local names = {
     {"ＨＥＸＡＧＯＮ ＨＵＢ::", " ＨＥＸＡＧＯＮ ＨＵＢ "},
@@ -184,7 +184,7 @@ local names = {
 }
 
 for _, nm in ipairs(names) do
-    RGBTab:Button({
+    ProfileTab:Button({
         Title = "Name: " .. nm[1],
         Callback = function()
             ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayName", nm[2])
@@ -246,6 +246,3 @@ end
 -- ==============================
 -- PROTECTION
 -- ==============================
-
-
-
