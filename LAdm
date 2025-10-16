@@ -94,9 +94,9 @@ local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
 AvatarTab:Section({Title = "3D Clothes", Icon = "tag"})
 
 local function equipClothes(clothesID, clothesName)
-    local clothes = { clothesID }
+    local args = { clothesID }
     local success = pcall(function()
-        return Wear:InvokeServer(unpack(clothes))
+        return Wear:InvokeServer(unpack(args))
     end)
     if success then
         print("Clothes " .. clothesName .. " Equipped with success")
@@ -169,7 +169,7 @@ AvatarTab:Button({
 })
 
 -- ==============================
--- Profile
+-- PROFILE
 -- ==============================
 
 ProfileTab:Section({Title = "Names", Icon = "pencil"})
@@ -399,7 +399,7 @@ createNotification("✅ Admin Bug enable", "Added tool, Use /stopallbugs to stop
 -- VIP
 -- ==============================
 
-VIPTab:Section({Title = "VIP", Icon = "sparkles"})
+VipTab:Section({Title = "VIP", Icon = "sparkles"})
 
 -- ==============================
 -- TELEPORTS
@@ -428,4 +428,5 @@ end
 -- ==============================
 -- PROTECTION
 -- ==============================
+
 
