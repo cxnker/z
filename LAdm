@@ -204,6 +204,8 @@ end
 -- SCRIPTS
 -- ==============================
 
+ScriptsTab:Section({Title = "Scripts", Icon = "scroll"})
+
 ScriptsTab:Button({
     Title = "Fly Gui V3 (Universal)",
     Callback = function()
@@ -214,6 +216,8 @@ ScriptsTab:Button({
 -- ==============================
 -- ADMIN
 -- ==============================
+
+AdminTab:Section({Title = "Admin", Icon = "crown"})
 
 AdminTab:Button({
     Title = "[Click] Admin Bug (Tool)",
@@ -312,7 +316,6 @@ local function bugPlayer(targetPlayer)
             [11] = true,
             [12] = false
         }
-
         Remote:FireServer(unpack(args))
     end)
 end
@@ -334,7 +337,7 @@ tool.Equipped:Connect(function(mouse)
     local character = tool.Parent
     if character and character:FindFirstChild("Humanoid") and character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
 
-    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
+    ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
 
         mouse.Button1Down:Connect(function()
             local humanoid = character:FindFirstChildOfClass("Humanoid")
@@ -359,7 +362,7 @@ tool.Equipped:Connect(function(mouse)
 end)
 
 tool.Unequipped:Connect(function()
-    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
+    ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
     createNotification("​📥 ​Admin Bug saved", "Unequipped tool")
 end)
 
@@ -396,6 +399,8 @@ createNotification("✅ Admin Bug enable", "Added tool, Use /stopallbugs to stop
 -- VIP
 -- ==============================
 
+VIPTab:Section({Title = "VIP", Icon = "sparkles"})
+
 -- ==============================
 -- TELEPORTS
 -- ==============================
@@ -423,3 +428,4 @@ end
 -- ==============================
 -- PROTECTION
 -- ==============================
+
