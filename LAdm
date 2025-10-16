@@ -6,7 +6,7 @@ local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitFor
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 local Window = WindUI:CreateWindow({
     Title = "Hexagon Client 🃏",
-    Icon = "rbxassetid://130960642678383",
+    Icon = "rbxassetid://103422693243379",
     Author = "by Nova · v1.0.0",
     Size = UDim2.fromOffset(600, 480),
     Transparent = true,
@@ -18,7 +18,7 @@ WindUI:Notify({
     Title = "Welcome to Hexagon Client",
     Content = "Created by @Roun95",
     Duration = 10,
-    Icon = "rbxassetid://130960642678383",
+    Icon = "rbxassetid://103422693243379",
 })
 
 local InfoTab = Window:Tab({
@@ -428,5 +428,6 @@ end
 -- ==============================
 -- PROTECTION
 -- ==============================
+
 
 
