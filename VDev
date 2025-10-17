@@ -331,12 +331,13 @@ local function updateESP(player)
             DistanceLabel.Parent = billboard
 
             game:GetService("RunService").Heartbeat:Connect(function()
-                if not head or not billboard.Parent then return end
-                local LocalPlayer = game:GetService("Players").LocalPlayer
-                if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Head") then
-                    local Distance = (head.Position - LocalPlayer.Character.Head.Position).Magnitude
-                    DistanceLabel.Text = string.format("%.1f studs", Distance)
-                end
+				if basePos and player.Character then
+                	local targetRoot = player.Character:FindFirstChild("HumanoidRootPart") or player.Character:FindFirstChild("Torso") or player.Character:FindFirstChild("UpperTorso")
+                	if targetRoot then
+                    	local Distance = (targetRoot.Position - basePos).Magnitude
+                    	DistanceLabel.Text = string.format("%.1f studs", Distance)
+                	end
+				end
             end)
 
             billboardGuis[player] = billboard
