@@ -324,18 +324,18 @@ local function updateESP(player)
             DistanceLabel.Name = "DistanceLabel"
             DistanceLabel.TextColor3 = getESPColor()
             DistanceLabel.BackgroundTransparency = 1
+			DistanceLabel.TextStrokeTransparency = 0.5
 			DistanceLabel.Font = Enum.Font.GothamBold
 			DistanceLabel.TextSize = 14
-            DistanceLabel.Size = UDim2.new(1, 0, 0, 20)
-            DistanceLabel.Position = UDim2.new(0, 0, 0, 40)
+            DistanceLabel.Size = UDim2.new(1,0,1,0)
+            DistanceLabel.Position = UDim2.new(0,0,0,40)
             DistanceLabel.Parent = billboard
 
-			local HRP = character.HumanoidRootPart
             game:GetService("RunService").Heartbeat:Connect(function()
-                if not HRP or not billboard.Parent then return end
+                if not head or not billboard.Parent then return end
                 local LocalPlayer = game:GetService("Players").LocalPlayer
-                if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                    local Distance = (HRP.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Head") then
+                    local Distance = (head.Position - LocalPlayer.Character.Head.Position).Magnitude
                     DistanceLabel.Text = string.format("%.1f studs", Distance)
                 end
             end)
